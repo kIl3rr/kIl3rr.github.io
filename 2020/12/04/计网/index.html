@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>计算机网络基础 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>wo02ie</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/wo02ie/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-04 12:50" pubdate>
+        December 4, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络基础</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、网络模型"><a href="#一、网络模型" class="headerlink" title="一、网络模型"></a>一、网络模型</h1><p>不同划分方式下的网络体系模型<br><img src="https://img-blog.csdnimg.cn/20201203132129490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MTYzMDcz,size_1,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201203133326473.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MTYzMDcz,size_1,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201203224110893.gif" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="二、各层介绍"><a href="#二、各层介绍" class="headerlink" title="二、各层介绍"></a>二、各层介绍</h1><p>1）<strong>物理层（Physical Layer）</strong></p>
+<p>激活、维持、关闭通信端点之间的机械特性、电气特性、功能特性以及过程特性。该层为上层协议提供了一个传输数据的可靠的物理媒体。简单的说，物理层确保原始的数据可在各种物理媒体上传输。物理层记住两个重要的设备名称，中继器（Repeater，也叫放大器）和集线器。</p>
+<p>2）<strong>数据链路层（Data Link Layer）</strong></p>
+<p>数据链路层在物理层提供的服务的基础上向网络层提供服务，其最基本的服务是将源自网络层来的数据可靠地传输到相邻节点的目标机网络层。为达到这一目的，数据链路必须具备一系列相应的功能，主要有：如何将数据组合成数据块，在数据链路层中称这种数据块为帧（frame），帧是数据链路层的传送单位；如何控制帧在物理信道上的传输，包括如何处理传输差错，如何调节发送速率以使与接收方相匹配；以及在两个网络实体之间提供数据链路通路的建立、维持和释放的管理。数据链路层在不可靠的物理介质上提供可靠的传输。该层的作用包括：物理地址寻址、数据的成帧、流量控制、数据的检错、重发等。</p>
+<ul>
+<li>数据链路层为网络层提供可靠的数据传输；</li>
+<li>基本数据单位为帧；</li>
+<li>主要的协议：<strong>以太网协议</strong>；</li>
+<li>两个重要设备名称：网桥和交换机。</li>
+</ul>
+<p>3）<strong>网络层（Network Layer）</strong></p>
+<p>网络层的目的是实现两个端系统之间的数据透明传送，具体功能包括寻址和路由选择、连接的建立、保持和终止等。它提供的服务使传输层不需要了解网络中的数据传输和交换技术。如果您想用尽量少的词来记住网络层，那就是“路径选择、路由及逻辑寻址”。</p>
+<p>网络层中涉及众多的协议，其中包括最重要的协议，也是TCP/IP的核心协议——IP协议。IP协议非常简单，仅仅提供不可靠、无连接的传送服务。IP协议的主要功能有：无连接数据报传输、数据报路由选择和差错控制。与IP协议配套使用实现其功能的还有地址解析协议ARP、逆地址解析协议RARP、因特网报文协议ICMP、因特网组管理协议IGMP。</p>
+<ul>
+<li>网络层负责对子网间的数据包进行路由选择。此外，网络层还可以实现拥塞控制、网际互连等功能；</li>
+<li>基本数据单位为IP数据报；</li>
+<li>包含的主要协议：<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs abnf">IP协议（Internet Protocol，因特网互联协议）<span class="hljs-comment">;</span><br><br>ICMP协议（Internet Control Message Protocol，因特网控制报文协议）<span class="hljs-comment">;</span><br><br>ARP协议（Address Resolution Protocol，地址解析协议）<span class="hljs-comment">;</span><br><br>RARP协议（Reverse Address Resolution Protocol，逆地址解析协议）。<br></code></pre></td></tr></table></figure></li>
+<li>重要的设备：路由器。</li>
+</ul>
+<p>4）<strong>传输层（Transport Layer）</strong></p>
+<p>第一个端到端，即主机到主机的层次。传输层负责将上层数据分段并提供端到端的、可靠的或不可靠的传输。此外，传输层还要处理端到端的差错控制和流量控制问题。</p>
+<p>传输层的任务是根据通信子网的特性，最佳的利用网络资源，为两个端系统的会话层之间，提供建立、维护和取消传输连接的功能，负责端到端的可靠数据传输。在这一层，信息传送的协议数据单元称为段或报文。</p>
+<p>网络层只是根据网络地址将源结点发出的数据包传送到目的结点，而传输层则负责将数据可靠地传送到相应的端口。</p>
+<ul>
+<li><p>传输层负责将上层数据分段并提供端到端的、可靠的或不可靠的传输以及端到端的差错控制和流量控制问题；</p>
+</li>
+<li><p>包含的主要协议：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">TCP协议（Transmission Control Protocol，传输控制协议）<br>UDP协议（<span class="hljs-keyword">User</span> <span class="hljs-title">Datagram</span> Protocol，用户数据报协议）<br></code></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>重要设备：网关。</li>
+</ul>
+<p>5）<strong>会话层</strong></p>
+<p>会话层管理主机之间的会话进程，即负责建立、管理、终止进程之间的会话。会话层还利用在数据中插入校验点来实现数据的同步。</p>
+<p>6）<strong>表示层</strong></p>
+<p>表示层对上层数据或信息进行变换以保证一个主机应用层信息可以被另一个主机的应用程序理解。表示层的数据转换包括数据的加密、压缩、格式转换等。</p>
+<p>7）<strong>应用层</strong></p>
+<p>为操作系统或网络应用程序提供访问网络服务的接口。</p>
+<p>会话层、表示层和应用层注意：</p>
+<ul>
+<li><p>数据传输基本单位为报文；</p>
+</li>
+<li><p>包含的主要协议：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arcade">FTP（文件传送协议）<br>Telnet（远程登录协议）<br>DNS（域名解析协议）<br>SMTP（邮件传送协议）<br>POP3协议（邮局协议）<br>HTTP协议（Hyper <span class="hljs-built_in">Text</span> Transfer Protocol）<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="三、硬件总结"><a href="#三、硬件总结" class="headerlink" title="三、硬件总结"></a>三、硬件总结</h1><p>1）交换机<br>在计算机网络系统中，交换机是针对共享工作模式的弱点而推出的。交换机拥有一条高带宽的背部总线和内部交换矩阵。交换机的所有的端口都挂接在这条背 部总线上，当控制电路收到数据包以后，处理端口会查找内存中的地址对照表以确定目的MAC（网卡的硬件地址）的NIC（网卡）挂接在哪个端口上，通过内部 交换矩阵迅速将数据包传送到目的端口。目的MAC若不存在，交换机才广播到所有的端口，接收端口回应后交换机会“学习”新的地址，并把它添加入内部地址表中。交换机工作于OSI参考模型的第二层，即数据链路层。交换机内部的CPU会在每个端口成功连接时，通过ARP协议学习它的MAC地址，保存成一张 ARP表。在今后的通讯中，发往该MAC地址的数据包将仅送往其对应的端口，而不是所有的端口。因此，交换机可用于划分数据链路层广播，即冲突域；但它不 能划分网络层广播，即广播域。交换机被广泛应用于二层网络交换，俗称“二层交换机”。交换机的种类有：二层交换机、三层交换机、四层交换机、七层交换机分别工作在OSI七层模型中的第二层、第三层、第四层盒第七层，并因此而得名。</p>
+<p>2）路由器<br>路由器（Router）是一种计算机网络设备，提供了路由与转送两种重要机制，可以决定数据包从来源端到目的端所经过 的路由路径（host到host之间的传输路径），这个过程称为路由；将路由器输入端的数据包移送至适当的路由器输出端(在路由器内部进行)，这称为转送。路由工作在OSI模型的第三层——即网络层，例如网际协议。路由器的一个作用是连通不同的网络，另一个作用是选择信息传送的线路。 路由器与交换器的差别，路由器是属于OSI第三层的产品，交换器是OSI第二层的产品(这里特指二层交换机)。</p>
+<p>3）网关<br>网关（Gateway），网关顾名思义就是连接两个网络的设备，区别于路由器（由于历史的原因，许多有关TCP/IP 的文献曾经把网络层使用的路由器（Router）称为网关，在今天很多局域网采用都是路由来接入网络，因此现在通常指的网关就是路由器的IP），经常在家 庭中或者小型企业网络中使用，用于连接局域网和Internet。 网关也经常指把一种协议转成另一种协议的设备，比如语音网关。</p>
+<h1 id="四、-协议总结"><a href="#四、-协议总结" class="headerlink" title="四、 协议总结"></a>四、 协议总结</h1><p>物理层：RJ45、CLOCK、IEEE802.3    （中继器，集线器，网关）<br>数据链路：PPP、FR、HDLC、VLAN、MAC  （网桥，交换机）<br>网络层：<strong>IP</strong>、ICMP、<strong>ARP</strong>、RARP、OSPF、IPX、RIP、IGRP、 （路由器）<br>传输层：<strong>TCP</strong>、<strong>UDP</strong>、SPX<br>会话层：NFS、<strong>SQL</strong>、NETBIOS、RPC<br>表示层：JPEG、MPEG、ASII<br>应用层：<strong>FTP</strong>、<strong>DNS</strong>、Telnet、SMTP、<strong>HTTP</strong>、<strong>WWW</strong>、NFS</p>
+<hr>
+<h1 id="五、对协议的梳理"><a href="#五、对协议的梳理" class="headerlink" title="五、对协议的梳理"></a>五、对协议的梳理</h1><p> ==MAC与IP间的协议==<br><strong>ARP协议：</strong> 负责将IP地址映射到 MAC地址</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 根据IP地址获取物理地址:<br>首先，每个主机都会在自己的ARP缓冲区中建立一个ARP列表，以表示IP地址和MAC地址之间的对应关系。当源主机要发送数据时，首先检查ARP列表中是否有对应IP地址的目的主机的MAC地址，如果有，则直接发送数据，如果没有，就向本网段的所有主机发送ARP数据包，该数据包包括的内容有：源主机 IP地址，源主机MAC地址，目的主机的IP 地址。当本网络的所有主机收到该ARP数据包时，首先检查数据包中的IP地址是否是自己的IP地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入ARP响应包中，告诉源主机自己是它想要找的MAC地址。源主机收到ARP响应包后。将目的主机的IP和MAC地址写入ARP列表，并利用此信息发送数据。如果源主机一直没有收到ARP响应数据包，表示ARP查询失败。<br>注意：广播（255.255.255.255）发送ARP请求，单播发送ARP响应</li>
+</ul>
+<hr>
+<p>MAC地址：MAC地址也叫物理地址、硬件地址，由网络设备制造商生产时烧录在网卡(Network lnterface Card)的EPROM(一种闪存芯片，通常可以通过程序擦写)。IP地址与MAC地址在计算机里都是以二进制表示的，IP地址是32位的，而MAC地址则是48位的。MAC地址的长度为48位(6个字节)，通常表示为12个16进制数，如：00-16-EA-AE-3C-40就是一个MAC地址，其中前3个字节，16进制数00-16-EA代表网络硬件制造商的编号，它由IEEE(电气与电子工程师协会)分配，而后3个字节，16进制数AE-3C-40代表该制造商所制造的某个网络产品(如网卡)的系列号。只要不更改自己的MAC地址，MAC地址在世界是唯一的。形象地说，MAC地址就如同身份证上的身份证号码，具有唯一性。<br><em>震网病毒攻击了西门子泄露MAC的PLC</em></p>
+<hr>
+<hr>
+<p>==网络之间信息传送的协议（网际层）==<br><strong>IP协议：</strong> 将IP信息包从源设备(如用户的计算机)传到目的设备(如某部门的www服务器)</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 为了达到这样的目的，IP必须依赖<strong>IP地址</strong>与<strong>IP路由器</strong>两种机制来实现。<br>IP地址<br>IP规定网络上所有的设备都必须有一个独一无二的IP地址，就好比是邮件上都必须注明收件人地址，邮递员才能将邮件送到。同理，每个IP信息包都必须包含有目的设备的IP地址，信息包才可以正确地送到目的地。同一设备不可以拥有多个IP地址，所有使用IP的网络设备至少有一个唯一的IP地址。<br>IP路由<br>互联网是由许多个网络连接所形成的大型网络。如果要在互联网中传送IP信息包，除了确保网络上每个设备都有一个唯一的IP地址之外，网络之间还必须有传送的机制，才能将IP信息包通过一个个的网络传送到目的地。此种传送机制称为IP路由。<br>各个网络通过路由器相互连接。路由器的功能是为IP信息包选择传送的路径。换言之，必须依靠沿途各路由器的通力合作，才能将IP信息包送到目的地。在IP路由的过程中，由路由器负责选择路径，IP信息包则是被传送的对象。<img src="https://img-blog.csdnimg.cn/2020120319503470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MTYzMDcz,size_1,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></li>
+</ul>
+<hr>
+<p>IP地址与IP路由是IP信息包传送的基础。此外，IP信息包传送时还有一项很重要的特性，即使用非连接式的传送方式。非连接式的传送方式是指IP信息包传送时，源设备与目的设备双方不必事先连接，即可将IP信息包送达。即源设备完全不用理会目的设备，而只是单纯地将IP信息包逐一送出。至于目的设备是否收到每个信息包、是否收到正确的信息包等，则由上层的协议(例如TCP)来负责检查。</p>
+<hr>
+<p>子网掩码：用来指明一个IP地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合IP地址一起使用。子网掩码只有一个作用，就是将某个IP地址划分成网络地址和主机地址两部分。用于屏蔽IP地址的一部分以区别网络标识和主机标识，并说明该IP地址是在局域网上，还是在广域网上。</p>
+<hr>
+<p>==网络之间信息传送的协议（传输层）==<br><strong>①TCP协议：</strong> 为不可靠的互联网络上提供可靠的端到端字节流</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox">  应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体的TCP层。TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。每台支持TCP的机器都有一个TCP传输实体。TCP实体可以是一个库过程、一个用户进程，或者内核的一部分。在所有这些情形下，它管理TCP流，以及与IP层之间的接口。TCP传输实体接受本地进程的用户数据流，将它们分割成不超过64KB（实际上去掉IP和TCP头，通常不超过1460数据字节）的分段，每个分段以单独的IP数据报形式发送。当包含TCP数据的数据报到达一台机器时，它们被递交给TCP传输实体，TCP传输实体重构出原始的字节流。为简化起见，我们有时候仅仅用“TCP”来代表TCP传输实体（一段软件）或者TCP协议（一组规则）。例如，在“用户将数据交给TCP”这句话中，很显然这里指的是TCP传输实体。IP层并不保证数据报一定被正确地递交到接收方，也不指示数据报的发送速度有多快。正是TCP负责既要足够快地发送数据报，以便使用网络容量，但又不能引起网络拥塞：而且，TCP超时后，要重传没有递交的数据报。即使被正确递交的数据报，也可能存在错序的问题，这也是TCP的责任，它必须把接收到的数据报重新装配成正确的顺序。</p>
+</li>
+<li><p><strong>TCP</strong></p>
+</li>
+</ul>
+<p>建立方式——三次握手：<br>第一次握手：客户端发送syn包(seq=x)到服务器，并进入SYN_SEND(发送)状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（seq=y），即SYN+ACK包，此时服务器进入SYN_RECV（接收）状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=y+1)，此包发送完毕，客户端和服务器进入ESTABLISHED（已建立）状态，完成三次握手。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201203221946406.gif" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>连接终止——四次挥手：<br>第一次挥手：主动关闭方发送一个FIN，用来关闭主动方到被动关闭方的数据传送，也就是主动关闭方告诉被动关闭方：我已经不 会再给你发数据了(当然，在fin包之前发送出去的数据，如果没有收到对应的ack确认报文，主动关闭方依然会重发这些数据)，但是，此时主动关闭方还可以接受数据。<br>第二次挥手：被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1。<br>第三次挥手：被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。<br>第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。</p>
+<p>说明：<br>1）SYN和ACK是标志位（0/1）（ACK=1表明ack有效），seq是序列号，ack是确认号。<br>2）给对方的确认方式就是把对方传来的seq+1并赋给ack。<br>3）SYN攻击 用众多伪造ip地址向服务器发送SYN=1（请求连接），让服务器处于SYN-RCVD状态，但都无法第三次握手（因为伪造ip不存在）<br>4）4次挥手中的FIN就相当于三次握手中的SYN。<br>5）序号seq，确认序号ack，确认标志位ACK作用还是一样的，就是确认作用（把seq加上1赋给ack，并把ACK置1）<br>6）为什么一个3次1个4次不一样？<br>因为两端的数据并不是同时发送完，所以两端谁发送完数据都需要自己告诉对方一次，并且对方确认一次。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201203210440531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MTYzMDcz,size_1,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<hr>
+<p>互联网络与单个网络有很大的不同，因为互联网络的不同部分可能有截然不同的拓扑结构、带宽、延迟、数据包大小和其他参数。TCP的设计目标是能够动态地适应互联网络的这些特性，而且具备面对各种故障时的健壮性。不同主机的应用层之间经常需要可靠的、像管道一样的连接，但是IP层不提供这样的流机制，而是提供不可靠的包交换。简而言之，TCP必须提供可靠性的良好性能，这正是大多数用户所期望的而IP又没有提供的功能。</p>
+<hr>
+<p><strong>②UDP协议：</strong> 为应用程序提供了无需建立连接就可以发送封装的 IP 数据包的方法</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 对应用程序交下来的报文，在添加首部后就向下交付给IP层。既不拆分，也不合并，而是保留这些报文的边界</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>UDP</th>
+<th>TCP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否连接</td>
+<td>无连接</td>
+<td>面向连接</td>
+</tr>
+<tr>
+<td>是否可靠</td>
+<td>不可靠传输，不使用流量控制和拥塞控制</td>
+<td>可靠传输，使用流量控制和拥塞控制</td>
+</tr>
+<tr>
+<td>连接对象个数</td>
+<td>支持一对一，一对多，多对一和多对多的交互通信</td>
+<td>只能一对一通信</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td>面向报文</td>
+<td>面向字节流</td>
+</tr>
+<tr>
+<td>首部字节</td>
+<td>8字节</td>
+<td>最小20，最大60字节</td>
+</tr>
+<tr>
+<td>应用环境</td>
+<td>适用于实时通信（IP电话、视频会议、直播等）</td>
+<td>适用于要求可靠传输的应用（文件传输）</td>
+</tr>
+<tr>
+<td>下层协议</td>
+<td>TFTP、SNMP、NFS、DNS、BOOTP</td>
+<td>FTP、Telnet、SMTP、POP3、HTTP</td>
+</tr>
+</tbody></table>
+<ul>
+<li>TCP向上层提供面向连接的可靠服务 ，UDP向上层提供无连接不可靠服务。</li>
+<li> 虽然 UDP 并没有 TCP 传输来的准确，但是也能在很多实时性要求高的地方有所作为</li>
+<li> 对数据准确性要求高，速度可以相对较慢的，可以选用TCP。不产生任何额外的数据，即使知道有破坏的包也不进行重发。当强调传输性能而不是传输的完整性时，如：音频和多媒体应用，UDP是最好的选择。在数据传输时间很短，以至于此前的连接过程成为整个流量主体的情况下，UDP也是一个好的选择。</li>
+</ul>
+<p>==域名与IP间的协议==<br><strong>DNS协议：</strong> 提供域名和IP地址相互映射的一个分布式数据库</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>域名解析：</strong> 首先，根据域名系统域名空间的层次结构将其按子树划分为不同的区域，每个区域可看作是负责层次结构中这一部分节点的可管理的权力实体。例如，整个域的顶层区域由ICANN负责管理，一些国家域名及其下属的那些节点又构成了各自的区域，像.cn域就由CNNIC负责管理。而.cn域下又被划分为一些更小的区域，例如.fudan.edu.cn由复旦大学网络中心负责管理。其次，每个区域必须有对应的域名服务器，每个区域中包含的信息存储在域名服务器上。一个区域中可有两个或多个域名服务器，这样即使其中一个域名服务器出了故障，另一个域名服务器仍然可以正常提供信息。一个域名服务器也可以同时管辖多个区域。域名服务器在接到用户发出的请求后查询自身的资源记录集合，返回用户想要得到的最终答案，或者当自身的资源记录集合中查不到所需要的答案时，返回指向另外一个域名服务器的指针，用户将继续向那个域名服务器发出请求。所以说，域名服务器不需要记录所有下属域名和主机的信息，对于其中的子域(如果存在)，只需要知道子域的域名服务器即可。资源记录是一个域名到值的绑定，它包括以下字段：域名、值、类型、分类和生命期。域名字段和值字段分别用来表示解析的内容和解析返回的结果。类型字段代表了值的种类：类型为A代表值字段是一个IP地址，即用户所要的最终答案；类型为NS代表值字段是另一个域名服务器的域名，该域名服务器能够知道如何解析域名字段所指定的域名；类型为CNAME代表值字段是由域名所指定的主机的一个别名；类型为MX代表值字段是一个邮件服务器的域名，该邮件服务器接收由域名字段所指定的域的邮件；类型PTR用于域名反解等。分类字段允许指定其他的记录类型。生命期字段用于指出该资源记录的有效期是多少。为减少域名解析时间，域名服务器会缓存一些曾经查询过的、来自其他域名服务器的资源记录。由于这些资源记录会因为更改而失效，因此域名服务器设置了生命期，到期的资源记录会被清除出缓存。<br>根域名服务器知道所有顶级域名的域名服务器，对应于每个顶级域名，它都有两条资源记录：一条是NS资源记录，域名字段是该顶级域名，值字段是该顶级域名解析的域名服务器的域名；另一条是A资源记录，用来指明该域名服务器的域名对应的IP地址。综合使用这两条记录，就可以知道对该域下的某个域名解析，应该继续去哪个IP地址的域名服务器寻找。第二层的域名服务器类似地存放各个第三层域名服务器的指针。第三层的域名服务器会出现A、CNAME、MX等类型的资源记录。每个域名服务器都有根域名服务器的地址记录。最后，一个需要域名解析的用户先将该解析请求发往本地的域名服务器。如果本地的域名服务器能够解析，则直接得到结果，否则本地的域名服务器将向根域名服务器发送请求。依据根域名服务器返回的指针再查询下一层的域名服务器，依此类推，最后得到所要解析域名的IP地址。</li>
+</ul>
+<p><strong>域名反解：</strong> 是指给出一个IP地址，找出其对应的域名，这也是利用DNS来实现的。举个例子，假设一个要反解的IP地址为202.120.225.9，系统将其改写为9.225.120.202. in-addr.arpa，然后按域名解析的方式查询。这需要在被查询主机的本地域名服务器上有一条对应于9.225.120.202.in-addr.arpa的资源记录，类型是PTR，值是其域名。</p>
+<p><del>（域名系统的名字空间）</del></p>
+<hr>
+<p>在浏览器中输入<a target="_blank" rel="noopener" href="http://www.baidu.com后执行的全部过程/">www.baidu.com后执行的全部过程</a> ：<br>1、客户端浏览器通过DNS解析到<a target="_blank" rel="noopener" href="http://www.baidu.com的ip地址220.181.27.48,通过这个ip地址找到客户端到服务器的路径.客户端浏览器发起一个http会话到220.161.27.48,然后通过tcp进行封装数据包,输入到网络层./">www.baidu.com的IP地址220.181.27.48，通过这个IP地址找到客户端到服务器的路径。客户端浏览器发起一个HTTP会话到220.161.27.48，然后通过TCP进行封装数据包，输入到网络层。</a><br>  2、在客户端的传输层(添加TCP头)，把HTTP会话请求分成报文段，添加源和目的端口，如服务器使用80端口监听客户端的请求，客户端由系统随机选择一个端口如5000，与服务器进行交换，服务器把相应的请求返回给客户端的5000端口。然后使用IP层的IP地址查找目的端。<br>  3、客户端的网络层（添加IP头）不用关系应用层或者传输层的东西，主要做的是通过查找路由表确定如何到达服务器，期间可能经过多个路由器，这些都是由路由器来完成的工作，我不作过多的描述，无非就是通过查找路由表决定通过那个路径到达服务器。<br>  4、客户端的链路层（添加MAC头），包通过链路层发送到路由器，通过邻居协议查找给定IP地址的MAC地址，然后发送ARP请求查找目的地址，如果得到回应后就可以使用ARP的请求应答交换的IP数据包现在就可以传输了，然后发送IP数据包到达服务器的地址。</p>
+<hr>
+<p>  ==传输文件的协议==<br>  <strong>FTP协议：</strong> 将文件从一台计算机传送到另一台计算机</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> FTP支持两种模式，一种方式叫做Standard (也就是 PORT方式，主动方式)，一种是 Passive(也就是PASV，被动方式)。 Standard模式 FTP的客户端发送 PORT 命令到FTP Serve。Passive模式FTP的客户端发送 PASV命令到 FTP Server。<br>Port：<br>FTP 客户端首先和FTP服务器的TCP 21端口建立连接，通过这个通道发送命令，客户端需要接收数据的时候在这个通道上发送PORT命令。 PORT命令包含了客户端用什么端口接收数据。在传送数据的时候，服务器端通过自己的TCP 20端口连接至客户端的指定端口发送数据。 FTP server必须和客户端建立一个新的连接用来传送数据。<br>Passive：<br>在建立控制通道的时候和Standard模式类似，但建立连接后发送的不是Port命令，而是Pasv命令。FTP服务器收到Pasv命令后，随机打开一个高端端口（端口号大于1024）并且通知客户端在这个端口上传送数据的请求，客户端连接FTP服务器此端口，通过三次握手建立通道，然后FTP服务器将通过这个端口进行数据的传送。<br>很多防火墙在设置的时候都是不允许接受外部发起的连接的，所以许多位于防火墙后或内网的FTP服务器不支持PASV模式，因为客户端无法穿过防火墙打开FTP服务器的高端端口；而许多内网的客户端不能用PORT模式登陆FTP服务器，因为从服务器的TCP 20无法和内部网络的客户端建立一个新的连接，造成无法工作。</li>
+</ul>
+<hr>
+<p>默认情况下FTP协议使用TCP端口中的 20和21这两个端口，其中20用于传输数据，21用于传输控制信息。但是，是否使用20作为传输数据的端口与FTP使用的传输模式有关，如果采用主动模式，那么数据传输端口就是20；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
+<hr>
+<p>==客户端和服务器端请求和应答的标准协议==<br><strong>HTTP协议：</strong> 客户端和服务端标准通信格式</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 一个客户机与服务器建立连接后，发送一个请求给服务器，请求方式的格式为，统一资源标识符、协议版本号，后边是MIME信息包括请求修饰符、客户机信息和可能的内容。服务器接到请求后，给予相应的响应信息，其格式为一个状态行包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息包括服务器信息、实体信息和可能的内容。其实简单说就是任何服务器除了包括HTML文件以外，还有一个HTTP驻留程序，用于响应用户请求。你的浏览器是HTTP客户，向服务器发送请求，当浏览器中输入了一个开始文件或点击了一个超级链接时，浏览器就向服务器发送了HTTP请求，此请求被送往由IP地址指定的URL。驻留程序接收到请求，在进行必要的操作后回送所要求的文件。在这一过程中，在网络上发送和接收的数据已经被分成一个或多个数据包（packet），每个数据包包括：要传送的数据；控制信息，即告诉网络怎样处理数据包。TCP/IP决定了每个数据包的格式。如果事先不告诉你，你可能不会知道信息被分成用于传输和再重新组合起来的许多小块。许多HTTP通讯是由一个用户代理初始化的并且包括一个申请在源服务器上资源的请求。最简单的情况可能是在用户代理(UA)和源服务器(O)之间通过一个单独的连接来完成。当一个或多个中介出现在请求/响应链中时，情况就变得复杂一些。中介有三种：代理(Proxy)、网关(Gateway)和通道(Tunnel)。一个代理根据URI的绝对格式来接受请求，重写全部或部分消息，通过URI的标识把已格式化过的请求发送到服务器。网关是一个接收代理，作为一些其它服务器的上层，并且如果必须的话，可以把请求翻译给下层的服务器协议。一个通道作为不改变消息的两个连接之间的中继点。当通讯需要通过一个中介(例如：防火墙等)或者是中介不能识别消息的内容时，通道经常被使用。</li>
+</ul>
+<hr>
+<p>客户与服务器之间的HTTP连接是一种一次性连接，它限制每次连接只处理一个请求，当服务器返回本次请求的应答后便立即关闭连接，下次请求再重新建立连接。这种一次性连接主要考虑到WWW服务器面向的是Internet中成干上万个用户，且只能提供有限个连接，故服务器不会让一个连接处于等待状态，及时地释放连接可以大大提高服务器的执行效率。 [7]<br>HTTP是一种无状态协议，即服务器不保留与客户交易时的任何状态。这就大大减轻了服务器记忆负担，从而保持较快的响应速度。HTTP是一种面向对象的协议。允许传送任意类型的数据对象。它通过数据类型和长度来标识所传送的数据内容和大小，并允许对数据进行压缩传送。当用户在一个HTML文档中定义了一个超文本链后，浏览器将通过TCP/IP协议与指定的服务器建立连接。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>HTTP方法</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>客户端请求指定资源信息，服务器返回指定资源</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>只请求响应报文中的HTTP首部</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>将客户端的数据提交到服务器，例：注册表单</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>从客户端向服务器传送的数据取代指定的文档内容</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求服务器删除Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td>MOVE</td>
+<td>请求服务器将制定的页面移至另一个网络地址</td>
+</tr>
+</tbody></table>
+<p>HTTP状态码<br>所有HTTP响应的第一行都是状态行，依次是当前HTTP版本号，3位数字组成的状态代码，以及描述状态的短语，彼此由空格分隔。状态代码的第一个数字代表当前响应的类型：</p>
+<ul>
+<li>1xx消息——请求已被服务器接收，继续处理</li>
+<li>2xx成功——请求已成功被服务器接收、理解、并接受</li>
+<li>3xx重定向——需要后续操作才能完成这一请求</li>
+<li>4xx请求错误——请求含有词法错误或者无法被执行</li>
+<li>5xx服务器错误——服务器在处理某个正确请求时发生错误</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/network/">network</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/04/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">常见端口及其服务</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/24/ctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                        <span class="hidden-mobile">ctf-web</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://wo02ie.github.io" target="_blank" rel="nofollow noopener"><span>wo02ie</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
