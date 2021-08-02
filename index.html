@@ -709,7 +709,8 @@ unserialize()
           
             
           
-          LowBrute Force查看代码 发现存在sql注入==$ query  = “SELECT * FROM ’users‘ WHERE user = ‘$ user’ AND password = ‘$pass’;”;==构造 admin’ #  上图选中代码变为$ query  = “SELECT * FROM ’users‘ WHERE user = ’admin’ # ‘ AND pas
+          LowBrute Force查看代码 发现存在sql注入
+$ query  = “SELECT * FROM ’users‘ WHERE user = ‘$ user’ AND password = ‘$pass’;”;构造 admin’ #  上图选中代码变为$ query  = “SELECT * FROM ’users‘ WHERE user = ’admin’ # ‘ AND passwo
         </a>
       </p>
 
