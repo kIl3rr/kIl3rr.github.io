@@ -248,7 +248,7 @@
 <li><input checked="" disabled="" type="checkbox"> 沙箱机制 相互隔离 互不影响 <del>Docker逃逸</del></li>
 </ul>
 <h2 id="二、架构"><a href="#二、架构" class="headerlink" title="二、架构"></a>二、架构</h2><p><strong>镜像：</strong>Docker镜像可以类比为 类<br><strong>容器：</strong>可以看作是镜像的 对象 可：创建、启动、停止、删除、暂停<br><strong>仓库：</strong>用来保存镜像</p>
-<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F3d7083fa7d291a90b05822583933224958a2af4d9067-6N1RKd_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113477&t=45b612ce6703b9aed09040223b8fee44" srcset="/img/loading.gif" lazyload alt="点击查看源网页"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fseo-1255598498.file.myqcloud.com%2Ffull%2F66ec0965a96e9a6d2d1c191ebcc8807ba71baa93.jpg&refer=http%3A%2F%2Fseo-1255598498.file.myqcloud.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113819&t=6abc442e6df87436f6b850b78b48ceda" srcset="/img/loading.gif" lazyload alt="点击查看源网页"></p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F3d7083fa7d291a90b05822583933224958a2af4d9067-6N1RKd_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113477&t=45b612ce6703b9aed09040223b8fee44" srcset="/img/loading.gif" lazyload><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fseo-1255598498.file.myqcloud.com%2Ffull%2F66ec0965a96e9a6d2d1c191ebcc8807ba71baa93.jpg&refer=http%3A%2F%2Fseo-1255598498.file.myqcloud.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113819&t=6abc442e6df87436f6b850b78b48ceda" srcset="/img/loading.gif" lazyload></p>
 <h2 id="三、命令"><a href="#三、命令" class="headerlink" title="三、命令"></a>三、命令</h2><p>阿里云弄一下镜像加速器</p>
 <p>docker</p>
 <ul>
@@ -264,15 +264,15 @@
 </ul>
 <p>问题：<br>1、Docker容器删除后 容器中产生的数据还有吗 没有</p>
 <p>2、容器之间怎么数据交互</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155318730.png" srcset="/img/loading.gif" lazyload alt="image-20210404155318730"></p>
-<p><em>物理机windows上vm搭建linux linux上使用Docker</em><br>3、Docker容器与外部的物理机(注意物理机指windows)能直接交互文件吗 不能<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155426461.png" srcset="/img/loading.gif" lazyload alt="image-20210404155426461"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155318730.png" srcset="/img/loading.gif" lazyload></p>
+<p><em>物理机windows上vm搭建linux linux上使用Docker</em><br>3、Docker容器与外部的物理机(注意物理机指windows)能直接交互文件吗 不能<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155426461.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li><p>数据卷是linux的一个目录或文件 把容器装载到数据卷上(对方的修改都会立即同步）<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155501288.png" srcset="/img/loading.gif" lazyload alt="image-20210404155501288"></p>
+<li><p>数据卷是linux的一个目录或文件 把容器装载到数据卷上(对方的修改都会立即同步）<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155501288.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>一个数据卷可以装载多个容器</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155156627.png" srcset="/img/loading.gif" lazyload alt="image-20210404155156627"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155156627.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><p>一个容器可以挂载多个数据卷<br><code>docker -it --name=first \</code><br><code>-v ../../...</code><br><code>-v ../../xxx</code></p>
 </li>
@@ -286,7 +286,7 @@
 <p>问题1：删除容器后Docker没有了产生的数据 但数据卷会保留容器产生的数据 扩展：恢复容器再次挂载数据卷 数据仍然可以使用</p>
 <p>2：同一个数据卷的容器 在数据卷的内容相同 对数据卷的操作同时生效</p>
 <h2 id="五、数据卷容器"><a href="#五、数据卷容器" class="headerlink" title="五、数据卷容器"></a>五、数据卷容器</h2><p>当多容器进行数据交换时 再使用同一个数据卷就不方便了 此时需要数据卷容器</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155917095.png" srcset="/img/loading.gif" lazyload alt="image-20210404155917095"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210404155917095.png" srcset="/img/loading.gif" lazyload></p>
 <p>此时相当于两个容器c1c2直接挂载到数据卷上 假如此时的C3坏了 c1c2与数据卷的联系也没有断</p>
 <p>挂载步骤</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">c3:<br>docker <span class="hljs-builtin-name">run</span> -it <span class="hljs-attribute">--name</span>=c3 -v **/volume(此目录不可改 由Docker分配)** 镜像名 <br><br>c1c2:<br>docker <span class="hljs-builtin-name">run</span> -it <span class="hljs-attribute">--name</span>=c1 --volumns-from c3 镜像名 <br><br>docker <span class="hljs-builtin-name">run</span> -it <span class="hljs-attribute">--name</span>=c2 --volumns-from c3 镜像名 <br></code></pre></td></tr></table></figure>
@@ -410,10 +410,10 @@
 
 <h2 id="七、镜像"><a href="#七、镜像" class="headerlink" title="七、镜像"></a>七、镜像</h2><p>为什么一个操作系统的镜像在Docker里会很小 因为使用了当前操作系统的bootfs 拉取下来的只是rootfs和往上的镜像层<br>又比如 tomcat的安装包比镜像小</p>
 <p>linux(bootfs-&gt;rootfs)<br>本质：Docker的底端是bootfs而且是使用的是宿主机的内核 第二层是当前系统的rootfs的基础镜像base image 然后就有软件的编译环境如jdk 最后暴露在外面的就是软件的镜像 ==即分层文件系统==</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210408211917032.png" srcset="/img/loading.gif" lazyload alt="image-20210408211917032"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210408211917032.png" srcset="/img/loading.gif" lazyload></p>
 <p>对于使用者来说 就是集成了操作系统和编译运行环境的文件系统</p>
 <h2 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h2><p>类似于操作系统中Ghost把分区克隆为.gho文件</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210418172617431.png" srcset="/img/loading.gif" lazyload alt="image-20210418172617431"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210418172617431.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>容器转为镜像<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker commit 容器<span class="hljs-built_in">id</span> 镜像名:版本号<br></code></pre></td></tr></table></figure>
 2.压缩镜像</li>
@@ -425,7 +425,7 @@
 
 
 
-<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210418172524845.png" srcset="/img/loading.gif" lazyload alt="image-20210418172524845"></p>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210418172524845.png" srcset="/img/loading.gif" lazyload></p>
 <p>它是一个记录指令的文本文件 每一条指令构造一层基础镜像(开发) 最终构造成一个完整的发布镜像 这种做法和容器打包为压缩文件不一样 但最终效果一致 都能为开发人员提供一个完全一致的开发环境 有利于多方调试 对于测试人员则直接可以把其docker run 然后用于工作 对于运维人员则可以在应用部署时实现无缝衔接</p>
 <p>据此，我们可以自定义一个软件(操作系统)安装后就有哪些功能(夹带哪些软件) FROM MAITAINER RUN WORKDIR</p>
 <h3 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment">#案例 刚安装的centos终端输入vim发现不能使用 说明vim并没有被载入centos的镜像中 需要用户自行安装 那么我们可以自定义镜像</span><br><br>①定义父镜像 <span class="hljs-keyword">FROM</span> centos7<br>②定义作者信息 <span class="hljs-keyword">MAINTAINER</span> wo02ie<br>③执行安装软件的命令 <span class="hljs-keyword">RUN</span><span class="bash"> apt-get install vim</span><br><span class="hljs-comment">#还可使用离线安装包 ADD springboot.jar app.jar</span><br><span class="hljs-comment">#CMD jar -jar app.jar</span><br><br>④定义默认工作目录 <span class="hljs-keyword">WORKDIR</span><span class="bash">　／ｕｓｒ</span><br>⑤让容器启动执行命令　<span class="hljs-keyword">CMD</span><span class="bash">　（常是）／ｂｉｎ／ｂａｓｈ</span><br></code></pre></td></tr></table></figure>
