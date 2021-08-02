@@ -337,7 +337,7 @@
 <p>php.ini是php的配置文件，通常下载下来的php都没有这个文件，有两个预置的ini模板，php.ini-development和php.ini-production,前者是开发环境推荐的，允许调试，少占资源；后者是上线产品时的环境推荐，禁止报错，提高性能</p>
 <p>php.ini包括了很多php的配置，这些配置中，又分为几种：<code>PHP_INI_SYSTEM</code>、<code>PHP_INI_PERDIR</code>、<code>PHP_INI_ALL</code>、<code>PHP_INI_USER</code>。</p>
 <p>除了主 php.ini 之外，PHP 还会在每个目录下扫描 ini 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（<code>$_SERVER[&#39;DOCUMENT_ROOT&#39;]</code> 所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。在 <code>.user.ini</code> 风格的 ini 文件中只有具有 PHP_INI_PERDIR 和 PHP_INI_USER 模式的 ini 设置可被识别</p>
-<p><img src="https://wooyun.js.org/images_result/images/2014103002272568560.png" srcset="/img/loading.gif" lazyload alt="enter image description here"></p>
+<p><img src="https://wooyun.js.org/images_result/images/2014103002272568560.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>.user.ini</code>实际上就是一个可以由用户“自定义”的php.ini，我们能够自定义的设置是模式为“PHP_INI_PERDIR 、 PHP_INI_USER”的设置。（上面表格中没有提到的PHP_INI_PERDIR也可以在.user.ini中设置）</p>
 <p>实际上，除了<code>PHP_INI_SYSTEM</code>以外的模式（包括PHP_INI_ALL）都是可以通过.user.ini来设置的</p>
 <p>而且，和<code>php.ini</code>不同的是，<code>.user.ini</code>是一个能被动态加载的ini文件。也就是说我修改了<code>.user.ini</code>后，不需要重启服务器中间件，只需要等待<code>user_ini.cache_ttl</code>所设置的时间（默认为300秒），即可被重新加载，然后我们看到php.ini中的配置项，但是只要稍微敏感的配置项，都是<code>PHP_INI_SYSTEM</code>模式的（甚至是php.ini only的），包括<code>disable_functions</code>、<code>extension_dir</code>、<code>enable_dl</code>等。 不过，我们可以很容易地借助<code>.user.ini</code>文件来构造一个“后门”，其中有两个可以利用的配置点</p>
