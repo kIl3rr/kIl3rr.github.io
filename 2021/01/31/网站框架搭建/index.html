@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      962 字
+      961 字
     </span>
   
 
@@ -249,7 +249,7 @@
 </ul>
 <h1 id="二、安装php"><a href="#二、安装php" class="headerlink" title="二、安装php"></a>二、安装php</h1><p>下载好php.zip解压至目标文件夹（注意：下载的php应该是有线程安全的版本）</p>
 <p>写一个1.php（echo hello world）<br>cmd里键入<code>php.exe -f 1.php</code><br><img src="https://img-blog.csdnimg.cn/20210127113446262.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>没问题php安装成功，接下来</p>
-<h1 id="三、-从apache加载php"><a href="#三、-从apache加载php" class="headerlink" title="三、==从apache加载php=="></a>三、==从apache加载php==</h1><ul>
+<h1 id="三、从apache加载php"><a href="#三、从apache加载php" class="headerlink" title="三、从apache加载php"></a>三、从apache加载php</h1><ul>
 <li>打开php文件中的<code>php.ini-development</code>改名为<code>php.ini</code></li>
 <li>修改<code>php.ini</code>的语句：<br>①去掉语句<code>;extension_dir=“ext”</code>分号（ini文件中;号为注释符）<br>②双引号内的<code>ext</code>更改为<code>php安装目录/ext</code></li>
 <li>修改<code>apache/conf/httpd.conf</code> 在LoadModule代码区下方添加：<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"> <span class="hljs-comment">#php安装路径/php7apache2_4.dll</span><br>LoadModule php_module <span class="hljs-string">&quot;php安装目录/php7apache2_4.dll&quot;</span> <br> <span class="hljs-comment">#php安装路径</span><br>PHPIniDir <span class="hljs-string">&quot;php安装目录&quot;</span> <br><span class="hljs-comment">#关联 *.php 文件</span><br>AddType application/x-httpd-php <span class="hljs-string">.php</span> <span class="hljs-string">.phtml</span><br></code></pre></td></tr></table></figure></li>
@@ -277,7 +277,7 @@
 <li><p>将mysql的bin配置环境变量中（方便启动时不用切换目录）</p>
 </li>
 </ul>
-<h1 id="五、-php连接mysql"><a href="#五、-php连接mysql" class="headerlink" title="五、==php连接mysql=="></a>五、==php连接mysql==</h1><p>此处使用的版本为php7 连接数据库与&lt;5.X有很大不同</p>
+<h1 id="五、php连接mysql"><a href="#五、php连接mysql" class="headerlink" title="五、php连接mysql"></a>五、php连接mysql</h1><p>此处使用的版本为php7 连接数据库与&lt;5.X有很大不同</p>
 <ul>
 <li>修改php.ini(之前已经配置过php.ini的一处ext.dir)<br>①去掉下面语句的分号：<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">;<span class="hljs-attribute">extension</span>=mysqli<br>;<span class="hljs-attribute">extension</span>=pdo_mysql<br></code></pre></td></tr></table></figure>
 ②在extension代码区下方添加：<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">extension</span>=php_mysqli.dll<br><span class="hljs-attr">extension</span>=php_pdo_mysql.dll<br></code></pre></td></tr></table></figure>
