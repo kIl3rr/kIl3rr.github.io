@@ -241,18 +241,18 @@
             
             <div class="markdown-body">
               <h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>更改test为2 成功显示2</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161249161.png" srcset="/img/loading.gif" lazyload alt="image-20210721161249161"></p>
-<p>输入<code>&lt;script&gt;&lt;/script&gt;</code>没有显示 按理来说应该会出现欢迎用户<code>&lt;script&gt;&lt;/script&gt;</code>才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的js代码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231844489.png" srcset="/img/loading.gif" lazyload alt="image-20210721231844489"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161249161.png" srcset="/img/loading.gif" lazyload></p>
+<p>输入<code>&lt;script&gt;&lt;/script&gt;</code>没有显示 按理来说应该会出现欢迎用户<code>&lt;script&gt;&lt;/script&gt;</code>才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的js代码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231844489.png" srcset="/img/loading.gif" lazyload></p>
 <p>需要弹窗才能下一关</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231540223.png" srcset="/img/loading.gif" lazyload alt="image-20210721231540223"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721160805637.png" srcset="/img/loading.gif" lazyload alt="image-20210721160805637"></p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232021324.png" srcset="/img/loading.gif" lazyload alt="image-20210721232021324"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231540223.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721160805637.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232021324.png" srcset="/img/loading.gif" lazyload></p>
 <p>有输入框 直接插入失败 在查看器看一下源码 </p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161841692.png" srcset="/img/loading.gif" lazyload alt="image-20210721161841692"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232250230.png" srcset="/img/loading.gif" lazyload alt="image-20210721232250230"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161841692.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232250230.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现上面的文字内容被html实体化编码了，但是下面输入框里还会显示原内容，但是在value值内浏览器无法解析，把value属性闭合，再把<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>”逃逸出去“  ==》构造<code>&gt;&quot;&lt;script&gt;&lt;/script&gt;//</code>, <code>//</code>是为了注释后面原有的<code>&gt;&quot;</code></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161733218.png" srcset="/img/loading.gif" lazyload alt="image-20210721161733218"></p>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721162035732.png" srcset="/img/loading.gif" lazyload alt="image-20210721162035732"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161733218.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721162035732.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现连value值里的内容都被实体化编码了，所以，我们需要尝试其他办法来执行js代码，我们可以发现我们传入的值是在input标签中的，而标签都有属性，我们可以给他添加一个属性，利用这个属性来执行js代码,双引号闭合失败就尝试单引号闭合value</p>
 <blockquote>
 <p>‘onmouseover=’javascript:alert(1)</p>
@@ -261,67 +261,67 @@
 <p>这里onmouseover是嵌入到input中的一个属性，他的作用是鼠标滑过时执行javascript代码，成功绕过。</p>
 <p>还有onclick，他的作用是点击时执行</p>
 <h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>和前一关不同的是使用了双引号进行闭合</p>
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113402660.png" srcset="/img/loading.gif" lazyload alt="image-20210724113402660"></p>
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113402660.png" srcset="/img/loading.gif" lazyload></p>
 <p>script被插进了下划线 说明匹配了&lt;script&gt; 双写 大小写可以尝试 都行不通</p>
 <p>换个标签试一试</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113621774.png" srcset="/img/loading.gif" lazyload alt="image-20210724113621774"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113621774.png" srcset="/img/loading.gif" lazyload></p>
 <p>同样构造闭合</p>
 <blockquote>
 <p>“&gt;&lt;a href=javascript:alert(1)&gt;click on&lt;/a&gt;</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724115942750.png" srcset="/img/loading.gif" lazyload alt="image-20210724115942750"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724115942750.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>测试发现第五关的基础上对herf进行了匹配 进行大小写绕过</p>
 <blockquote>
 <p>“&gt;&lt;a Href=javascript:alert(1)&gt;click on&lt;/a&gt;</p>
 </blockquote>
-<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>第五关提到的双写这里出现了<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724223917009.png" srcset="/img/loading.gif" lazyload alt="image-20210724223917009"></p>
-<p>可以看到提交后标签里的script不再是插入下划线 而是替换为空 那么尝试双写<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724224133906.png" srcset="/img/loading.gif" lazyload alt="image-20210724224133906"></p>
-<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225137053.png" srcset="/img/loading.gif" lazyload alt="image-20210724225137053"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225156651.png" srcset="/img/loading.gif" lazyload alt="image-20210724225156651"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225227736.png" srcset="/img/loading.gif" lazyload alt="image-20210724225227736"></p>
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>第五关提到的双写这里出现了<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724223917009.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以看到提交后标签里的script不再是插入下划线 而是替换为空 那么尝试双写<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724224133906.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225137053.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225156651.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225227736.png" srcset="/img/loading.gif" lazyload></p>
 <p>点击链接后</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225301905.png" srcset="/img/loading.gif" lazyload alt="image-20210724225301905"></p>
-<p>原来javascript被过滤了 可以将这个进行编码绕过 比如将最后一个字符进行编码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225948421.png" srcset="/img/loading.gif" lazyload alt="image-20210724225948421"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225301905.png" srcset="/img/loading.gif" lazyload></p>
+<p>原来javascript被过滤了 可以将这个进行编码绕过 比如将最后一个字符进行编码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225948421.png" srcset="/img/loading.gif" lazyload></p>
 <p>得到<code>javascrip&amp;#116:alert()</code>放入框里添加链接 然后点击链接即可</p>
 <h2 id="9"><a href="#9" class="headerlink" title="9"></a>9</h2><p>无论什么都是链接不合法 看一下wp说需要<code>http://</code> 而且不能因为有<code>http://</code>影响注入</p>
 <p>那么就注释掉</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231259786.png" srcset="/img/loading.gif" lazyload alt="image-20210724231259786"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231254317.png" srcset="/img/loading.gif" lazyload alt="image-20210724231254317"></p>
-<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224553446.png" srcset="/img/loading.gif" lazyload alt="image-20210726224553446"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231259786.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231254317.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224553446.png" srcset="/img/loading.gif" lazyload></p>
 <p>直接插入不行   查看源码发现有三个input是hidden的  分别传参如下</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224355595.png" srcset="/img/loading.gif" lazyload alt="image-20210726224355595"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224412941.png" srcset="/img/loading.gif" lazyload alt="image-20210726224412941"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224450585.png" srcset="/img/loading.gif" lazyload alt="image-20210726224450585"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224355595.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224412941.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224450585.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>t_sort=” type=”text” onmouseover=alert() “</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230555125.png" srcset="/img/loading.gif" lazyload alt="image-20210726230555125"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230555125.png" srcset="/img/loading.gif" lazyload></p>
 <p>鼠标划过文本框</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230610328.png" srcset="/img/loading.gif" lazyload alt="image-20210726230610328"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230610328.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="11"><a href="#11" class="headerlink" title="11"></a>11</h2><p>仍然使用上一关的方法</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728171409093.png" srcset="/img/loading.gif" lazyload alt="image-20210728171409093"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728171409093.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现被实例化  这个t_ref参数怎么利用 url里传好像传不进去</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728173918864.png" srcset="/img/loading.gif" lazyload alt="image-20210728173918864"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728173918864.png" srcset="/img/loading.gif" lazyload></p>
 <p>但是从这里可以发现ref应该是refer</p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174023540.png" srcset="/img/loading.gif" lazyload alt="image-20210728174023540"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174042560.png" srcset="/img/loading.gif" lazyload alt="image-20210728174042560"></p>
-<p>一传进去就是出现文本框了<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174109292.png" srcset="/img/loading.gif" lazyload alt="image-20210728174109292"></p>
-<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174639889.png" srcset="/img/loading.gif" lazyload alt="image-20210728174639889"></p>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174626300.png" srcset="/img/loading.gif" lazyload alt="image-20210728174626300"></p>
-<h2 id="13"><a href="#13" class="headerlink" title="13"></a>13</h2><p>理所当然的<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174839524.png" srcset="/img/loading.gif" lazyload alt="image-20210728174839524"></p>
-<p>额没有反应 抓包！<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728211436470.png" srcset="/img/loading.gif" lazyload alt="image-20210728211436470"></p>
-<h2 id="16"><a href="#16" class="headerlink" title="16"></a>16</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013507101.png" srcset="/img/loading.gif" lazyload alt="image-20210802013507101"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174023540.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174042560.png" srcset="/img/loading.gif" lazyload></p>
+<p>一传进去就是出现文本框了<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174109292.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174639889.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174626300.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="13"><a href="#13" class="headerlink" title="13"></a>13</h2><p>理所当然的<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174839524.png" srcset="/img/loading.gif" lazyload></p>
+<p>额没有反应 抓包！<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728211436470.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="16"><a href="#16" class="headerlink" title="16"></a>16</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013507101.png" srcset="/img/loading.gif" lazyload></p>
 <p>被替换为空格 注意空格和空字符不一样 尝试了大小写无效</p>
 <p>尝试图片标签 </p>
 <blockquote>
 <p>keyword=&lt;img src=1 οnerrοr=alert()&gt;</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013807695.png" srcset="/img/loading.gif" lazyload alt="image-20210802013807695"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013807695.png" srcset="/img/loading.gif" lazyload></p>
 <p>可见 空格被实体化了 %0a绕过</p>
 <blockquote>
 <p>&lt;img%0asrc=1%0aonerror=alert()&gt;</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802014135142.png" srcset="/img/loading.gif" lazyload alt="image-20210802014135142"></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802014135142.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="xss的攻防："><a href="#xss的攻防：" class="headerlink" title="xss的攻防："></a>xss的攻防：</h2><p>1.利用&lt;&gt;标记，构造<script>标签可执行javascript的xss代码。</p>
 <p>xss过滤函数需过滤&lt;&gt;<script></script>等字符。</p>
 <p>2.利用html标签属性支持javascript:伪协议（支持标签属性的有href、lowsrc、bgsound、background、value、action、dynsrc等），执行xss代码。</p>
