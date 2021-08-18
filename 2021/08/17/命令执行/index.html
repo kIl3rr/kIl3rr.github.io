@@ -246,11 +246,7 @@
 <p>过滤了关键单词 如flag、php 在linux可以使用占位符<code>？</code>和<code>*</code></p>
 <p>比如<code>flag.php</code>可以使用<code>fl??.???</code>或者<code>fl?g.??p</code>和<code>f*</code>或者 <code>f***</code>等</p>
 <p>也可以使用空字符<code>&#39;&#39;</code>夹在过滤内容之中<code>fl&#39;&#39;ag.php</code>  </p>
-<<<<<<< Updated upstream
 <p>还可以这样<code>fla\g.php</code>或者正则<code>f[abcd]ag.php</code>、<code>f[a-z]ag.php</code> <code>[abcd]</code> (<code>[abcd]</code> 匹配<code>abcd</code>中一个字符<code>[a-z]</code> 匹配范围 <code>a-z</code>)</p>
-=======
-<p>还可以这样<code>fla\g.php</code>或者正则<code>f[abcd]ag.php</code>、``f[a-z]ag.php```[abcd]<code> (</code>[abcd]<code> 匹配abcd中一个字符</code>[a-z]` 匹配范围 a-z)</p>
->>>>>>> Stashed changes
 <p>payload优先级<code>* = &#39;&#39; = \ &gt; ?</code></p>
 <ul>
 <li>从变量逃逸的角度</li>
@@ -368,11 +364,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$ffi</span> = FFI::cdef(<span class="hljs-string">&quot;int system(const char *command);&quot;</span>);<span class="hljs-comment">//创建一个system对象</span><br><span class="hljs-variable">$a</span>=<span class="hljs-string">&#x27;/readflag &gt; 1.txt&#x27;</span>;<span class="hljs-comment">//没有回显的</span><br><span class="hljs-variable">$ffi</span>-&gt;system(<span class="hljs-variable">$a</span>);<span class="hljs-comment">//通过$ffi去调用system函数</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<<<<<<< Updated upstream
 <p>${PATH:~A}${PWD:~A}${IFS}????.???</p>
-=======
-<p>${PATH:<del>A}${PWD:</del>A}${IFS}????.???</p>
->>>>>>> Stashed changes
 </blockquote>
 <h2 id="include-c"><a href="#include-c" class="headerlink" title="include(c)"></a>include(c)</h2><p>data://，可以让用户来控制输入流，当它与包含函数结合时，用户输入的data://流会被当作php文件执行</p>
 <blockquote>
@@ -453,19 +445,11 @@
 <p>假如更改文件描述符的指向，就能重定向输入输出。比如我们将1指向文件，那么标准的输出就会输出到文件中。</p>
 <p>使用&gt;或者&gt;&gt;对<strong>输出</strong>进行重定向。符号的左边表示文件描述符，如果没有的话表示1，也就是标准输出，符号的右边可以是一个文件，也可以是一个输出设备。当使用&gt;时，会判断右边的文件存不存在，如果存在的话就覆盖，不存在的话则直接创建。但是当使用&gt;&gt;进行追加时，则不会删除原来已经存在的文件。</p>
 <p>root@en1sksyfamnufy5g:~/Desktop# tree<br>.<br>└── a.txt</p>
-<<<<<<< Updated upstream
 <p>0 directories, 1 file<br>root@en1sksyfamnufy5g:~/Desktop# ls a.txt b.txt<br>ls: cannot access ‘b.txt’: No such file or directory<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# ^C<br>root@en1sksyfamnufy5g:~/Desktop# </p>
 <p>在我们执行<code>ls a.txt b.txt</code>之后，一共有两种输出，其中<code>ls: </code>无法访问b.txt: 没有那个文件或目录是错误输出，a.txt是标准输出。</p>
 <p>root@en1sksyfamnufy5g:~/Desktop# ls a.txt b.txt 1&gt;out<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:~/Desktop# cat out<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# ls a.txt b.txt &gt;&gt;out<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:~/Desktop# cat out<br>a.txt<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# </p>
 <p>将原来的标准输出重定向到了out文件中，所以控制台只剩下了错误提示。并且当执行了追加操作时，out文件的内容非但没有被清空，反而又多了一条a.txt。下面我们将错误输出重定向到文件中：</p>
 <p>root@en1sksyfamnufy5g:~/Desktop# ls a.txt b.txt 2&gt;err<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# cat err<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:~/Desktop# ls a.txt b.txt &gt;out 2&gt;err<br>root@en1sksyfamnufy5g:~/Desktop# cat out<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# cat err<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:~/Desktop# </p>
-=======
-<p>0 directories, 1 file<br>root@en1sksyfamnufy5g:<del>/Desktop# ls a.txt b.txt<br>ls: cannot access ‘b.txt’: No such file or directory<br>a.txt<br>root@en1sksyfamnufy5g:</del>/Desktop# ^C<br>root@en1sksyfamnufy5g:~/Desktop# </p>
-<p>在我们执行<code>ls a.txt b.txt</code>之后，一共有两种输出，其中<code>ls: </code>无法访问b.txt: 没有那个文件或目录是错误输出，a.txt是标准输出。</p>
-<p>root@en1sksyfamnufy5g:<del>/Desktop# ls a.txt b.txt 1&gt;out<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:</del>/Desktop# cat out<br>a.txt<br>root@en1sksyfamnufy5g:<del>/Desktop# ls a.txt b.txt &gt;&gt;out<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:</del>/Desktop# cat out<br>a.txt<br>a.txt<br>root@en1sksyfamnufy5g:~/Desktop# </p>
-<p>将原来的标准输出重定向到了out文件中，所以控制台只剩下了错误提示。并且当执行了追加操作时，out文件的内容非但没有被清空，反而又多了一条a.txt。下面我们将错误输出重定向到文件中：</p>
-<p>root@en1sksyfamnufy5g:<del>/Desktop# ls a.txt b.txt 2&gt;err<br>a.txt<br>root@en1sksyfamnufy5g:</del>/Desktop# cat err<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:<del>/Desktop# ls a.txt b.txt &gt;out 2&gt;err<br>root@en1sksyfamnufy5g:</del>/Desktop# cat out<br>a.txt<br>root@en1sksyfamnufy5g:<del>/Desktop# cat err<br>ls: cannot access ‘b.txt’: No such file or directory<br>root@en1sksyfamnufy5g:</del>/Desktop# </p>
->>>>>>> Stashed changes
 </blockquote>
 <ol start="2">
 <li>输入</li>
@@ -494,11 +478,7 @@
 <p>使用&lt;对<strong>输入</strong>做重定向，如果符号左边没有写值，那么默认就是0。以cat命令为例，如果cat后面没有跟文件名的话，那它的作用就是将标准输入（比如键盘）回显到标准输出（比如屏幕）上：</p>
 <p>root@en1sksyfamnufy5g:~/Desktop# cat<br>123<br>123<br>test<br>test</p>
 <p>让cat读取一个文件，我们利用输入重定向：</p>
-<<<<<<< Updated upstream
 <p>root@en1sksyfamnufy5g:~/Desktop# cat a.txt<br>hello<br>root@en1sksyfamnufy5g:~/Desktop# cat &gt;out &lt;a.txt<br>root@en1sksyfamnufy5g:~/Desktop# cat out<br>hello<br>root@en1sksyfamnufy5g:~/Desktop# </p>
-=======
-<p>root@en1sksyfamnufy5g:<del>/Desktop# cat a.txt<br>hello<br>root@en1sksyfamnufy5g:</del>/Desktop# cat &gt;out &lt;a.txt<br>root@en1sksyfamnufy5g:<del>/Desktop# cat out<br>hello<br>root@en1sksyfamnufy5g:</del>/Desktop# </p>
->>>>>>> Stashed changes
 <p>我们可以看看上一次的cat out的内容是a.txt</p>
 <p>root@en1sksyfamnufy5g:~/Desktop# cat &gt;out &lt;&lt;end</p>
 <p>&gt;hhh<br>&gt;end<br>root@en1sksyfamnufy5g:~/Desktop# </p>
@@ -516,11 +496,7 @@
 </blockquote>
 <p>在终端就会这样</p>
 <blockquote>
-<<<<<<< Updated upstream
 <p>root@en1sksyfamnufy5g:~/Desktop# cat flag.php<br>flag{……}<br>root@en1sksyfamnufy5g:~/Desktop# &gt;/dev/null 2&gt;&amp;1<br>root@en1sksyfamnufy5g:~/Desktop# </p>
-=======
-<p>root@en1sksyfamnufy5g:<del>/Desktop# cat flag.php<br>flag{……}<br>root@en1sksyfamnufy5g:</del>/Desktop# &gt;/dev/null 2&gt;&amp;1<br>root@en1sksyfamnufy5g:~/Desktop# </p>
->>>>>>> Stashed changes
 </blockquote>
 <p>还可以利用分号</p>
 <blockquote>
