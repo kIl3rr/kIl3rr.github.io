@@ -316,7 +316,7 @@ keywords - 关键字
 
 
 <p>读取文件的同时执行后面的代码 因此提高了程序的性能 从而我们可以把需要处理回调函数的参数写在回调函数内</p>
-<p>即 ==阻塞是按顺序执行代码的 非阻塞可以不按照顺序执行==</p>
+<p>即 <strong>阻塞是按顺序执行代码的 非阻塞可以不按照顺序执行</strong></p>
 <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>Node.js 异步编程的直接体现就是回调。</p>
 <p>异步编程依托于回调来实现 但不能说使用了回调后程序就异步化了 </p>
 <p>nodejs是单线程应用程序 而V8引擎提供的异步执行回调接口就可以处理大量的并发 从而极大的提升了性能</p>
@@ -430,7 +430,7 @@ keywords - 关键字
 <li><p>__proto__<br>就上例而言 我们可以通过Student.prototype访问Student类的原型 但是实例化后的对象stu是不能通过prototype访问原型的 这时候我们使用__proto__来访问实例化对象的原型 stu.__proto__==Student.prototype看到二者是等价的</p>
 </li>
 </ul>
-<p>==在Java.Script中 万物皆对象==<br>所有的变量，函数，数组，对象都始于Object的原型即Object.prototype  对象的__proto__和类的prototype相对应</p>
+<p><strong>在Java.Script中 万物皆对象</strong><br>所有的变量，函数，数组，对象都始于Object的原型即Object.prototype  对象的__proto__和类的prototype相对应</p>
 <p>特别的 函数也可以使用__proto__因为函数也是对象 后面给予说明</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/n.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>在javascript中 每个对象的都有一个指向他的原型(prototype)的内部链接 这个原型对象又有它自己的原型，直到null为止</p>
@@ -545,9 +545,9 @@ keywords - 关键字
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/02/Upload%E7%AC%94%E8%AE%B0/">
+                      <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Upload笔记</span>
+                        <span class="hidden-mobile">命令执行</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     

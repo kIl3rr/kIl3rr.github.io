@@ -194,24 +194,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
-          命令执行
+        <a href="/2021/09/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" target="_self">
+          文件包含
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+        <a href="/2021/09/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" target="_self">
           
           
             
           
-          命令执行eval(c)
-从绕过正则匹配的角度：
+          123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file = $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125; 
 
-过滤了关键单词 如flag、php 在linux可以使用占位符？和*
-比如flag.php可以使用fl??.???或者fl?g.??p和f*或者 f***等
-也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php  
-还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [abc
+
+?file=php://filter/read=convert.base64-encod
         </a>
       </p>
 
@@ -219,8 +216,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-17 10:11" pubdate>
-              2021-08-17
+            <time datetime="2021-09-15 17:30" pubdate>
+              2021-09-15
             </time>
           </div>
         
@@ -250,19 +247,24 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/02/Upload%E7%AC%94%E8%AE%B0/" target="_self">
-          Upload笔记
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+          命令执行
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/02/Upload%E7%AC%94%E8%AE%B0/" target="_self">
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
           
           
             
           
-          第一关查看源码
-1234567891011121314151617function checkFile() &#123;    var file = document.getElementsByName(&#x27;upload_file&#x27;)[0].value;    if (file == null || file == &quot;&quot;) &#123;        aler
+          命令执行eval(c)
+从绕过正则匹配的角度：
+
+过滤了关键单词 如flag、php 在linux可以使用占位符？和*
+比如flag.php可以使用fl??.???或者fl?g.??p和f*或者 f***等
+也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php  
+还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [abc
         </a>
       </p>
 
@@ -270,8 +272,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-02 23:51" pubdate>
-              2021-08-02
+            <time datetime="2021-08-17 10:11" pubdate>
+              2021-08-17
             </time>
           </div>
         

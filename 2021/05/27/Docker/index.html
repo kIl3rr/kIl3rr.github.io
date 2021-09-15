@@ -408,7 +408,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">./redis-cli.exe -h 192.168.149.135 -p 6379<br></code></pre></td></tr></table></figure>
 
 <h2 id="七、镜像"><a href="#七、镜像" class="headerlink" title="七、镜像"></a>七、镜像</h2><p>为什么一个操作系统的镜像在Docker里会很小 因为使用了当前操作系统的bootfs 拉取下来的只是rootfs和往上的镜像层<br>又比如 tomcat的安装包比镜像小</p>
-<p>linux(bootfs-&gt;rootfs)<br>本质：Docker的底端是bootfs而且是使用的是宿主机的内核 第二层是当前系统的rootfs的基础镜像base image 然后就有软件的编译环境如jdk 最后暴露在外面的就是软件的镜像 ==即分层文件系统==</p>
+<p>linux(bootfs-&gt;rootfs)<br>本质：Docker的底端是bootfs而且是使用的是宿主机的内核 第二层是当前系统的rootfs的基础镜像base image 然后就有软件的编译环境如jdk 最后暴露在外面的就是软件的镜像 <strong>即分层文件系统</strong></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210408211917032.png" srcset="/img/loading.gif" lazyload></p>
 <p>对于使用者来说 就是集成了操作系统和编译运行环境的文件系统</p>
 <h2 id="八、压缩文件"><a href="#八、压缩文件" class="headerlink" title="八、压缩文件"></a>八、压缩文件</h2><p>类似于操作系统中Ghost把分区克隆为.gho文件</p>
