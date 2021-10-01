@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      11.8k 字
+      11.9k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      158
+      159
        分钟
     </span>
   
@@ -251,6 +251,9 @@
 <p>POST <a target="_blank" rel="noopener" href="http://www.example.com/">http://www.example.com</a> HTTP/1.1<br>Content-Type: application/x-www-form-urlencoded;charset=utf-8<br>title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3    </p>
 <hr>
 <h2 id="IP伪造-xff和referer"><a href="#IP伪造-xff和referer" class="headerlink" title="IP伪造-xff和referer"></a>IP伪造-xff和referer</h2><p>抓包后改包：<br>添加   X-Forwarded-For：ip    Referer：网站<br>ip和网站均是要伪造的对象</p>
+<p>X-Forwarded-For是用于记录代理信息的，每经过一级代理(匿名代理除外)，代理服务器都会把这次请求的来源IP追加在X-Forwarded-For中，X-Real-IP，一般只记录真实发出请求的客户端IP</p>
+<h2 id="curl-–local-port-xx"><a href="#curl-–local-port-xx" class="headerlink" title="curl –local-port xx"></a>curl –local-port xx</h2><p><a target="_blank" rel="noopener" href="http://web.jarvisoj.com:32770/">http://web.jarvisoj.com:32770/</a></p>
+<h3 id="Please-use-port-51-to-visit-this-site"><a href="#Please-use-port-51-to-visit-this-site" class="headerlink" title="Please use port 51 to visit this site."></a>Please use port 51 to visit this site.</h3><p>curl –local-port 51 <a target="_blank" rel="noopener" href="http://web.jarvisoj.com:32770/">http://web.jarvisoj.com:32770/</a></p>
 <h2 id="webshell"><a href="#webshell" class="headerlink" title="webshell"></a>webshell</h2><p>使用蚁剑或post方式 使用shell=system(‘cat flag.txt’)</p>
 <h2 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h2><p>由于输入对管道符  | || &amp; &amp;&amp;过滤不严产生的漏洞<br>windows或linux下:</p>
 <table>
@@ -329,7 +332,7 @@
 <ul>
 <li>以php解析.htaccess文件所在目录及其子目录中的后缀为.xxx的文件文件</li>
 </ul>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">AddType <span class="hljs-built_in">application</span>/x-httpd-php xxx<br></code></pre></td></tr></table></figure>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">AddType <span class="hljs-built_in">application</span>/x-httpd-php xxx<br><br>(AddHandler php5-<span class="hljs-keyword">script</span> php)<br></code></pre></td></tr></table></figure>
 
 <p>然后直接一句话以php解析.htaccess文件所在目录及其子目录中的所有文件 上传一个test.jpg的一句话木马，然后连接蚁剑即可</p>
 <h4 id="user-ini文件"><a href="#user-ini文件" class="headerlink" title=".user.ini文件"></a>.user.ini文件</h4><p>上面的是对apache起作用的，而这个是对以fastcgi运行的php起作用的，不管他的服务器是nginx/apache/IIS，范围更广</p>
