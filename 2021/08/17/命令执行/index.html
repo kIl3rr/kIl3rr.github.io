@@ -486,7 +486,7 @@
 <p>当我们输入完<code>cat &gt;out &lt;&lt;end</code>，然后敲下回车之后，命令并没有结束，此时cat命令像一开始一样，等待你给它输入数据。然后当我们敲入end之后，cat命令就结束了。end之前输入的字符都已经被写入到了out文件中。这就是输入分割符的作用。</p>
 </blockquote>
 <p>回到<code>&gt;/dev/null 2&gt;&amp;1</code> 可以分为两部分</p>
-<p><code>\&gt;/dev/null</code></p>
+<p><code>&gt;/dev/null</code></p>
 <p>这条命令的作用是将标准输出1重定向到<code>/dev/null</code>中。 <code>/dev/null</code>代表linux的空设备文件，所有往这个文件里面写入的内容都会丢失，俗称“黑洞”。那么执行了<code>&gt;/dev/null</code>之后，标准输出就会不再存在，没有任何地方能够找到输出的内容。</p>
 <p><code>2&gt;&amp;1</code></p>
 <p>这条命令用到了重定向绑定，采用&amp;可以将两个输出绑定在一起。这条命令的作用是错误输出将和标准输出同用一个文件描述符，说人话就是错误输出将会和标准输出输出到同一个地方。</p>
@@ -604,6 +604,7 @@
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210815112747397.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210815112814014.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210815115542123.png" srcset="/img/loading.gif" lazyload></p>
+<p>能否使用sess上传进度</p>
 <ul>
 <li>shell数字构造</li>
 </ul>
