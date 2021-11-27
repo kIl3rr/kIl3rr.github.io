@@ -399,7 +399,7 @@
 <p>3.利用javascript在引号中只用分号分隔单词或强制语句结束，用换行符忽略分号强制结束一个完整语句，而忽略回车、空格、tab等键，绕过对javascript的关键字的过滤。</p>
 <p>4.利用html标签属性值支持ascii码，对标签属性值进行转码进行规则库的绕过。</p>
 <p>xss 过滤函数需过滤&amp;#\等字符。</p>
-<p>5.利用事件处理函数，触发事件，执行xss代码。例如<img src='#' onerror=alert(/xss/)>,当浏览器响应页面时，找不到图片的地址，触发onerror事件。</p>
+<p>5.利用事件处理函数，触发事件，执行xss代码。例如<code>&lt;img src=&#39;#&#39; onerror=alert(/xss/)&gt;</code>,当浏览器响应页面时，找不到图片的地址，触发onerror事件。</p>
 <p>6.利用css执行javascript代码</p>
 <blockquote>
 <p>css代码中利用expression触发xss漏洞。如下所示：</p>
@@ -418,6 +418,7 @@
 </blockquote>
 <p>7.利用大小写混淆、使用单引号、不使用引号、使用/插入在img src中间、构造不同的全角字符、运用/**/混淆过滤规则来绕过过滤函数</p>
 <p>8.利用字符编码。javascript支持unicode、escapes、十六进制、八进制等编码形式。</p>
+<p>&lt;img src=’#’ onerror=alert(‘i support online rights’)&gt;</p>
 
             </div>
             <hr>
