@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+<html lang="en" data-default-color-scheme=auto>
 
 
 
@@ -9,14 +9,20 @@
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/wo02ie/photo/main/icon.jpg">
   <link rel="icon" href="https://raw.githubusercontent.com/wo02ie/photo/main/icon.jpg">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://example.com/categories/index.html">
+<meta property="og:site_name" content="wo02ie">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
   
   <title>Categories - wo02ie</title>
 
@@ -40,7 +46,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -51,8 +57,9 @@
   <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>wo02ie</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>wo02ie</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -138,13 +145,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -187,8 +195,6 @@
 
 
 
-
-
 <div class="category-list">
   
   
@@ -209,12 +215,11 @@
         <i class="iconfont icon-articles"></i>
         <span>14</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-95cc64dd2825f9df13ec4ad683ecf339" role="tabpanel" aria-labelledby="heading-95cc64dd2825f9df13ec4ad683ecf339">
         
         
           
-  <div id="collapse-95cc64dd2825f9df13ec4ad683ecf339" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-95cc64dd2825f9df13ec4ad683ecf339">
+  <div class="category-post-list">
     
     
       
@@ -226,7 +231,7 @@
     
       
       
-        <a href="/2021/11/22/nodejs&Prototype-Pollution-Attack/" class="list-group-item list-group-item-action">
+        <a href="/2021/11/22/nodejs&amp;Prototype-Pollution-Attack/" class="list-group-item list-group-item-action">
           <span class="category-post">nodejs&amp;原型链污染</span>
         </a>
       
@@ -314,12 +319,11 @@
         <i class="iconfont icon-articles"></i>
         <span>2</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-ad42f6697b035b7580e4fef93be20b4d" role="tabpanel" aria-labelledby="heading-ad42f6697b035b7580e4fef93be20b4d">
         
         
           
-  <div id="collapse-ad42f6697b035b7580e4fef93be20b4d" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ad42f6697b035b7580e4fef93be20b4d">
+  <div class="category-post-list">
     
     
       
@@ -357,12 +361,11 @@
         <i class="iconfont icon-articles"></i>
         <span>2</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-91e02cd2b8621d0c05197f645668c5c4" role="tabpanel" aria-labelledby="heading-91e02cd2b8621d0c05197f645668c5c4">
         
         
           
-  <div id="collapse-91e02cd2b8621d0c05197f645668c5c4" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-91e02cd2b8621d0c05197f645668c5c4">
+  <div class="category-post-list">
     
     
       
@@ -400,12 +403,11 @@
         <i class="iconfont icon-articles"></i>
         <span>1</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-c5fd214cdd0d2b3b4272e73b022ba5c2" role="tabpanel" aria-labelledby="heading-c5fd214cdd0d2b3b4272e73b022ba5c2">
         
         
           
-  <div id="collapse-c5fd214cdd0d2b3b4272e73b022ba5c2" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-c5fd214cdd0d2b3b4272e73b022ba5c2">
+  <div class="category-post-list">
     
     
       
@@ -436,12 +438,11 @@
         <i class="iconfont icon-articles"></i>
         <span>1</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-195eb419639d73192945705b06502324" role="tabpanel" aria-labelledby="heading-195eb419639d73192945705b06502324">
         
         
           
-  <div id="collapse-195eb419639d73192945705b06502324" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-195eb419639d73192945705b06502324">
+  <div class="category-post-list">
     
     
       
@@ -472,12 +473,11 @@
         <i class="iconfont icon-articles"></i>
         <span>1</span>
       </a>
-      <div class="category-collapse">
+      <div class="category-collapse collapse" id="collapse-e206a54e97690cce50cc872dd70ee896" role="tabpanel" aria-labelledby="heading-e206a54e97690cce50cc872dd70ee896">
         
         
           
-  <div id="collapse-e206a54e97690cce50cc872dd70ee896" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-e206a54e97690cce50cc872dd70ee896">
+  <div class="category-post-list">
     
     
       
@@ -503,7 +503,7 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -593,6 +593,10 @@
 <!-- Plugins -->
 
 
+  <script  src="/js/local-search.js" ></script>
+
+
+
   
     <script  src="/js/img-lazyload.js" ></script>
   
@@ -602,18 +606,6 @@
   
 
 
-
-
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
