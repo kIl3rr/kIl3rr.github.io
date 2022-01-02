@@ -202,6 +202,73 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/05/29/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_self">
+          反序列化漏洞
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/29/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_self">
+          
+          
+            
+          
+          反序列化漏洞序列化与反序列化类中，实例化生成一个对象，而把这个对象转化成字符串，这个操作就是序列化。反过来，将字符串转化成类模板形式的对象，就是反序列化。两者结合就可以方便地存储和传输数据。
+不同编程语言序列化后的存储文件不同，当然语法也不相同
+我们以php语言为例
+
+
+
+
+函数
+描述
+
+
+
+serialize()
+将一个对象转换成一串字符串
+
+
+unserialize()
+将一串字符串转换成一个
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-29 20:24" pubdate>
+              2021-05-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf/">ctf</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/05/29/Token%20Session%20Cookie%20JWT/" target="_self">
           认证及会话管理
         </a>
@@ -673,56 +740,6 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/knowledge/">knowledge</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/24/ctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" target="_self">
-          ctf-web
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/24/ctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" target="_self">
-          
-          
-            
-          
-          基础认证题页面中依据提示 可猜测用户为admin可弱口令尝试（admin）——失败暴脾气，，，词典爆破！下载其页面提供的词典抓包处对上图circle处进行解密 在burp的decode模板中进行查询可知其加密方式为base64载入词典此处开始走弯路：1.词典所加载的均为密码，缺少用户名（发现问题后，度娘学习正则表达式，很好，又学了个奇奇怪怪的姿势）2.词典爆破后一直都是401返回，长度均为404，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-24 18:52" pubdate>
-              2020-11-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/cs/">cs</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ctf-training/">ctf-training</a>
             
           </div>
         
