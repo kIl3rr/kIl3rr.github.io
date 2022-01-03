@@ -25,8 +25,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/wo02ie/photo/main/image-20211205230453548.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wo02ie/photo/main/u=2184180237,1938452684&fm=253&app=138&f=PNG.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wo02ie/photo/main/fghsdhfghk.jpg">
 <meta property="article:published_time" content="2021-12-05T15:22:39.258Z">
-<meta property="article:modified_time" content="2022-01-03T12:57:34.000Z">
+<meta property="article:modified_time" content="2022-01-03T13:23:08.366Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="knowledge">
 <meta name="twitter:card" content="summary">
@@ -73,7 +74,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
 <body>
@@ -211,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      3.5k 字
     </span>
   
 
@@ -312,18 +313,18 @@
 <li><strong>安全域的划分</strong></li>
 </ul>
 <p>划分安全域的目的是将一组安全等级相同的计算机划入同一个网段， 网段内的计算机拥有相同的网络边界，并在网络边界通过部署防火墙来实现对其他安全域的网络访问控制策略(NACL)，允许哪些IP访问此域、允许此域访问哪些IP地址和网段进行设置</p>
-<p>![](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/wo02ie/photo/main/src=http">https://raw.githubusercontent.com/wo02ie/photo/main/src=http</a> _gitee.com_fengwenhua_ImageBed_raw_master_1581320381_20200131143208647_931338907.png&amp;refer=http _gitee.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg.jpg)</p>
+<p><img src="https://raw.githubusercontent.com/wo02ie/photo/main/fghsdhfghk.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>一个用路由器连接的内网，可以将网络划分围殴三个区域：安全级别最高的内网；安全级别中等的DMZ；安全级别最低的外网(Internet)</p>
 <p>DMZ称为隔离区也称为非军事化区，是为了解决安装防火墙后外部网络不能访问内部网络服务器的问题而设立的一个非安全系统与安全系统之间的缓冲区，放置一些必须公开的服务器设施，例如企业web服务器、ftp服务器和论坛服务器等，因此可以从外部访问DMZ</p>
 <p>DMZ的屏障功能：</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> 内网可以访问外网，需要防火墙执行NAT</li>
-<li><input checked="" disabled="" type="checkbox"> 内网可以访问DMZ，管理DMZ的服务器</li>
-<li><input checked="" disabled="" type="checkbox"> 外网不能访问DMZ，外网访问内网就要通过VPN来访问</li>
-<li><input checked="" disabled="" type="checkbox"> 外网可以访问DMZ，外网必须可以访问DMZ，并且由防火墙实现对外地址到服务器地址的转换</li>
-<li><input checked="" disabled="" type="checkbox"> DMZ不能访问内网，如果不执行此策略时，攻陷DMZ，内网将不能受到保护</li>
-<li><input checked="" disabled="" type="checkbox"> DMZ不能访问外网，例外：当DMZ有邮件服务器时，就要允许访问外网</li>
-</ul>
+<ol>
+<li>内网可以访问外网，需要防火墙执行NAT</li>
+<li>内网可以访问DMZ，管理DMZ的服务器</li>
+<li>外网不能访问DMZ，外网访问内网就要通过VPN来访问</li>
+<li>外网可以访问DMZ，外网必须可以访问DMZ，并且由防火墙实现对外地址到服务器地址的转换</li>
+<li>DMZ不能访问内网，如果不执行此策略时，攻陷DMZ，内网将不能受到保护</li>
+<li>DMZ不能访问外网，例外：当DMZ有邮件服务器时，就要允许访问外网</li>
+</ol>
 <p>内网又分为办公区和核心区：</p>
 <ol>
 <li>公司员工工作区，会安装防病毒软件、主机入侵检测产品，如果部分办公区可以访问核心数据区(运维人员)，则会部署堡垒机</li>
@@ -429,6 +430,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/01/03/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
