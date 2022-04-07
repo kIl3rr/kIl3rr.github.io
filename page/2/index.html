@@ -206,6 +206,177 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+          命令执行
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+          
+          
+            
+          
+          命令执行eval(c)
+从绕过正则匹配的角度：
+
+过滤了关键单词 如 flag、php 在 linux 可以使用占位符？和*
+比如flag.php可以使用fl??.???或者fl?g.??p和f*或者 f***等
+也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php
+还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [ab
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-17 10:11" pubdate>
+              2021-08-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf-training/">ctf-training</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/21/XSS%E7%AC%94%E8%AE%B0/" target="_self">
+          XSS笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/21/XSS%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          
+            
+          
+          xss-lab1更改 test 为 2 成功显示 2
+
+输入&lt;script&gt;&lt;/script&gt;没有显示 按理来说应该会出现欢迎用户&lt;script&gt;&lt;/script&gt;才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的 js 代码
+需要弹窗才能下一关
+
+
+2
+有输入框 直接插入失败 在查看器看一下源码
+
+
+发现上面的文字内容被
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-21 16:41" pubdate>
+              2021-07-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf-training/">ctf-training</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/04/HTTP%E8%B5%B0%E7%A7%81%E6%94%BB%E5%87%BB/" target="_self">
+          HTTP走私攻击
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/04/HTTP%E8%B5%B0%E7%A7%81%E6%94%BB%E5%87%BB/" target="_self">
+          
+          
+            
+          
+          0x01 HTTP请求走私是什么HTTP请求走私是一种干扰网站处理从一个或多个用户接收的HTTP请求序列的方式的技术。使攻击者可以绕过安全控制，未经授权访问敏感数据并直接危害其他应用程序用户。
+0x02 为什么会产生HTTP请求走私请求走私漏洞成因
+
+前端服务器(CDN)和后端服务器接收数据不同步，引起对客户端传入的数据理解不一致，从而导致漏洞的产生。
+
+大多数HTTP请求走私漏洞的出现是因为HT
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-04 21:24" pubdate>
+              2021-06-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/knowledge/">knowledge</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/03/%E4%BD%BF%E7%94%A8%E9%AB%98%E7%AB%AF%E5%8F%A3ssh/" target="_self">
           使用高端口ssh
         </a>
@@ -591,158 +762,6 @@ data
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/environment/">environment</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/23/DVWA%E7%AC%94%E8%AE%B0/" target="_self">
-          DVWA
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/23/DVWA%E7%AC%94%E8%AE%B0/" target="_self">
-          
-          
-            
-          
-          LowBrute Force查看代码 发现存在sql注入
-$ query  = “SELECT * FROM ’users‘ WHERE user = ‘$ user’ AND password = ‘$pass’;”;构造 admin’ #  上图选中代码变为$ query  = “SELECT * FROM ’users‘ WHERE user = ’admin’ # ‘ AND passwo
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-23 11:22" pubdate>
-              2021-01-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/cs/">cs</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ctf-training/">ctf-training</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/08/%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" target="_self">
-          靶场搭建问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/08/%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" target="_self">
-          
-          
-            
-          
-          平台：DVWA sqli-labs upload-labs xss-labs xxe-labs ssrf-labs bwapp
-SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问题，需要更改数据库名，更改面积大，直接虚拟机开低版本搭建学长语：直接解压sqli-labs到www根目录下就行了啊我…还真是，上图注意：需要更改sqli-labs-master\sql-conne
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-08 13:34" pubdate>
-              2020-12-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/debug/">debug</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ctf-training/">ctf-training</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/04/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1/" target="_self">
-          常见端口及其服务
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/04/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1/" target="_self">
-          
-          
-            
-          
-            0  Reserved  通常用于分析操作系统。这一方法能够工作是因为在一些系统中“0”是无效 ，当你试图使用通常的闭合 连接它时将产生不同的结果。一种典型的扫描，使用IP地址为0.0.0.0，设置ACK位并在以太网层广播。  1  tcpmux  这显示有人在寻找SGI Irix机器。Irix是实现tcpmux的主要提供者，默认情况下tcpmux在这种系统中被打开。Irix机器在发布是含有几
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-04 13:01" pubdate>
-              2020-12-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/network/">network</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/knowledge/">knowledge</a>
             
           </div>
         

