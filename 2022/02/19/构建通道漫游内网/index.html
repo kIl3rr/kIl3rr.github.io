@@ -32,6 +32,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/lcx.gif">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/lcx2.gif">
 <meta property="og:image" content="https://inotgo.com/imagesLocal/202111/08/20211108204253211w_0.png.jpg">
+<meta property="og:image" content="d:/photo/image-20220528201642102.png">
+<meta property="og:image" content="d:/photo/image-20220528202309017.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220304133010463.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220304140512685.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220304135427676.png">
@@ -54,7 +56,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220326110539622.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220326224539.png">
 <meta property="article:published_time" content="2022-02-18T23:59:41.688Z">
-<meta property="article:modified_time" content="2022-05-19T08:16:17.600Z">
+<meta property="article:modified_time" content="2022-05-28T12:24:06.579Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="knowledge">
 <meta name="twitter:card" content="summary">
@@ -584,7 +586,7 @@
 <p>ssh -CfNg -L A监听端口 : C内网IP : 目标端口  root@B          -f转入后台 -N建立静默连接，两参数常配合使用</p>
 </blockquote>
 <blockquote>
-<p> ssh -CfNg -L 1234:192.168.254.155:3389 <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#x32;&#53;&#x34;&#x2e;&#49;&#50;&#56;">&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#x2e;&#x32;&#53;&#x34;&#x2e;&#49;&#50;&#56;</a></p>
+<p> ssh -CfNg -L 1234:192.168.254.155:3389 <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#50;&#53;&#x34;&#46;&#x31;&#x32;&#x38;">&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#57;&#50;&#46;&#49;&#x36;&#56;&#46;&#50;&#53;&#x34;&#46;&#x31;&#x32;&#x38;</a></p>
 </blockquote>
 <p>可能会一时难以理解，在本地监听一个端口，所有访问这个端口的流量都会通过SSH隧道传输到远端的对应端口，ssh本地转发也是正向的。</p>
 <p>A-128，B-130，C-155</p>
@@ -594,7 +596,7 @@
 <p>ssh -CfNg -R A端口 :  C内网IP : C目标端口 root@A</p>
 </blockquote>
 <blockquote>
-<p>ssh -CfNg -R 10086:192.168.254.155:3389 <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#53;&#x34;&#x2e;&#x31;&#x32;&#x38;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#50;&#53;&#x34;&#x2e;&#x31;&#x32;&#x38;</a></p>
+<p>ssh -CfNg -R 10086:192.168.254.155:3389 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#57;&#50;&#x2e;&#49;&#54;&#x38;&#46;&#50;&#53;&#x34;&#x2e;&#49;&#50;&#x38;">&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#57;&#50;&#x2e;&#49;&#54;&#x38;&#46;&#50;&#53;&#x34;&#x2e;&#49;&#50;&#x38;</a></p>
 </blockquote>
 <p>然后在VPS上就可以访问C3389，这是反向的</p>
 <p>理解不清楚的参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/170597122">https://zhuanlan.zhihu.com/p/170597122</a></p>
@@ -615,7 +617,26 @@
 <p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/144987.html">https://www.secpulse.com/archives/144987.html</a></p>
 <p>工具推荐：</p>
 <p>dnscat2(win可以用dnscat2-powershell)、iodine</p>
-<h4 id="HTTP-HTTPS"><a href="#HTTP-HTTPS" class="headerlink" title="HTTP/HTTPS"></a>HTTP/HTTPS</h4><h5 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a><a target="_blank" rel="noopener" href="https://github.com/sensepost/reGeorg">reGeorg</a></h5><p>reGeorg 是 reDuh 的升级版，主要功能是把内网服务器端口的数据通过 HTTP/HTTPS 隧道转发到本机，实现基于 HTTP 协议的通信。 </p>
+<ul>
+<li>部署域名解析</li>
+</ul>
+<p>先添加A类解析，然后创建NS解析</p>
+<p><img src="D:\photo\image-20220528201642102.png" srcset="/img/loading.gif" lazyload></p>
+<p>域名的解析类型主要是这些：A记录、MX记录、CNAME记录、TXT记录、AAAA记录、SRV记录、NS记录，域名持有人可以依据需要，选择合适的域名解析类型。</p>
+<p>域名解析类型中，比较常用的是A记录和CNAME记录，以及MX记录。</p>
+<p>1.A记录：设定域名或者子域名指向，保证域名指向对应的主机重要设置。</p>
+<p>做A记录时， 对应值必须是IP地址</p>
+<p>2.MX记录：设定域名的邮件交换记录，是指定该域名对应的邮箱服务器的重要设置。</p>
+<p>3.CNAME记录：即：别名记录。这种记录允许您将多个名字映射到同一台计算机。</p>
+<p>一般域名解析至虚拟主机时，大多采取CNAME记录类型。</p>
+<ul>
+<li>联通测试，VPS抓包</li>
+</ul>
+<blockquote>
+<p>tcpdump -n -i eth0 udp port 53</p>
+</blockquote>
+<p><img src="D:\photo\image-20220528202309017.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="iodine"><a href="#iodine" class="headerlink" title="iodine"></a>iodine</h5><h4 id="HTTP-HTTPS"><a href="#HTTP-HTTPS" class="headerlink" title="HTTP/HTTPS"></a>HTTP/HTTPS</h4><h5 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a><a target="_blank" rel="noopener" href="https://github.com/sensepost/reGeorg">reGeorg</a></h5><p>reGeorg 是 reDuh 的升级版，主要功能是把内网服务器端口的数据通过 HTTP/HTTPS 隧道转发到本机，实现基于 HTTP 协议的通信。 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">python2 reGeorgSocksProxy.py -h<br><br>usage: reGeorgSocksProxy.py [-h] [-l] [-p] [-r] -u  [-v]                      <br>                                                                              <br>Socks server for reGeorg HTTP(s) tunneller                                    <br>                                                                              <br>optional arguments:                                                           <br>  -h, --help           show this help message and exit                        <br>  -l , --listen-on     The default listening address                          <br>  -p , --listen-port   The default listening port                             <br>  -r , --read-buff     Local read buffer, max data to be sent per POST        <br>  -u , --url           The url containing the tunnel script                   <br>  -v , --verbose       Verbose output[INFO|DEBUG]                             <br></code></pre></td></tr></table></figure>
 
 
