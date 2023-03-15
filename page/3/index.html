@@ -579,7 +579,10 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
           
             
           
-          ssrf1234567891011&lt;?phperror_reporting(0);highlight_file(__FILE__);$url=$_POST[&#x27;url&#x27;];$ch=curl_init($url);curl_setopt($ch, CURLOPT_HEADER, 0);curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);$r
+          ssrf原理前后端分离的业务下，服务器请求往往会有向本机或其所在内网的其他机器获取数据的过程，如果没有对请求的目标地址做过滤和限制，就会出现SSRF漏洞
+常见的场景如：从指定URL获取资源，篡改该URL地址，指向内网或者外网
+PHP中的函数和伪协议可能造成漏洞的有：
+12345678910file_get_contents()curl_exec()fsockopen()    file://dic
         </a>
       </p>
 

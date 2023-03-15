@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="ssrf1234567891011&lt;?phperror_reporting(0);highlight_file(__FILE__);$url&#x3D;$_POST[&amp;#x27;url&amp;#x27;];$ch&#x3D;curl_init($url);curl_setopt($ch, CURLOPT_HEADER, 0);curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);$r">
+  <meta name="description" content="ssrf原理前后端分离的业务下，服务器请求往往会有向本机或其所在内网的其他机器获取数据的过程，如果没有对请求的目标地址做过滤和限制，就会出现SSRF漏洞 常见的场景如：从指定URL获取资源，篡改该URL地址，指向内网或者外网 PHP中的函数和伪协议可能造成漏洞的有： 12345678910file_get_contents()curl_exec()fsockopen()    file:&#x2F;&#x2F;dic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssrf">
 <meta property="og:url" content="http://example.com/2020/11/20/ssrf/index.html">
 <meta property="og:site_name" content="🗄">
-<meta property="og:description" content="ssrf1234567891011&lt;?phperror_reporting(0);highlight_file(__FILE__);$url&#x3D;$_POST[&amp;#x27;url&amp;#x27;];$ch&#x3D;curl_init($url);curl_setopt($ch, CURLOPT_HEADER, 0);curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);$r">
+<meta property="og:description" content="ssrf原理前后端分离的业务下，服务器请求往往会有向本机或其所在内网的其他机器获取数据的过程，如果没有对请求的目标地址做过滤和限制，就会出现SSRF漏洞 常见的场景如：从指定URL获取资源，篡改该URL地址，指向内网或者外网 PHP中的函数和伪协议可能造成漏洞的有： 12345678910file_get_contents()curl_exec()fsockopen()    file:&#x2F;&#x2F;dic">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210423211039257.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210423211353222.png#pic_center">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211117221246468.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211117234343142.png">
 <meta property="article:published_time" content="2020-11-20T14:51:00.000Z">
-<meta property="article:modified_time" content="2022-03-31T14:38:00.960Z">
+<meta property="article:modified_time" content="2023-03-15T07:40:43.544Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="ctf-training">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.6k 字
+      3.9k 字
     </span>
   
 
@@ -260,7 +260,14 @@
             <h1 style="display: none">ssrf</h1>
             
             <div class="markdown-body">
-              <h2 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br>highlight_file(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$url</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-variable">$ch</span>=curl_init(<span class="hljs-variable">$url</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_HEADER, <span class="hljs-number">0</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);<br><span class="hljs-variable">$result</span>=curl_exec(<span class="hljs-variable">$ch</span>);<br>curl_close(<span class="hljs-variable">$ch</span>);<br><span class="hljs-keyword">echo</span> (<span class="hljs-variable">$result</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+              <h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>前后端分离的业务下，服务器请求往往会有向本机或其所在内网的其他机器获取数据的过程，如果没有对请求的目标地址做过滤和限制，就会出现SSRF漏洞</p>
+<p>常见的场景如：从指定URL获取资源，篡改该URL地址，指向内网或者外网</p>
+<p>PHP中的函数和伪协议可能造成漏洞的有：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php">file_get_contents()<br>curl_exec()<br>fsockopen()<br><br>    <br>file:<span class="hljs-comment">//</span><br>dict:<span class="hljs-comment">//</span><br>gopher:<span class="hljs-comment">//</span><br>except:<span class="hljs-comment">//</span><br>...<br></code></pre></td></tr></table></figure>
+
+<h2 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h2><p>内网扫描（端口，指纹识别）</p>
+<p>伪协议攻击内网服务（gopher://），枚举敏感文件（file://）</p>
+<h2 id="CTF题"><a href="#CTF题" class="headerlink" title="CTF题"></a>CTF题</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br>highlight_file(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$url</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-variable">$ch</span>=curl_init(<span class="hljs-variable">$url</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_HEADER, <span class="hljs-number">0</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);<br><span class="hljs-variable">$result</span>=curl_exec(<span class="hljs-variable">$ch</span>);<br>curl_close(<span class="hljs-variable">$ch</span>);<br><span class="hljs-keyword">echo</span> (<span class="hljs-variable">$result</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>curl_init 初始化 curl 会话</p>
 <p>curl_setopt 设置 curl 传输选项，CURLOPT_HEADER 启用时会将头文件的信息作为数据流输出；CURLOPT_RETURNTRANSFER 为 true 时将 curl_exec()获取的信息以字符串返回，而不是直接输出。</p>
@@ -272,12 +279,8 @@
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br>highlight_file(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$url</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-variable">$x</span>=parse_url(<span class="hljs-variable">$url</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$x</span>[<span class="hljs-string">&#x27;scheme&#x27;</span>]===<span class="hljs-string">&#x27;http&#x27;</span>||<span class="hljs-variable">$x</span>[<span class="hljs-string">&#x27;scheme&#x27;</span>]===<span class="hljs-string">&#x27;https&#x27;</span>)&#123;<br><span class="hljs-variable">$host</span>=<span class="hljs-variable">$x</span>[<span class="hljs-string">&#x27;host&#x27;</span>];<br><span class="hljs-keyword">if</span>((strlen(<span class="hljs-variable">$host</span>)&lt;=<span class="hljs-number">5</span>))&#123; <span class="hljs-comment">//strlen($host)&lt;=3</span><br><span class="hljs-variable">$ch</span>=curl_init(<span class="hljs-variable">$url</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_HEADER, <span class="hljs-number">0</span>);<br>curl_setopt(<span class="hljs-variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);<br><span class="hljs-variable">$result</span>=curl_exec(<span class="hljs-variable">$ch</span>);<br>curl_close(<span class="hljs-variable">$ch</span>);<br><span class="hljs-keyword">echo</span> (<span class="hljs-variable">$result</span>);<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;hacker&#x27;</span>);<br>&#125;<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;hacker&#x27;</span>);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>开始过滤了，方法有：</p>
-<ul>
-<li><p>IP Bypass</p>
-<p>127.0.0.1 使用的是点分十进制 绕过如下</p>
-</li>
-</ul>
+<h3 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h3><p>开始过滤了，方法有：</p>
+<h4 id="IP-Bypass"><a href="#IP-Bypass" class="headerlink" title="IP Bypass"></a>IP Bypass</h4><p>127.0.0.1 使用的是点分十进制 绕过如下</p>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">8</span>进制格式：<span class="hljs-number">0177.00.00</span>.<span class="hljs-number">01</span><br><br><span class="hljs-number">16</span>进制格式：<span class="hljs-number">0</span>x7f.<span class="hljs-number">0x0.0x0</span>.<span class="hljs-number">0</span>x1<br><br><span class="hljs-number">10</span>进制整数格式：<span class="hljs-number">2130706433</span><br><br>特别的，在linux下，<span class="hljs-number">0</span>代表<span class="hljs-number">127.0.0.1</span>，可以用http://<span class="hljs-number">0</span>进行请求<span class="hljs-number">127.0.0.1</span><br></code></pre></td></tr></table></figure>
 
 <p>8 进制<br><img src="https://img-blog.csdnimg.cn/20210423211039257.png#pic_center" srcset="/img/loading.gif" lazyload><br>16 进制<br><img src="https://img-blog.csdnimg.cn/20210423211353222.png#pic_center" srcset="/img/loading.gif" lazyload><br>10 进制整数：<img src="https://img-blog.csdnimg.cn/20210423211439801.png#pic_center" srcset="/img/loading.gif" lazyload><br>linux：<br><img src="https://img-blog.csdnimg.cn/20210423211503787.png#pic_center" srcset="/img/loading.gif" lazyload></p>
@@ -297,26 +300,17 @@
 
 <p>header 会发送原生 http 头，一串字符串，上面代码就是用 js 的 Location 属性跳转到 127.0.0.1/flag.php，然后被 header 发回</p>
 <p>预期解：</p>
-<ul>
-<li>DNS 重绑定</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://xip.io/">http://xip.io/</a></p>
+<h4 id="DNS-重绑定"><a href="#DNS-重绑定" class="headerlink" title="DNS 重绑定"></a>DNS 重绑定</h4><p><a target="_blank" rel="noopener" href="http://xip.io/">http://xip.io/</a></p>
 <p><a target="_blank" rel="noopener" href="http://ceye.io/">http://ceye.io/</a></p>
 <p><a target="_blank" rel="noopener" href="https://lock.cmpxchg8b.com/rebinder.html">https://lock.cmpxchg8b.com/rebinder.html</a></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>error_reporting(<span class="hljs-number">0</span>);<br>highlight_file(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$url</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-variable">$x</span>=parse_url(<span class="hljs-variable">$url</span>);<br><span class="hljs-keyword">if</span>(preg_match(<span class="hljs-string">&#x27;/^http:\/\/ctf\..*show$/i&#x27;</span>,<span class="hljs-variable">$url</span>))&#123;<br>    <span class="hljs-keyword">echo</span> file_get_contents(<span class="hljs-variable">$url</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>URL bypass</li>
-</ul>
-<p>尝试夹杂@ # / \ ?，详见<a target="_blank" rel="noopener" href="https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf">blackhat 峰会</a>大佬提到的<code>parse_url</code>解析问题</p>
+<h4 id="URL-bypass"><a href="#URL-bypass" class="headerlink" title="URL bypass"></a>URL bypass</h4><p>尝试夹杂@ # / \ ?，详见<a target="_blank" rel="noopener" href="https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf">blackhat 峰会</a>大佬提到的<code>parse_url</code>解析问题</p>
 <p>需要以<code>http://ctf.</code>开头<code>show</code>结尾</p>
 <blockquote>
 <p>url=<a target="_blank" rel="noopener" href="http://ctf.@127.0.0.1/flag.php?show">http://ctf.@127.0.0.1/flag.php?show</a></p>
 </blockquote>
-<ul>
-<li>gopherus</li>
-</ul>
-<p>mysql 写马</p>
+<h4 id="gopherus"><a href="#gopherus" class="headerlink" title="gopherus"></a>gopherus</h4><p>mysql 写马</p>
 <p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20211117234343142.png" srcset="/img/loading.gif" lazyload></p>
 <p>将<code>gopher://127.0.0.1:3306/_</code>后面再编码一次，bp 发包，shell 传上</p>
 <p>redis 同理</p>
