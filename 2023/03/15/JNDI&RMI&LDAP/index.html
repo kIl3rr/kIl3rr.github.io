@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="JNDI&amp;RMI&amp;LDAPJNDI是Java Naming and Directory Interface即 Java 命名与目录接口，通过 JNDI 的 API 可以调用目录或服务有：JDBC LDAP RMI DNS NIS CORBA，JNDI是Java EE的重要组成部分 其中的Naming用以命名唯一资源，从而资源方便被调用；Directory就是目录服务，与计算机的文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNDI&amp;RMI&amp;LDAP">
+<meta property="og:url" content="http://example.com/2023/03/15/JNDI&RMI&LDAP/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="JNDI&amp;RMI&amp;LDAPJNDI是Java Naming and Directory Interface即 Java 命名与目录接口，通过 JNDI 的 API 可以调用目录或服务有：JDBC LDAP RMI DNS NIS CORBA，JNDI是Java EE的重要组成部分 其中的Naming用以命名唯一资源，从而资源方便被调用；Directory就是目录服务，与计算机的文件">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220728043012202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/bfd78d812a584b589c775cb12d938fa2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220729063335264.png">
+<meta property="article:published_time" content="2023-03-15T12:56:37.738Z">
+<meta property="article:modified_time" content="2023-09-09T06:58:04.310Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220728043012202.png">
+  
+  <title>JNDI&amp;RMI&amp;LDAP - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JNDI&amp;RMI&amp;LDAP">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-15 20:56" pubdate>
+        March 15, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JNDI&amp;RMI&amp;LDAP</h1>
+            
+            <div class="markdown-body">
+              <h1 id="JNDI-amp-RMI-amp-LDAP"><a href="#JNDI-amp-RMI-amp-LDAP" class="headerlink" title="JNDI&amp;RMI&amp;LDAP"></a>JNDI&amp;RMI&amp;LDAP</h1><p><code>JNDI</code>是<code>Java Naming and Directory Interface</code>即 Java 命名与目录接口，通过 JNDI 的 API 可以调用目录或服务有：<code>JDBC LDAP RMI DNS NIS CORBA</code>，<code>JNDI</code>是<code>Java EE</code>的重要组成部分</p>
+<p>其中的<code>Naming</code>用以命名唯一资源，从而资源方便被调用；<code>Directory</code>就是目录服务，与计算机的文件系统很像(dns 也是一种目录服务)</p>
+<h2 id="DataSource"><a href="#DataSource" class="headerlink" title="DataSource"></a>DataSource</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/336803c5ce06">参考</a></p>
+<p>往常连接数据库的时候，都是使用原生的 JDBC 的<code>DriverManager</code>，而在生产环境中一般是使用数据源来代替<code>DriverManager</code>管理数据库的连接</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220728043012202.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用数据源，可以通过池的机制复用数据库的连接，并发对数据库的访问；而另一个场景，不止使用一种数据源，就可以发布不同数据源进行隔离；不同的数据源实现由具体的厂商提供；提供数据源服务的多是<code>Servlet容器</code></p>
+<p>一个 mysql 的配置文件示例如图，数据源名称就是 MySqlDS</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">datasources</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">local-tx-datasource</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">jndi-name</span>&gt;</span>MySqlDS<span class="hljs-tag">&lt;/<span class="hljs-name">jndi-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">connection-url</span>&gt;</span>jdbc:mysql://localhost:3306/lw<span class="hljs-tag">&lt;/<span class="hljs-name">connection-url</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">driver-class</span>&gt;</span>com.mysql.jdbc.Driver<span class="hljs-tag">&lt;/<span class="hljs-name">driver-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">user-name</span>&gt;</span>root<span class="hljs-tag">&lt;/<span class="hljs-name">user-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>rootpassword<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">exception-sorter-class-name</span>&gt;</span>org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter<span class="hljs-tag">&lt;/<span class="hljs-name">exception-sorter-class-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">metadata</span>&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">type-mapping</span>&gt;</span>mySQL<span class="hljs-tag">&lt;/<span class="hljs-name">type-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">metadata</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">local-tx-datasource</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">datasources</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在使用时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Context ctx=<span class="hljs-keyword">new</span> InitialContext();<br>Object datasourceRef=ctx.lookup(<span class="hljs-string">&quot;java:MySqlDS&quot;</span>); <span class="hljs-comment">//引用数据源</span><br>DataSource ds=(Datasource)datasourceRef;<br>conn=ds.getConnection();<br><span class="hljs-comment">/* 使用conn进行数据库SQL操作 */</span><br>......<br>c.close();<br></code></pre></td></tr></table></figure>
+
+<p>通过 JNDI 统一的接口，只需要配置好数据源，在使用时，只需要调用 lookup 方法，查询数据源名称就可以获得数据源，使用数据库，不需要考虑不同数据库的驱动、连接、调用等方式，如果想换一个数据库，只需要修改下数据源配置文件就可以了</p>
+<h2 id="JNDI-调用-DNS-解析"><a href="#JNDI-调用-DNS-解析" class="headerlink" title="JNDI 调用 DNS 解析"></a>JNDI 调用 DNS 解析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> javax.naming.NamingException;<br><span class="hljs-keyword">import</span> javax.naming.directory.Attributes;<br><span class="hljs-keyword">import</span> javax.naming.directory.DirContext;<br><span class="hljs-keyword">import</span> javax.naming.directory.InitialDirContext;<br><span class="hljs-keyword">import</span> java.util.Hashtable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Jndi2DNS</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//设置泛型环境变量，环境需要压入JNDI的工厂类：naming初始化对应JNDI的DNS工厂类(设定DNS Service Provider)，两个参数都是String型，故泛型应该如下</span><br>            Hashtable&lt;String, String&gt; env = <span class="hljs-keyword">new</span> Hashtable&lt;&gt;();<br>            env.put(<span class="hljs-string">&quot;java.naming.factory.initial&quot;</span>,<span class="hljs-string">&quot;com.sun.jndi.dns.DnsContextFactory&quot;</span>);<br>            <span class="hljs-comment">//创建JNDI目录服务对象</span><br>            DirContext dnscontext =<span class="hljs-keyword">new</span> InitialDirContext(env);<br>            <span class="hljs-comment">//设置查询类型</span><br>            <span class="hljs-comment">//String[] types = new String[]&#123;&quot;A&quot;&#125;;</span><br>            String[] types = <span class="hljs-keyword">new</span> String[]&#123;<span class="hljs-string">&quot;TXT&quot;</span>,<span class="hljs-string">&quot;MX&quot;</span>&#125;;<br>            <span class="hljs-comment">//返回查询结果：baidu.com的TXT和MX记录</span><br>            Attributes attrs = dnscontext.getAttributes(<span class="hljs-string">&quot;baidu.com&quot;</span>, types);<br>            System.out.println(attrs);<br>        &#125; <span class="hljs-keyword">catch</span> (NamingException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#&#123;a=A: 110.242.68.66, 39.156.66.10&#125;</span><br><br>λ nslookup baidu.com<br>服务器:  ns.yc<br>Address:  10.44.0.2<br><br>非权威应答:<br>名称:    baidu.com<br>Addresses:  110.242.68.66<br>          39.156.66.10<br></code></pre></td></tr></table></figure>
+
+<p>更为高级的操作有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.what21.demo04;<br><br><span class="hljs-keyword">import</span> java.util.Hashtable;<br><span class="hljs-keyword">import</span> javax.naming.NamingEnumeration;<br><span class="hljs-keyword">import</span> javax.naming.NamingException;<br><span class="hljs-keyword">import</span> javax.naming.directory.Attribute;<br><span class="hljs-keyword">import</span> javax.naming.directory.Attributes;<br><span class="hljs-keyword">import</span> javax.naming.directory.InitialDirContext;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DNSDemo</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> dnsURL</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> NamingException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InitialDirContext <span class="hljs-title">createContext</span><span class="hljs-params">(String dnsURL)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> NamingException</span>&#123;<br>        Hashtable&lt;String,String&gt; env = <span class="hljs-keyword">new</span> Hashtable&lt;String,String&gt;();<br>        env.put(<span class="hljs-string">&quot;java.naming.factory.initial&quot;</span>, <span class="hljs-string">&quot;com.sun.jndi.dns.DnsContextFactory&quot;</span>);<br>        env.put(<span class="hljs-string">&quot;java.naming.provider.url&quot;</span>,dnsURL);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> InitialDirContext(env);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> context</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> address</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> NamingException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">search</span><span class="hljs-params">(InitialDirContext context,String address)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> NamingException</span>&#123;<br>        Attributes attrs = context.getAttributes(address, <span class="hljs-keyword">null</span>);<br>        NamingEnumeration eEnum = attrs.getAll();<br>        <span class="hljs-keyword">while</span>(eEnum.hasMoreElements())&#123;<br>            Attribute attr = (Attribute)eEnum.nextElement();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;attr.size();i++)&#123;<br>                System.out.println(attr.get(i));<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> context</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> address</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> NamingException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">search2</span><span class="hljs-params">(InitialDirContext context, String address)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> NamingException </span>&#123;<br>        String dns_attrs[] = &#123; <span class="hljs-string">&quot;MX&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;HINFO&quot;</span> &#125;;<br>        Attributes attrs = context.getAttributes(address, dns_attrs);<br>        Attribute Aattr = attrs.get(<span class="hljs-string">&quot;A&quot;</span>);<br>        <span class="hljs-keyword">if</span>(Aattr!=<span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; Aattr.size(); i++) &#123;<br>                System.out.println(Aattr.getID()+ <span class="hljs-string">&quot;  &quot;</span> + Aattr.get(i));<br>            &#125;<br>        &#125;<br><br>        Attribute MXattr = attrs.get(<span class="hljs-string">&quot;MX&quot;</span>);<br>        <span class="hljs-keyword">if</span>(MXattr!=<span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MXattr.size(); i++) &#123;<br>                System.out.println(MXattr.getID()+ <span class="hljs-string">&quot;  &quot;</span> + MXattr.get(i));<br>            &#125;<br>        &#125;<br><br>        Attribute HINFOattr = attrs.get(<span class="hljs-string">&quot;HINFO&quot;</span>);<br>        <span class="hljs-keyword">if</span>(HINFOattr!=<span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; HINFOattr.size(); i++) &#123;<br>                System.out.println(HINFOattr.getID()+ <span class="hljs-string">&quot;  &quot;</span> + HINFOattr.get(i));<br>            &#125;<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> args</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        InitialDirContext context = createContext(<span class="hljs-string">&quot;dns://gjjline.bta.net.cn/&quot;</span>);<br>        String nameInSpace = context.getNameInNamespace();<br>        System.out.println(nameInSpace);<br><br>        search(context,<span class="hljs-string">&quot;mail.163.com&quot;</span>);<br>        search2(context,<span class="hljs-string">&quot;mail.163.com&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h2><p>RMI(Remote Method Invocation)，Java 远程方法调用，用以构建分布式应用程序，实现了 Java 程序跨 JVM 的远程通信；这种 Java 对象在远程 JVM 调用的实现来源于 Java 的 RPC 思想(Remote Procedure Call)；JRMP(Java Remote Method Protocol，专门为 RMI 设计的协议)和 IIOP(Internet inter-ORB Protocol，基于 CORBA 实现的跨语言协议)可以实现 RMI 通信</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/bfd78d812a584b589c775cb12d938fa2.png" srcset="/img/loading.gif" lazyload></p>
+<p>流程为：注册服务-&gt;RMIServer-&gt;Client-&gt;接口-&gt;实现接口的功能类</p>
+<p>常见的 RPC 框架</p>
+<ul>
+<li>应用级的服务框架：阿里的 Dubbo/Dubbox、Google gRPC、Spring Boot/Spring Cloud</li>
+<li>远程通信协议：RMI、Socket、SOAP(HTTP XML)、REST(HTTP JSON)</li>
+<li>通信框架：MINA 和 Netty</li>
+</ul>
+<p>实现 Demo：</p>
+<p>信息记录类，含 getter()、setter()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DeserializeTest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String email;<br>    <span class="hljs-keyword">private</span> String username;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmail</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> email;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEmail</span><span class="hljs-params">(String email)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.email = email;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getUsername</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> username;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUsername</span><span class="hljs-params">(String username)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.username = username;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> java.rmi.Remote;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RMIInterfaceDemo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Remote</span> </span>&#123;<br>    <span class="hljs-function">DeserializeTest <span class="hljs-title">getInfo</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一个服务端，Registry 与 Server 绑定在了一起：main()中可以直接启动该服务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> java.net.MalformedURLException;<br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><span class="hljs-keyword">import</span> java.rmi.registry.LocateRegistry;<br><span class="hljs-keyword">import</span> java.rmi.server.UnicastRemoteObject;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RmitestService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">UnicastRemoteObject</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RMIInterfaceDemo</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">RmitestService</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException</span>&#123;&#125;;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> DeserializeTest <span class="hljs-title">getInfo</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        DeserializeTest aman = <span class="hljs-keyword">new</span> DeserializeTest();<br>        aman.setEmail(<span class="hljs-string">&quot;RMI@gmail.com&quot;</span>);<br>        aman.setUsername(<span class="hljs-string">&quot;RMIWorker&quot;</span>);<br>        <span class="hljs-keyword">return</span> aman;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            RmitestService rmitestService = <span class="hljs-keyword">new</span> RmitestService();<br>            LocateRegistry.createRegistry(<span class="hljs-number">1099</span>);<br>            Naming.rebind(<span class="hljs-string">&quot;rmi://127.0.0.1:1099/RmitestService&quot;</span>,rmitestService);<br>            System.out.println(<span class="hljs-string">&quot;Service rmitest has up:&quot;</span>+<span class="hljs-string">&quot;rmi://127.0.0.1:1099/RmitestService&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (RemoteException | MalformedURLException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RmitestClient</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br><span class="hljs-comment">//            RmitestService rmitestService = (RmitestService) Naming.lookup(&quot;rmi://127.0.0.1:1389/RmitestService&quot;);//这里不应该得到rmi对象交给信息类，应该给接口</span><br>            RMIInterfaceDemo rmiInterfaceDemo = (RMIInterfaceDemo) Naming.lookup(<span class="hljs-string">&quot;rmi://127.0.0.1:1099/RmitestService&quot;</span>);<br>            DeserializeTest info = rmiInterfaceDemo.getInfo();<br>            System.out.println(<span class="hljs-string">&quot;whoami:&quot;</span>+info.getUsername()+<span class="hljs-string">&quot;\n&quot;</span>+<span class="hljs-string">&quot;email:&quot;</span>+info.getEmail());<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>拆开来看，就会对这个机制有更深的理解：服务端是绑定了本地的一个类实例，而客户端在调用这个服务端的 RMI 服务时，则需要这个远程服务端类实例的接口，这个接口客户端也是拥有的，但是并不知道这个接口在服务端的实现代码，这没有什么影响</p>
+<p>往往一个 RMI Server 有实现<code>java.rmi.Remote</code>的接口(定义了一些方法)，实现接口的类，一个主类用以注册绑定到 rmi 地址(<strong>这个就是 Server 了，demo 里没有分开 2 和 3</strong>)</p>
+<h3 id="攻击-RMI-服务"><a href="#攻击-RMI-服务" class="headerlink" title="攻击 RMI 服务"></a>攻击 RMI 服务</h3><p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220729063335264.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="探测-RMI-服务"><a href="#探测-RMI-服务" class="headerlink" title="探测 RMI 服务"></a>探测 RMI 服务</h4><p><code>Naming.rebind()</code>服务端绑定的对象引用客户端都是可以获取的<code>Naming.list()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String[] names = Naming.list(<span class="hljs-string">&quot;rmi://127.0.0.1:1099/&quot;</span>);<br>System.out.println(Arrays.toString(names));<br></code></pre></td></tr></table></figure>
+
+<p>得到对象引用，如何<code>lookup()</code>是关键，也就是对其方法进行调用</p>
+<p>调用一个存在危险功能的 RMI 服务端：RMI 绑定对象+方法+参数，找不到它的方法和参数基本没有利用的可能，比较鸡肋</p>
+<h4 id="codebase"><a href="#codebase" class="headerlink" title="codebase"></a>codebase</h4><p>相对于本地路径<code>ClASSPATH</code>，<code>codebase</code>远程类的指定与 jdbc 的 url 相似，通常是远程 URL，比如 http、ftp 等；如果我们指定<code>codebase=http://example.com/ </code>，然后加载<code>org.vulhub.example.Example</code>类，则 Java 虚拟机会下载这个文件<code>http://example.com/org/vulhub/example/Example.class</code>，并作为 Example 类的字节码</p>
+<p>RMI 的流程中，客户端和服务端之间传递的是一些序列化后的对象，这些对象在反序列化时，就会去寻 找类。如果某一端反序列化时发现一个对象，那么就会去自己的 CLASSPATH 下寻找想对应的类；如果在 本地没有找到这个类，就会去远程加载 codebase 中的类</p>
+<p>进一步地，控制了<code>codebase</code>，就可以加载远程恶意类</p>
+<p>官方注意到这个问题，满足如下攻击条件 RMI 服务器才能被攻击：</p>
+<ul>
+<li>安装并配置了<code>SecurityManager</code></li>
+<li>Java 版本低于 7u21、6u45，或者高于版本的设置了<code>java.rmi.server.useCodebaseonly=false</code>，其余情况 Java 虚拟机只信任预先配置好的<code>codebase</code>，而不从 RMI 请求获取</li>
+</ul>
+<h4 id="反序列化攻击"><a href="#反序列化攻击" class="headerlink" title="反序列化攻击"></a>反序列化攻击</h4><p>既然直接找=枚举方法(有害方法)和参数是几乎没有可能利用的，来看看反序列化：RMI 客户端反序列化攻击 RMI 服务端</p>
+<p>首先抓一手流量</p>
+<p>RMI 的第一个<code>call</code>描述了获取远程对象：<code>0xaced</code>后面的就是序列化值，也就是我们的对象名，这个包的意思是获取远程的这个对象</p>
+<p>后面的一个<code>ReturnData</code>就是这个对象的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -jar SerializationDumper-v1.13.jar <span class="hljs-string">&quot;aced0005770f0144c29b6800000182736d1c688006737d00000002000f6a6176612e726d692e52656d6f7465001a6d796a6176617365632e52 4d49496e7465726661636544656d6f70787200176a6176612e6c616e672e7265666c6563742e50726f7879e127da20cc1043cb0200014c0001687400254c6a6176612f6c616e672f7265666c6563742f496e766f636174696f6e48616e646c65723b7078707372002d6a6176612e726d692e7365727665722e52656d6f74654f626a656374496e766f636174696f6e48616e646c65720000000000000002020000707872001c6a6176612e726d692e7365727665722e52656d6f74654f626a656374d361b4910c61331e0300007078707732000a556e6963617374526566000931302e34342e372e35000004daee738cb6741502bf44c29b6800000182736d1c6880010178&quot;</span><br><br>STREAM_MAGIC - 0xac ed<br>STREAM_VERSION - 0x00 05<br>Contents<br>  TC_BLOCKDATA - 0x77<br>    Length - 15 - 0x0f<br>    Contents - 0x0144c29b6800000182736d1c688006<br>  TC_OBJECT - 0x73<br>    TC_PROXYCLASSDESC - 0x7d<br>      newHandle 0x00 7e 00 00<br>      Interface count - 2 - 0x00 00 00 02<br>      proxyInterfaceNames<br>        0:<br>          Length - 15 - 0x00 0f<br>          Value - java.rmi.Remote - 0x6a6176612e726d692e52656d6f7465<br>        1:<br>          Length - 26 - 0x00 1a<br>          Value - myjavasec.RMIInterfaceDemo - 0x6d796a6176617365632e524d49496e7465726661636544656d6f<br>      classAnnotations<br>        TC_NULL - 0x70<br>        TC_ENDBLOCKDATA - 0x78<br>      superClassDesc<br>        TC_CLASSDESC - 0x72<br>          className<br>            Length - 23 - 0x00 17<br>            Value - java.lang.reflect.Proxy - 0x6a6176612e6c616e672e7265666c6563742e50726f7879<br>          serialVersionUID - 0xe1 27 da 20 cc 10 43 cb<br>          newHandle 0x00 7e 00 01<br>          classDescFlags - 0x02 - SC_SERIALIZABLE<br>          fieldCount - 1 - 0x00 01<br>          Fields<br>            0:<br>              Object - L - 0x4c<br>              fieldName<br>                Length - 1 - 0x00 01<br>                Value - h - 0x68<br>              className1<br>                TC_STRING - 0x74<br>                  newHandle 0x00 7e 00 02<br>                  Length - 37 - 0x00 25<br>                  Value - Ljava/lang/reflect/InvocationHandler; - 0x4c6a6176612f6c616e672f7265666c6563742f496e766f636174696f6e48616e646c65723b<br>          classAnnotations<br>            TC_NULL - 0x70<br>            TC_ENDBLOCKDATA - 0x78<br>          superClassDesc<br>            TC_NULL - 0x70<br>    newHandle 0x00 7e 00 03<br>    classdata<br>      java.lang.reflect.Proxy<br>        values<br>          h<br>            (object)<br>              TC_OBJECT - 0x73<br>                TC_CLASSDESC - 0x72<br>                  className<br>                    Length - 45 - 0x00 2d<br>                    Value - java.rmi.server.RemoteObjectInvocationHandler - 0x6a6176612e726d692e7365727665722e52656d6f74654f626a656374496e766f636174696f6e48616e646c6572<br>                  serialVersionUID - 0x00 00 00 00 00 00 00 02<br>                  newHandle 0x00 7e 00 04<br>                  classDescFlags - 0x02 - SC_SERIALIZABLE<br>                  fieldCount - 0 - 0x00 00<br>                  classAnnotations<br>                    TC_NULL - 0x70<br>                    TC_ENDBLOCKDATA - 0x78<br>                  superClassDesc<br>                    TC_CLASSDESC - 0x72<br>                      className<br>                        Length - 28 - 0x00 1c<br>                        Value - java.rmi.server.RemoteObject - 0x6a6176612e726d692e7365727665722e52656d6f74654f626a656374<br>                      serialVersionUID - 0xd3 61 b4 91 0c 61 33 1e<br>                      newHandle 0x00 7e 00 05<br>                      classDescFlags - 0x03 - SC_WRITE_METHOD | SC_SERIALIZABLE<br>                      fieldCount - 0 - 0x00 00<br>                      classAnnotations<br>                        TC_NULL - 0x70<br>                        TC_ENDBLOCKDATA - 0x78<br>                      superClassDesc<br>                        TC_NULL - 0x70<br>                newHandle 0x00 7e 00 06<br>                classdata<br>                  java.rmi.server.RemoteObject<br>                    values<br>                    objectAnnotation<br>                      TC_BLOCKDATA - 0x77<br>                        Length - 50 - 0x32<br>                        Contents - 0x000a556e6963617374526566000931302e34342e372e35000004daee738cb6741502bf44c29b6800000182736d1c68800101<br>                      TC_ENDBLOCKDATA - 0x78<br>                  java.rmi.server.RemoteObjectInvocationHandler<br>                    values<br>      &lt;Dynamic Proxy Class&gt;<br></code></pre></td></tr></table></figure>
+
+<p>其中一个<code>classAnnotations</code>是序列化<code>objectOutputStream.annotateClass()</code>中设置的，序列化后的数据要放自定义的数据，只需要重写这个方法；也就是说，分析序列化数据的时候，看到的<code>classAnnotations</code>就是<code>annotateClass</code>写入的数据</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/language/">language</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/15/Java%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java读写文件</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/15/Gadget%20Java/">
+                        <span class="hidden-mobile">Gadget Java</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

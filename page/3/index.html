@@ -206,19 +206,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/05/vm%E8%AF%81%E4%B9%A6bug/" target="_self">
-          vm证书bug
+        <a href="/2022/01/02/SSTI/" target="_self">
+          ssti
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/05/vm%E8%AF%81%E4%B9%A6bug/" target="_self">
+        <a href="/2022/01/02/SSTI/" target="_self">
           
           
             
           
-          原因：VMware Authorization Service这个服务替换了本地根证书解决方案：打开控制面板-管理工具-服务，设置VMware workstation server这个服务的启动类型为手动
-
+          SSTISSTI-服务端模板注入漏洞服务端模板注入是由于服务端接收了用户的输入，将其作为 Web 应用模板内容的一部分，在进行目标编译渲染的过程中，执行了用户插入的恶意内容，因而导致了敏感信息泄露、代码执行、GetShell 等问题。其影响范围主要取决于模版引擎的复杂性。
+Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引擎。它具有完整的 unicode 支
         </a>
       </p>
 
@@ -226,114 +226,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-05 18:56" pubdate>
-              2021-03-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/debug/">debug</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/31/%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/" target="_self">
-          Mysql+Apache+PHP
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/31/%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/" target="_self">
-          
-          
-            
-          
-          一、安装apache高版本不再提供msi安装 下载到的为压缩包方式 需要手动注册apache服务
-
-将apache解压至目标文件夹并配置conf/httpd.conf：
-以管理员身份运行cmd，键入 .\..\Apache\bin&gt;httpd.exe -k install -n apache 安装服务
-键入httpd.exe即可启动服务
-在浏览器中键入localhost:端口号如下即apac
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-31 00:04" pubdate>
-              2021-01-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/debug/">debug</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/environment/">environment</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/23/DVWA%E7%AC%94%E8%AE%B0/" target="_self">
-          DVWA
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/23/DVWA%E7%AC%94%E8%AE%B0/" target="_self">
-          
-          
-            
-          
-          LowBrute Force查看代码 发现存在sql注入
-$ query  = “SELECT * FROM ’users‘ WHERE user = ‘$ user’ AND password = ‘$pass’;”;构造 admin’ #  上图选中代码变为$ query  = “SELECT * FROM ’users‘ WHERE user = ’admin’ # ‘ AND passwo
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-23 11:22" pubdate>
-              2021-01-23
+            <time datetime="2022-01-02 19:57" pubdate>
+              2022-01-02
             </time>
           </div>
         
@@ -363,19 +257,22 @@ $ query  = “SELECT * FROM ’users‘ WHERE user = ‘$ user’ AND password =
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/12/08/%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" target="_self">
-          靶场搭建问题
+        <a href="/2021/12/05/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" target="_self">
+          内网基础
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/12/08/%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/" target="_self">
+        <a href="/2021/12/05/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" target="_self">
           
           
             
           
-          平台：DVWA sqli-labs upload-labs xss-labs xxe-labs ssrf-labs bwapp
-SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问题，需要更改数据库名，更改面积大，直接虚拟机开低版本搭建学长语：直接解压sqli-labs到www根目录下就行了啊我…还真是，上图注意：需要更改sqli-labs-master\sql-conne
+          内网基础内网也指局域网(Local Area Network,LAN),是指在某一区域内由多台计算机互连而成的计算机组
+工作组(Work Group)在一个大型局域网内，通常会有很多计算机连接组成，他们会列在网络邻居中，为了使网络得到有效的管理，对计算机进行分组，于是就产生了工作组。通常按计算机的不同功能进行分组
+
+
+可以更改工作组的名称加入对应的组，如果组名在网络中不存在，那么相当于新建了一个工
         </a>
       </p>
 
@@ -383,8 +280,8 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-08 13:34" pubdate>
-              2020-12-08
+            <time datetime="2021-12-05 23:22" pubdate>
+              2021-12-05
             </time>
           </div>
         
@@ -392,57 +289,7 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/debug/">debug</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ctf-training/">ctf-training</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/04/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1/" target="_self">
-          常见端口及其服务
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/04/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1/" target="_self">
-          
-          
-            
-          
-            0  Reserved  通常用于分析操作系统。这一方法能够工作是因为在一些系统中“0”是无效 ，当你试图使用通常的闭合 连接它时将产生不同的结果。一种典型的扫描，使用IP地址为0.0.0.0，设置ACK位并在以太网层广播。  1  tcpmux  这显示有人在寻找SGI Irix机器。Irix是实现tcpmux的主要提供者，默认情况下tcpmux在这种系统中被打开。Irix机器在发布是含有几
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-04 13:01" pubdate>
-              2020-12-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/network/">network</a>
+              <a href="/categories/%E5%86%85%E7%BD%91/">内网</a>
             
           </div>
         
@@ -464,22 +311,19 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/12/04/%E8%AE%A1%E7%BD%91/" target="_self">
-          计算机网络基础
+        <a href="/2021/12/04/XXE/" target="_self">
+          XXE
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/12/04/%E8%AE%A1%E7%BD%91/" target="_self">
+        <a href="/2021/12/04/XXE/" target="_self">
           
           
             
           
-          一、网络模型不同划分方式下的网络体系模型
-
-二、各层介绍1）物理层（Physical Layer）
-激活、维持、关闭通信端点之间的机械特性、电气特性、功能特性以及过程特性。该层为上层协议提供了一个传输数据的可靠的物理媒体。简单的说，物理层确保原始的数据可在各种物理媒体上传输。物理层记住两个重要的设备名称，中继器（Repeater，也叫放大器）和集线器。
-2）数据链路层（Data Link Laye
+          XMLXML 指可扩展标记语言（eXtensible Markup Language）， 被设计用来传输和存储数据。区别于用来显示数据的 html
+作用： 当作小型的数据库使用，如 msg 聊天工作通过 xml 文件在本地保留聊天记录，软件的配置文件 xmk，通讯软件通过 xml 文件保留用户之前看到的媒体信息，在网站当中当作 “接口” 服务，XML 文件作为配置文件（Spring、Struts2
         </a>
       </p>
 
@@ -487,58 +331,8 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-04 12:50" pubdate>
-              2020-12-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/network/">network</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/knowledge/">knowledge</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/24/ctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" target="_self">
-          ctf-web
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/24/ctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" target="_self">
-          
-          
-            
-          
-          基础认证题页面中依据提示 可猜测用户为admin可弱口令尝试（admin）——失败暴脾气，，，词典爆破！下载其页面提供的词典抓包处对上图circle处进行解密 在burp的decode模板中进行查询可知其加密方式为base64载入词典此处开始走弯路：1.词典所加载的均为密码，缺少用户名（发现问题后，度娘学习正则表达式，很好，又学了个奇奇怪怪的姿势）2.词典爆破后一直都是401返回，长度均为404，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-24 18:52" pubdate>
-              2020-11-24
+            <time datetime="2021-12-04 12:45" pubdate>
+              2021-12-04
             </time>
           </div>
         
@@ -568,21 +362,25 @@ SQLi-LABS搭建出现的问题，由于PHPstudy的版本原因，搭建出现问
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/11/20/ssrf/" target="_self">
-          ssrf
+        <a href="/2021/11/14/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%86%E6%9E%90/" target="_self">
+          伪随机数
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/20/ssrf/" target="_self">
+        <a href="/2021/11/14/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%88%86%E6%9E%90/" target="_self">
           
           
             
           
-          ssrf原理前后端分离的业务下，服务器请求往往会有向本机或其所在内网的其他机器获取数据的过程，如果没有对请求的目标地址做过滤和限制，就会出现SSRF漏洞
-常见的场景如：从指定URL获取资源，篡改该URL地址，指向内网或者外网
-PHP中的函数和伪协议可能造成漏洞的有：
-12345678910file_get_contents()curl_exec()fsockopen()    file://dic
+          PHP
+mt_scrand()//播种 Mersenne Twister 随机数生成器
+mt_rand()//生成随机数
+
+mt_scrand()通过 seed 分发种子，通过 mt_rand()生成伪随机数
+从 PHP 4.2.0 开始，随机数生成器自动播种，因此没有必要使用该函数 因此不需要播种，并且如果设置了 seed 参数 生成的随机数就是伪随机数，意思就是每次生成的随机数 是一样的
+
+当
         </a>
       </p>
 
@@ -590,8 +388,8 @@ PHP中的函数和伪协议可能造成漏洞的有：
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-20 22:51" pubdate>
-              2020-11-20
+            <time datetime="2021-11-14 21:15" pubdate>
+              2021-11-14
             </time>
           </div>
         
@@ -621,21 +419,21 @@ PHP中的函数和伪协议可能造成漏洞的有：
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/11/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%9F%BA%E7%A1%80%E7%AF%87/" target="_self">
-          信息收集基础篇
+        <a href="/2021/10/05/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" target="_self">
+          文件包含
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%9F%BA%E7%A1%80%E7%AF%87/" target="_self">
+        <a href="/2021/10/05/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" target="_self">
           
           
             
           
-          信息收集721第二次培训:信息收集包括主动以及被动
-本次任务有：分别用c 语言和php写 99 乘法表，csdn写博客（另：下星期由我分享win-dos内容）
-1.被动信息收集域名信息查询（爱站网 站长工具） 企业信息查询（企查查 公安部备案查询）Github平台：泄露源码、数据库、邮箱、ftp、ssh、端口3389、个人信息、其他敏感信息
-svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
+          123456if(isset($_GET[&#x27;file&#x27;]))&#123;    $file = $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;
+
+
+?file=php://filter/read=convert.base64-encode
         </a>
       </p>
 
@@ -643,8 +441,179 @@ svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-20 00:51" pubdate>
-              2020-11-20
+            <time datetime="2021-10-05 18:46" pubdate>
+              2021-10-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf-training/">ctf-training</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+          命令执行
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/17/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" target="_self">
+          
+          
+            
+          
+          命令执行eval(c)
+从绕过正则匹配的角度：
+
+过滤了关键单词 如 flag、php 在 linux 可以使用占位符？和*
+比如flag.php可以使用fl??.???或者fl?g.??p和f*或者 f***等
+也可以使用空字符&#39;&#39;夹在过滤内容之中fl&#39;&#39;ag.php
+还可以这样fla\g.php或者正则f[abcd]ag.php、f[a-z]ag.php [ab
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-17 10:11" pubdate>
+              2021-08-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf-training/">ctf-training</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/21/XSS%E7%AC%94%E8%AE%B0/" target="_self">
+          XSS笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/21/XSS%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          
+            
+          
+          xss-lab1更改 test 为 2 成功显示 2
+
+输入&lt;script&gt;&lt;/script&gt;没有显示 按理来说应该会出现欢迎用户&lt;script&gt;&lt;/script&gt;才对，但是没有，到哪里去了，他被浏览器解析了，在这个标签中就可以插入你想执行的 js 代码
+需要弹窗才能下一关
+
+
+2
+有输入框 直接插入失败 在查看器看一下源码
+
+
+发现上面的文字内容被
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-21 16:41" pubdate>
+              2021-07-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/cs/">cs</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ctf-training/">ctf-training</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/04/HTTP%E8%B5%B0%E7%A7%81%E6%94%BB%E5%87%BB/" target="_self">
+          HTTP走私攻击
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/04/HTTP%E8%B5%B0%E7%A7%81%E6%94%BB%E5%87%BB/" target="_self">
+          
+          
+            
+          
+          0x01 HTTP请求走私是什么HTTP请求走私是一种干扰网站处理从一个或多个用户接收的HTTP请求序列的方式的技术。使攻击者可以绕过安全控制，未经授权访问敏感数据并直接危害其他应用程序用户。
+0x02 为什么会产生HTTP请求走私请求走私漏洞成因
+
+前端服务器(CDN)和后端服务器接收数据不同步，引起对客户端传入的数据理解不一致，从而导致漏洞的产生。
+
+大多数HTTP请求走私漏洞的出现是因为HT
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-04 21:24" pubdate>
+              2021-06-04
             </time>
           </div>
         
@@ -674,20 +643,21 @@ svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/11/19/burp/" target="_self">
-          burp
+        <a href="/2021/06/03/%E4%BD%BF%E7%94%A8%E9%AB%98%E7%AB%AF%E5%8F%A3ssh/" target="_self">
+          使用高端口ssh
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/19/burp/" target="_self">
+        <a href="/2021/06/03/%E4%BD%BF%E7%94%A8%E9%AB%98%E7%AB%AF%E5%8F%A3ssh/" target="_self">
           
           
             
           
-          721第一次培训就网络安全对其进行一些介绍和方向上的讲解，还有一些网络钓鱼，字典爆破等攻击手段，并演示了burp实现对HTTP的抓包，分析抓包的内容，以及分享了利用burp可以实现什么。
-此次任务有：熟悉HTTP协议，利用burp抓包，搭建虚拟机kali。
-重点内容：burp1.1burp的安装①配置Java环境(问：为什么要这样配置     答：burp是由Java语言编写而成，其可执行程序是j
+          Centos7 使用 ssh 连接之改端口 22题记：
+说来贻笑大方，开始接触 ssh 时认为 22 端口作为 ssh 常用端口，放到公网上容易被别人爆破，谁让我用的是弱密码呢，我错了，但我下次还敢哈哈哈，其实有没有改端口，使用弱密码映射到公网是极不安全的，对方只要扫一扫你开放的端口，简单的爆破一下你就完蛋
+正题
+一、更改 sshd 配置文件ssh_config 是客服端的配置文件，而 cento
         </a>
       </p>
 
@@ -695,8 +665,75 @@ svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-19 22:51" pubdate>
-              2020-11-19
+            <time datetime="2021-06-03 14:38" pubdate>
+              2021-06-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/linux/">linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E9%9A%A7%E9%81%93/">通信隧道</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/29/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_self">
+          反序列化漏洞
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/29/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_self">
+          
+          
+            
+          
+          反序列化漏洞序列化与反序列化类中，实例化生成一个对象，而把这个对象转化成字符串，这个操作就是序列化。反过来，将字符串转化成类模板形式的对象，就是反序列化。两者结合就可以方便地存储和传输数据。
+不同编程语言序列化后的存储文件不同，当然语法也不相同
+我们以 php 语言为例
+
+
+
+
+函数
+描述
+
+
+
+serialize()
+将一个对象转换成一串字符串
+
+
+unserialize()
+将一串字符串转换成
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-29 20:24" pubdate>
+              2021-05-29
             </time>
           </div>
         
@@ -712,7 +749,7 @@ svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/tools/">tools</a>
+              <a href="/tags/ctf/">ctf</a>
             
           </div>
         
@@ -724,7 +761,7 @@ svn信息、邮件信息（通过爬虫、搜索引擎获取暴露的邮箱，
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

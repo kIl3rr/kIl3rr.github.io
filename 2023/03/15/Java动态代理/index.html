@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="Java动态代理就像研究反序列化一样，我们可以自定义writeObject，写入我们想要写入的；动态代理通过Java的反射机制，劫持到所持有的委托类对象的相关方法，成为特定的服务；这样做一是隔绝了直接调用相关业务类的方法或者比静态代理(代码写死)更加灵活，通过代理类来调用一些方法；也可以自定义一些方法在其中（面向切面编程：切入点前执行aaa，切入点后执行bbb），这样可以完成对程序的无侵入式扩展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理">
+<meta property="og:url" content="http://example.com/2023/03/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="Java动态代理就像研究反序列化一样，我们可以自定义writeObject，写入我们想要写入的；动态代理通过Java的反射机制，劫持到所持有的委托类对象的相关方法，成为特定的服务；这样做一是隔绝了直接调用相关业务类的方法或者比静态代理(代码写死)更加灵活，通过代理类来调用一些方法；也可以自定义一些方法在其中（面向切面编程：切入点前执行aaa，切入点后执行bbb），这样可以完成对程序的无侵入式扩展">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-15T12:56:37.738Z">
+<meta property="article:modified_time" content="2023-09-09T05:23:33.337Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+  <title>Java动态代理 - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java动态代理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-15 20:56" pubdate>
+        March 15, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java动态代理</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Java动态代理"><a href="#Java动态代理" class="headerlink" title="Java动态代理"></a>Java动态代理</h1><p>就像研究反序列化一样，我们可以自定义<code>writeObject</code>，写入我们想要写入的；动态代理通过Java的反射机制，劫持到所持有的委托类对象的相关方法，成为特定的服务；这样做一是隔绝了直接调用相关业务类的方法或者比静态代理(代码写死)更加灵活，通过代理类来调用一些方法；也可以自定义一些方法在其中（面向切面编程：切入点前执行aaa，切入点后执行bbb），这样可以完成对程序的无侵入式扩展</p>
+<p><strong>Java动态代理主要使用场景：</strong></p>
+<ol>
+<li>统计方法执行所耗时间</li>
+<li>在方法执行前后添加日志</li>
+<li>检测方法的参数或返回值</li>
+<li>方法访问权限控制</li>
+<li>方法<code>Mock</code>测试</li>
+</ol>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="java-lang-reflect-Proxy"><a href="#java-lang-reflect-Proxy" class="headerlink" title="java.lang.reflect.Proxy"></a>java.lang.reflect.Proxy</h3><p>生成动态代理类，创建代理类实例，实现了<code>Serializable</code>接口</p>
+<p>主要方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.lang.reflect;<br><br><span class="hljs-keyword">import</span> java.lang.reflect.InvocationHandler;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Creator: yz</span><br><span class="hljs-comment"> * Date: 2020/1/15</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Proxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span> </span>&#123;<br><br>  <span class="hljs-comment">// 省去成员变量和部分类方法...</span><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取动态代理处理类对象</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> proxy 返回调用处理程序的代理实例</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 代理实例的调用处理程序</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IllegalArgumentException 如果参数不是一个代理实例</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InvocationHandler <span class="hljs-title">getInvocationHandler</span><span class="hljs-params">(Object proxy)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> IllegalArgumentException </span>&#123;<br>        ...<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建动态代理类实例</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> loader     指定动态代理类的类加载器</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> interfaces 指定动态代理类的类需要实现的接口数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> h          动态代理处理类</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回动态代理生成的代理类实例</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IllegalArgumentException 不正确的参数异常</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title">newProxyInstance</span><span class="hljs-params">(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> IllegalArgumentException </span>&#123;<br>        ...<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建动态代理类</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> loader     定义代理类的类加载器</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> interfaces 代理类要实现的接口列表</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 用指定的类加载器定义的代理类，它可以实现指定的接口</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Class&lt;?&gt; getProxyClass(ClassLoader loader, Class&lt;?&gt;... interfaces) &#123;<br>        ...<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 检测某个类是否是动态代理类</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> cl 要测试的类</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 如该类为代理类，则为 true，否则为 false</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isProxyClass</span><span class="hljs-params">(Class&lt;?&gt; cl)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> java.lang.reflect.Proxy.class.isAssignableFrom(cl) &amp;&amp; proxyClassCache.containsValue(cl);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 向指定的类加载器中定义一个类对象</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> loader 类加载器</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> name   类名</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> b      类字节码</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> off    截取开始位置</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> len    截取长度</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> JVM创建的类Class对象</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">native</span> Class <span class="hljs-title">defineClass0</span><span class="hljs-params">(ClassLoader loader, String name, <span class="hljs-keyword">byte</span>[] b, <span class="hljs-keyword">int</span> off, <span class="hljs-keyword">int</span> len)</span></span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="java-lang-reflect-InvocationHandler"><a href="#java-lang-reflect-InvocationHandler" class="headerlink" title="java.lang.reflect.InvocationHandler"></a>java.lang.reflect.InvocationHandler</h3><p>用于调用<code>java.lang.reflect.Proxy</code>生成的代理类方法，接口中只定义了一个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.lang.reflect;<br><br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 每个代理实例都具有一个关联的调用处理程序。对代理实例调用方法时，将对方法调用进行编码并</span><br><span class="hljs-comment"> * 将其指派到它的调用处理程序的 invoke 方法。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 在代理实例上处理方法调用并返回结果。在与方法关联的代理实例上调用方法时，将在调用处理程序上调用此方法。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> proxy  在其上调用方法的代理实例</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> method 对应于在代理实例上调用的接口方法的 Method 实例。Method 对象的声明类将是在其中声明</span><br><span class="hljs-comment">     *               方法的接口，该接口可以是代理类赖以继承方法的代理接口的超接口。</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> args   包含传入代理实例上方法调用的参数值的对象数组，如果接口方法不使用参数，</span><br><span class="hljs-comment">     *               则为 null。基本类型的参数被包装在适当基本包装器类（如 java.lang.Integer</span><br><span class="hljs-comment">     *               或 java.lang.Boolean）的实例中。</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 从代理实例的方法调用返回的值。如果接口方法的声明返回类型是基本类型，</span><br><span class="hljs-comment">     * 则此方法返回的值一定是相应基本包装对象类的实例；否则，它一定是可分配到声明返回类型的类型。</span><br><span class="hljs-comment">     * 如果此方法返回的值为 null 并且接口方法的返回类型是基本类型，则代理实例上的方法调用将抛出</span><br><span class="hljs-comment">     * NullPointerException。否则，如果此方法返回的值与上述接口方法的声明返回类型不兼容，</span><br><span class="hljs-comment">     * 则代理实例上的方法调用将抛出 ClassCastException。</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Throwable 从代理实例上的方法调用抛出的异常。该异常的类型必须可以分配到在接口方法的</span><br><span class="hljs-comment">     *                   throws 子句中声明的任一异常类型或未经检查的异常类型 java.lang.RuntimeException 或</span><br><span class="hljs-comment">     *                   java.lang.Error。如果此方法抛出经过检查的异常，该异常不可分配到在接口方法的 throws 子句中</span><br><span class="hljs-comment">     *                   声明的任一异常类型，代理实例的方法调用将抛出包含此方法曾抛出的异常的</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable</span>;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用java-lang-reflect-Proxy动态创建类对象"><a href="#使用java-lang-reflect-Proxy动态创建类对象" class="headerlink" title="使用java.lang.reflect.Proxy动态创建类对象"></a>使用java.lang.reflect.Proxy动态创建类对象</h2><p><code>ClassLoader</code>和<code>Unsafe</code>都有一个叫做<code>defineClassXXX</code>的<code>native</code>方法，我们可以通过调用这个<code>native</code>方法动态的向<code>JVM</code>创建一个类对象，而<code>java.lang.reflect.Proxy</code>类恰好也有这么一个<code>native</code>方法，所以我们也将可以通过调用<code>java.lang.reflect.Proxy</code>类<code>defineClass0</code>方法实现动态创建类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;<br><span class="hljs-keyword">import</span> javassist.*;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.lang.reflect.InvocationTargetException;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><span class="hljs-keyword">import</span> java.lang.reflect.Proxy;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyDefineclass</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            ClassPool cp = ClassPool.getDefault();<br>            cp.insertClassPath(<span class="hljs-keyword">new</span> ClassClassPath(AbstractTranslet.class));<br>            CtClass ctClass = cp.makeClass(<span class="hljs-string">&quot;Cat&quot;</span>);<br>            String cmd = <span class="hljs-string">&quot;java.lang.System.out.println(\&quot;hello\&quot;);&quot;</span>;<br>            ctClass.makeClassInitializer().insertBefore(cmd);<br>            ctClass.setSuperclass(cp.get(AbstractTranslet.class.getName()));<br>            <span class="hljs-keyword">byte</span>[] classbyte = ctClass.toBytecode();<br>            System.out.println();<br>            ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();<br>            Method defineClass0 = Proxy.class.getDeclaredMethod(<span class="hljs-string">&quot;defineClass0&quot;</span>, <span class="hljs-keyword">new</span> Class[]&#123;ClassLoader.class, String.class, <span class="hljs-keyword">byte</span>[].class, <span class="hljs-keyword">int</span>.class, <span class="hljs-keyword">int</span>.class&#125;);<br>            defineClass0.setAccessible(<span class="hljs-keyword">true</span>);<br>            Class invokedefineclass0 = (Class) defineClass0.invoke(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">new</span> Object[]&#123;systemClassLoader, <span class="hljs-string">&quot;Cat&quot;</span>, classbyte, <span class="hljs-number">0</span>, classbyte.length&#125;);<br>            System.out.println(invokedefineclass0);<br>        &#125; <span class="hljs-keyword">catch</span> (CannotCompileException | NoSuchMethodException | IllegalAccessException | InvocationTargetException |<br>                 NotFoundException | IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>动态代理生成出来的类有如下技术细节和特性：</strong></p>
+<ol>
+<li>动态代理的必须是接口类，通过<code>动态生成一个接口实现类</code>来代理接口的方法调用(<code>反射机制</code>)。</li>
+<li>动态代理类会由<code>java.lang.reflect.Proxy.ProxyClassFactory</code>创建。</li>
+<li><code>ProxyClassFactory</code>会调用<code>sun.misc.ProxyGenerator</code>类生成该类的字节码，并调用<code>java.lang.reflect.Proxy.defineClass0()</code>方法将该类注册到<code>JVM</code>。</li>
+<li>该类继承于<code>java.lang.reflect.Proxy</code>并实现了需要被代理的接口类，因为<code>java.lang.reflect.Proxy</code>类实现了<code>java.io.Serializable</code>接口，所以被代理的类支持<code>序列化/反序列化</code>。</li>
+<li>该类实现了代理接口类(示例中的接口类是<code>com.anbai.sec.proxy.FileSystem</code>)，会通过<code>ProxyGenerator</code>动态生成接口类(<code>FileSystem</code>)的所有方法，</li>
+<li>该类因为实现了代理的接口类，所以当前类是代理的接口类的实例(<code>proxyInstance instanceof FileSystem</code>为<code>true</code>)，但不是代理接口类的实现类的实例(<code>proxyInstance instanceof UnixFileSystem</code>为<code>false</code>)。</li>
+<li>该类方法中包含了被代理的接口类的所有方法，通过调用动态代理处理类(<code>InvocationHandler</code>)的<code>invoke</code>方法获取方法执行结果。</li>
+<li>该类代理的方式重写了<code>java.lang.Object</code>类的<code>toString</code>、<code>hashCode</code>、<code>equals</code>方法。</li>
+<li>如果动过动态代理生成了多个动态代理类，新生成的类名中的<code>0</code>会自增，如<code>com.sun.proxy.$Proxy0/$Proxy1/$Proxy2</code>。</li>
+</ol>
+<h2 id="Demo1"><a href="#Demo1" class="headerlink" title="Demo1"></a>Demo1</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> java.lang.reflect.Proxy;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassMapDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        InvocationHandlerDemo invocationHandlerDemo = <span class="hljs-keyword">new</span> InvocationHandlerDemo(<span class="hljs-keyword">new</span> HashMap());<br>        Map proxyMap = (Map) Proxy.newProxyInstance(Map.class.getClassLoader(), <span class="hljs-keyword">new</span> Class[]&#123;Map.class&#125;, invocationHandlerDemo);<br>        System.out.println(proxyMap.put(<span class="hljs-string">&quot;proxy&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>));<br>        proxyMap.get(<span class="hljs-string">&quot;proxy&quot;</span>);<br>        proxyMap.entrySet();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myjavasec;<br><br><span class="hljs-keyword">import</span> java.lang.reflect.InvocationHandler;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InvocationHandlerDemo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> Object map;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">InvocationHandlerDemo</span><span class="hljs-params">(Map map)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.map = map;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        <span class="hljs-keyword">if</span> (method.getName().contains(<span class="hljs-string">&quot;put&quot;</span>)) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Hook Map.put Method: &quot;</span> + method.getName());<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;not allowed&quot;</span>;<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;detect the method: &quot;</span> + method.getName() + <span class="hljs-string">&quot;, and exec without being hooked&quot;</span>);<br>        <span class="hljs-keyword">return</span> method.invoke(<span class="hljs-keyword">this</span>.map, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Demo2"><a href="#Demo2" class="headerlink" title="Demo2"></a>Demo2</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.InvocationHandler;<br><span class="hljs-keyword">import</span> java.lang.reflect.Method;<br><span class="hljs-keyword">import</span> java.lang.reflect.Proxy;<br><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ObjectInterface</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Object <span class="hljs-title">getClassName</span><span class="hljs-params">(Object object)</span></span>;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ORIObjectfindName</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ObjectInterface</span></span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getClassName</span><span class="hljs-params">(Object object)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;white class: &quot;</span>+ object.hashCode() +<span class="hljs-string">&quot;, pass!&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ObjectfindName</span> <span class="hljs-keyword">implements</span>  <span class="hljs-title">InvocationHandler</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> Object object;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">get</span><span class="hljs-params">(Object object)</span></span>&#123;<br>        <span class="hljs-keyword">this</span>.object=object;<br>        <span class="hljs-keyword">return</span> Proxy.newProxyInstance(<span class="hljs-keyword">this</span>.getClass().getClassLoader(), <span class="hljs-keyword">this</span>.object.getClass().getInterfaces(),<span class="hljs-keyword">this</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        <span class="hljs-keyword">for</span>(Object o:args)&#123;<br>            System.out.println(<span class="hljs-string">&quot;black class proxy: &quot;</span>+ o.hashCode() +<span class="hljs-string">&quot;, block!&quot;</span>);<br>            <span class="hljs-keyword">if</span> (o.toString().contains(<span class="hljs-string">&quot;System&quot;</span>))&#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> method.invoke(<span class="hljs-keyword">this</span>.object,args);<br>    &#125;<br><br><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DynamicProxy</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        ORIObjectfindName oriObjectfindName = <span class="hljs-keyword">new</span> ORIObjectfindName();<br>        oriObjectfindName.getClassName(String.class);<br><br>        ObjectInterface oriObjectfindName1 = <span class="hljs-keyword">new</span> ORIObjectfindName();<br>        ObjectfindName objectfindNameproxy = <span class="hljs-keyword">new</span> ObjectfindName();<br>        ObjectInterface objectInterface =(ObjectInterface) objectfindNameproxy.get(oriObjectfindName1);<br>        objectInterface.getClassName(System.class);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="动态代理类实例序列化问题"><a href="#动态代理类实例序列化问题" class="headerlink" title="动态代理类实例序列化问题"></a>动态代理类实例序列化问题</h2><p>动态代理类符合<code>Java</code>对象序列化条件，并且在<code>序列化/反序列化</code>时会被<code>ObjectInputStream/ObjectOutputStream</code>特殊处理</p>
+<p>动态代理生成的类在<code>反序列化/反序列化</code>时不会序列化该类的成员变量，并且<code>serialVersionUID</code>为<code>0L</code> ，也将是说将该类的<code>Class</code>对象传递给<code>java.io.ObjectStreamClass</code>的静态<code>lookup</code>方法时，返回的<code>ObjectStreamClass</code>实例将具有以下特性：</p>
+<ol>
+<li>调用其<code>getSerialVersionUID</code>方法将返回<code>0L</code> </li>
+<li>调用其<code>getFields</code>方法将返回长度为零的数组</li>
+<li>调用其<code>getField</code>方法将返回<code>null</code> </li>
+</ol>
+<p>但其父类(<code>java.lang.reflect.Proxy</code>)在序列化时不受影响，父类中的<code>h</code>变量(<code>InvocationHandler</code>)将会被序列化，这个<code>h</code>存储了动态代理类的处理类实例以及动态代理的接口类的实现类的实例</p>
+<p>动态代理生成的对象(<code>com.sun.proxy.$ProxyXXX</code>)序列化的时候会使用一个特殊的协议：<code>TC_PROXYCLASSDESC(0x7D)</code>，这个常量在<code>java.io.ObjectStreamConstants</code>中定义的。在反序列化时也不会调用<code>java.io.ObjectInputStream</code>类的<code>resolveClass</code>方法而是调用<code>resolveProxyClass</code>方法来转换成类对象的</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/language/">language</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/15/JNI%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JNI安全基础</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/15/Java%E5%BA%8F%E5%88%97%E5%8C%96%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                        <span class="hidden-mobile">Java序列化反序列化</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

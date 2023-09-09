@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <link rel="icon" href="https://raw.githubusercontent.com/kIl3rr/photo/main/icon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="sun.misc.Unsafe本文参考：http:&#x2F;&#x2F;mishadoff.com&#x2F;blog&#x2F;java-magic-part-4-sun-dot-misc-dot-unsafe&#x2F;，https:&#x2F;&#x2F;blog.csdn.net&#x2F;zyzzxycj&#x2F;article&#x2F;details&#x2F;89877863 Java对内存的管理很严格，https:&#x2F;&#x2F;blog.csdn.net&#x2F;bandaoyu&#x2F;article&#x2F;de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🗄">
+<meta property="og:url" content="http://example.com/2023/03/15/Unsafe/index.html">
+<meta property="og:site_name" content="🗄">
+<meta property="og:description" content="sun.misc.Unsafe本文参考：http:&#x2F;&#x2F;mishadoff.com&#x2F;blog&#x2F;java-magic-part-4-sun-dot-misc-dot-unsafe&#x2F;，https:&#x2F;&#x2F;blog.csdn.net&#x2F;zyzzxycj&#x2F;article&#x2F;details&#x2F;89877863 Java对内存的管理很严格，https:&#x2F;&#x2F;blog.csdn.net&#x2F;bandaoyu&#x2F;article&#x2F;de">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/568153-20191216214607494-455490214.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220310141213354.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220310141414128.png">
+<meta property="article:published_time" content="2023-03-15T12:56:37.729Z">
+<meta property="article:modified_time" content="2022-03-31T14:41:29.608Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kIl3rr/photo/main/568153-20191216214607494-455490214.png">
+  
+  <title>🗄</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-dark-dimmed.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"G-SL9T1KRBQY","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>👩‍💻</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/kIl3rr/photo/main/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-15 20:56" pubdate>
+        March 15, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      NaN 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="sun-misc-Unsafe"><a href="#sun-misc-Unsafe" class="headerlink" title="sun.misc.Unsafe"></a>sun.misc.Unsafe</h1><p>本文参考：<a target="_blank" rel="noopener" href="http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/%EF%BC%8Chttps://blog.csdn.net/zyzzxycj/article/details/89877863">http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/，https://blog.csdn.net/zyzzxycj/article/details/89877863</a></p>
+<p>Java对内存的管理很严格，<a target="_blank" rel="noopener" href="https://blog.csdn.net/bandaoyu/article/details/83418583%EF%BC%8CUnsafe%E7%B1%BB%E5%8F%AF%E4%BB%A5%E7%AA%81%E7%A0%B4JVM%EF%BC%8C%E5%AE%83%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8free(%E4%B8%8D%E8%A2%ABGC%E5%9B%9E%E6%94%B6)%EF%BC%8C%E5%AE%83%E4%B8%8D%E6%98%AFJ2SE%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%8C%E5%B1%9E%E4%BA%8Esun.*API">https://blog.csdn.net/bandaoyu/article/details/83418583，Unsafe类可以突破JVM，它分配的内存需要手动free(不被GC回收)，它不是J2SE的一部分，属于sun.*API</a></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/568153-20191216214607494-455490214.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Unsafe类实例化"><a href="#Unsafe类实例化" class="headerlink" title="Unsafe类实例化"></a>Unsafe类实例化</h2><p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220310141213354.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/kIl3rr/photo/main/image-20220310141414128.png" srcset="/img/loading.gif" lazyload></p>
+<p>可见必须是ClassLoader加载的类，然后返回标记为<code>private</code>的theUnsafe实例</p>
+<p>Unsafe方法有105种方法，分类如下：</p>
+<ul>
+<li><p>Info</p>
+<p>Just returns some low-level memory information.</p>
+<ul>
+<li><code>addressSize</code></li>
+<li><code>pageSize</code></li>
+</ul>
+</li>
+<li><p>Objects</p>
+<p>Provides methods for object and its fields manipulation.</p>
+<ul>
+<li><code>allocateInstance</code></li>
+<li><code>objectFieldOffset</code></li>
+</ul>
+</li>
+<li><p>Classes</p>
+<p>Provides methods for classes and static fields manipulation.</p>
+<ul>
+<li><code>staticFieldOffset</code></li>
+<li><code>defineClass</code></li>
+<li><code>defineAnonymousClass</code></li>
+<li><code>ensureClassInitialized</code></li>
+</ul>
+</li>
+<li><p>Arrays</p>
+<p>Arrays manipulation.</p>
+<ul>
+<li><code>arrayBaseOffset</code></li>
+<li><code>arrayIndexScale</code></li>
+</ul>
+</li>
+<li><p>Synchronization</p>
+<p>Low level primitives for synchronization.</p>
+<ul>
+<li><code>monitorEnter</code></li>
+<li><code>tryMonitorEnter</code></li>
+<li><code>monitorExit</code></li>
+<li><code>compareAndSwapInt</code></li>
+<li><code>putOrderedInt</code></li>
+</ul>
+</li>
+<li><p>Memory</p>
+<p>Direct memory access methods.</p>
+<ul>
+<li><code>allocateMemory</code></li>
+<li><code>copyMemory</code></li>
+<li><code>freeMemory</code></li>
+<li><code>getAddress</code></li>
+<li><code>getInt</code></li>
+<li><code>putInt</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="Avoid-initialization"><a href="#Avoid-initialization" class="headerlink" title="Avoid initialization"></a>Avoid initialization</h3><p>当创建一个类实例却不需要调用其构造函数(<strong>或构造函数私有</strong>)、初始化代码以及绕过各种JVM安全检查等等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Field theUnsafe = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>        theUnsafe.setAccessible(<span class="hljs-keyword">true</span>);<br>        Unsafe unsafe = (Unsafe) theUnsafe.get(<span class="hljs-keyword">null</span>);<br><br>        A a1 = (A) unsafe.allocateInstance(A.class);<br>        System.out.println(a1.getNum);<span class="hljs-comment">//打印结果为0</span><br>	<br>        <span class="hljs-comment">//bypass</span><br>        a1.setNum(<span class="hljs-number">666</span>);<br>        System.out.println(a1.getNum());<span class="hljs-comment">//打印结果为666</span><br>    &#125;<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> num = <span class="hljs-number">123</span>;<br><br>        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">A</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.num = <span class="hljs-number">2333</span>;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getNum</span><span class="hljs-params">()</span></span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.num;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.num = num;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>allocateInstance()</code>方法根本没有进入构造方法，在单例模式下很危险</p>
+<h3 id="Memory-corruption"><a href="#Memory-corruption" class="headerlink" title="Memory corruption"></a>Memory corruption</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Field f = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>        f.setAccessible(<span class="hljs-keyword">true</span>);<br>        Unsafe unsafe = (Unsafe) f.get(<span class="hljs-keyword">null</span>);<br><br>        Guard guard = <span class="hljs-keyword">new</span> Guard();<br>        <span class="hljs-keyword">boolean</span> flag1 = guard.giveAccess();   <span class="hljs-comment">// false, no access</span><br><br>        <span class="hljs-comment">// bypass</span><br>        Field field = guard.getClass().getDeclaredField(<span class="hljs-string">&quot;ACCESS_ALLOWED&quot;</span>);<br>        unsafe.putInt(guard, unsafe.objectFieldOffset(field), <span class="hljs-number">42</span>); <span class="hljs-comment">// memory corruption</span><br>        <span class="hljs-keyword">boolean</span> flag2 = guard.giveAccess(); <span class="hljs-comment">// true, access granted</span><br><br>        System.out.println(flag1);<br>        System.out.println(flag2);<br>    &#125;<br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Guard</span> </span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> ACCESS_ALLOWED = <span class="hljs-number">1</span>;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">giveAccess</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">42</span> == ACCESS_ALLOWED;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>获取目标对象字段在内存中的offset，使用putInt()方法，修改类的私有变量ACCESS_ALLOWED</p>
+<p>在已知类结构的时候，数据的偏移总是可以获得的（与c++中的类中数据的偏移计算是一致的）</p>
+<p>sizeOf 计算内存大小（Unsafe.getDeclaredFields和Unsafe.objectFieldOffset）</p>
+<h3 id="sizeOf"><a href="#sizeOf" class="headerlink" title="sizeOf"></a>sizeOf</h3><p>结合反射和objectFieldOffset()函数实现类似c中的sizeof()函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    Guard guard = <span class="hljs-keyword">new</span> Guard();<br>    sizeOf(guard); <span class="hljs-comment">// 16, the size of guard</span><br>&#125;<br><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Guard</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> ACCESS_ALLOWED = <span class="hljs-number">1</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">giveAccess</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">42</span> == ACCESS_ALLOWED;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">sizeOf</span><span class="hljs-params">(Object o)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    Field f = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>    f.setAccessible(<span class="hljs-keyword">true</span>);<br>    Unsafe unsafe = (Unsafe) f.get(<span class="hljs-keyword">null</span>);<br><br>    HashSet&lt;Field&gt; fields = <span class="hljs-keyword">new</span> HashSet();<br>    Class c = o.getClass();<br>    <span class="hljs-keyword">while</span> (c != Object.class) &#123;<br>        <span class="hljs-keyword">for</span> (Field field : c.getDeclaredFields()) &#123;<br>            <span class="hljs-keyword">if</span> ((field.getModifiers() &amp; Modifier.STATIC) == <span class="hljs-number">0</span>) &#123;<br>                fields.add(field);<br>            &#125;<br>        &#125;<br>        c = c.getSuperclass();<br>    &#125;<br><br>    <span class="hljs-comment">// get offset</span><br>    <span class="hljs-keyword">long</span> maxSize = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (Field field : fields) &#123;<br>        <span class="hljs-keyword">long</span> offset = unsafe.objectFieldOffset(field);<br>        <span class="hljs-keyword">if</span> (offset &gt; maxSize) &#123;<br>            maxSize = offset;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ((maxSize/<span class="hljs-number">8</span>) + <span class="hljs-number">1</span>) * <span class="hljs-number">8</span>;   <span class="hljs-comment">// padding</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>算法的思路非常清晰：从底层子类开始，依次取出它自己和它的所有超类的非静态域，放置到一个HashSet中（重复的只计算一次，Java是单继承），然后使用objectFieldOffset()获得一个最大偏移，最后还考虑了对齐</p>
+<h3 id="Shallow-copy"><a href="#Shallow-copy" class="headerlink" title="Shallow copy"></a>Shallow copy</h3><p>利用Unsafe.copyMemory()，将老地址及其指向的对象的size，拷贝到新的内存地址上。并且浅复制函数可以应用于任意java对象，它的尺寸是动态计算的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Field f = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>        f.setAccessible(<span class="hljs-keyword">true</span>);<br>        unsafe = (Unsafe) f.get(<span class="hljs-keyword">null</span>);<br>        Guard guard = <span class="hljs-keyword">new</span> Guard();<br>        shallowCopy(guard);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Unsafe <span class="hljs-title">getUnsafe</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> unsafe;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> Object <span class="hljs-title">shallowCopy</span><span class="hljs-params">(Object obj)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">long</span> size = sizeOf(obj);<br>        <span class="hljs-keyword">long</span> start = toAddress(obj);<br>        <span class="hljs-keyword">long</span> address = getUnsafe().allocateMemory(size);<br>        getUnsafe().copyMemory(start, address, size);<br>        <span class="hljs-keyword">return</span> fromAddress(address);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">toAddress</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>        Object[] array = <span class="hljs-keyword">new</span> Object[]&#123;obj&#125;;<br>        <span class="hljs-keyword">long</span> baseOffset = getUnsafe().arrayBaseOffset(Object[].class);<br>        <span class="hljs-keyword">return</span> normalize(getUnsafe().getLong(array, baseOffset));<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> Object <span class="hljs-title">fromAddress</span><span class="hljs-params">(<span class="hljs-keyword">long</span> address)</span> </span>&#123;<br>        Object[] array = <span class="hljs-keyword">new</span> Object[] &#123;<span class="hljs-keyword">null</span>&#125;;<br>        <span class="hljs-keyword">long</span> baseOffset = getUnsafe().arrayBaseOffset(Object[].class);<br>        getUnsafe().putLong(array, baseOffset, address);<br>        <span class="hljs-keyword">return</span> array[<span class="hljs-number">0</span>];<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Guard</span> </span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> ACCESS_ALLOWED = <span class="hljs-number">1</span>;<br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">giveAccess</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">42</span> == ACCESS_ALLOWED;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">sizeOf</span><span class="hljs-params">(Object o)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Field f = Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>        f.setAccessible(<span class="hljs-keyword">true</span>);<br>        Unsafe unsafe = (Unsafe) f.get(<span class="hljs-keyword">null</span>);<br><br>        HashSet&lt;Field&gt; fields = <span class="hljs-keyword">new</span> HashSet();<br>        Class c = o.getClass();<br>        <span class="hljs-keyword">while</span> (c != Object.class) &#123;<br>            <span class="hljs-keyword">for</span> (Field field : c.getDeclaredFields()) &#123;<br>                <span class="hljs-keyword">if</span> ((field.getModifiers() &amp; Modifier.STATIC) == <span class="hljs-number">0</span>) &#123;<br>                    fields.add(field);<br>                &#125;<br>            &#125;<br>            c = c.getSuperclass();<br>        &#125;<br><br>        <span class="hljs-comment">// get offset</span><br>        <span class="hljs-keyword">long</span> maxSize = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (Field field : fields) &#123;<br>            <span class="hljs-keyword">long</span> offset = unsafe.objectFieldOffset(field);<br>            <span class="hljs-keyword">if</span> (offset &gt; maxSize) &#123;<br>                maxSize = offset;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ((maxSize / <span class="hljs-number">8</span>) + <span class="hljs-number">1</span>) * <span class="hljs-number">8</span>;   <span class="hljs-comment">// padding</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Hide-Password"><a href="#Hide-Password" class="headerlink" title="Hide Password"></a>Hide Password</h3><p>一般密码都要存成byte[]或者char[]数组，为什么呢？因为我们使用完了，可以直接将他们设为null。但如果密码存在String中，将其设为null，密码实际任然存在在内存中，等到GC后，才能被释放，就很不安全。所以当我们把密码字段存储在String中时，在密码字段使用完之后，最安全的做法是：将它的值覆盖。很多不再需要的，但是又是比较机密的对象，想快点消灭证据，都可以通过这种方法来消除。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Field stringValue = String.class.getDeclaredField(<span class="hljs-string">&quot;value&quot;</span>);<br>stringValue.setAccessible(<span class="hljs-keyword">true</span>);<br><span class="hljs-keyword">char</span>[] mem = (<span class="hljs-keyword">char</span>[]) stringValue.get(password);<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mem.length; i++) &#123;<br>    mem[i] = <span class="hljs-string">&#x27;?&#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Multiple-Inheritance"><a href="#Multiple-Inheritance" class="headerlink" title="Multiple Inheritance"></a>Multiple Inheritance</h3><p>在java中没有多继承，除非我们能在这些不同的类互相强制转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">long</span> intClassAddress = normalize(getUnsafe().getInt(<span class="hljs-keyword">new</span> Integer(<span class="hljs-number">0</span>), <span class="hljs-number">4L</span>));<br><span class="hljs-keyword">long</span> strClassAddress = normalize(getUnsafe().getInt(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">4L</span>));<br>getUnsafe().putAddress(intClassAddress + <span class="hljs-number">36</span>, strClassAddress);<br></code></pre></td></tr></table></figure>
+
+<p>上面这段代码将String添加为int的父类，所以我们转换的时候就不会报错了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">(String) (Object) (<span class="hljs-keyword">new</span> Integer(<span class="hljs-number">666</span>))<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/15/Gadget%20Java/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Gadget Java</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/15/FastJson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                        <span class="hidden-mobile">FastJson反序列化</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"lCUF08cIQ1BPgn7X9fjMMTbe-MdYXbMMI","appKey":"RSMbcrKIFnecyMgNGc47g3tN","placeholder":"说点什么","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="http://kIl3rr.github.io" target="_blank" rel="nofollow noopener"><span>kIl3rr</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-SL9T1KRBQY', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -206,20 +206,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/04/11/%E5%88%9D%E6%8E%A2Docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/" target="_self">
-          初探Docker容器逃逸
+        <a href="/2023/09/09/APT%E6%AD%A6%E5%99%A8%E7%A0%94%E7%A9%B6/" target="_self">
+          APT武器研究
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/04/11/%E5%88%9D%E6%8E%A2Docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/" target="_self">
+        <a href="/2023/09/09/APT%E6%AD%A6%E5%99%A8%E7%A0%94%E7%A9%B6/" target="_self">
           
           
             
           
-          初探Docker容器逃逸判断是否处于Container中123/.dockerenv文件/proc/1/cgroup文件是否存在&quot;docker&quot;字符串是否有container环境变量
-
-Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）是Linux内核中的权限提升漏洞，源于Linux内核的内存子系统在处理写入时拷贝（copy-on-
+          Here's something encrypted, password is required to continue reading.
         </a>
       </p>
 
@@ -227,8 +225,8 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-11 11:04" pubdate>
-              2022-04-11
+            <time datetime="2023-09-09 13:33" pubdate>
+              2023-09-09
             </time>
           </div>
         
@@ -236,7 +234,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E5%AE%89%E5%85%A8/">云原生安全</a>
+              <a href="/categories/tool/">tool</a>
             
           </div>
         
@@ -244,7 +242,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/C2/">C2</a>
             
           </div>
         
@@ -258,18 +256,24 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/04/04/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/" target="_self">
-          痕迹清理
+        <a href="/2023/09/09/Javaagent/" target="_self">
+          Javaagent
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/04/04/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/" target="_self">
+        <a href="/2023/09/09/Javaagent/" target="_self">
           
           
             
           
-          痕迹清理win日志删除1234567应用程序日志：%systemroot%\system32\config\AppEvent.EVT安全日志：%systemroot%\system32\config\SecEvent.EVT系统日志：%systemroot%\system32\config\SysEvent.EVTDNS日志：%sys temroot%\system32\config，默认文件大小
+          JavaagentJVM启动前静态Instrumentjava命令可以指定一个参数javaagent，用于指定一个jar包，这个jar包有如下要求：
+
+这个jar包的MANIFEST.MF指定Premain-Class
+Premain-Class指定的类需要实现premain()方法
+
+premain方法是运行在main方法之前，一个Premain-Class指定类的方法
+在java命令中可以看到
         </a>
       </p>
 
@@ -277,8 +281,8 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-04 13:59" pubdate>
-              2022-04-04
+            <time datetime="2023-09-09 13:10" pubdate>
+              2023-09-09
             </time>
           </div>
         
@@ -286,7 +290,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -294,7 +298,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -308,19 +312,19 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/31/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" target="_self">
-          横向移动
+        <a href="/2023/03/15/JDBC%E5%9F%BA%E7%A1%80/" target="_self">
+          JDBC基础
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/31/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" target="_self">
+        <a href="/2023/03/15/JDBC%E5%9F%BA%E7%A1%80/" target="_self">
           
           
             
           
-          横向移动IPCIPC(Inter Process Connection)共享命名管道的资源，是为了实现进程间通信而开放的命名管道。IPC可以通过验证用户名和密码获取相应权限，通常在远程管理计算机和查看计算机的共享资源时使用
-通过ipc$可以与目标机器建立连接。利用这个连接，不仅可以访问目标机器只能够的文件，进行上传、下载等操作，还可以在目标机器上运行其他命令，以获取目标机器的目录结构、用户列表等信
+          JDBC 基础JDBC(Java Database Connectivity)是 Java 提供对数据库进行连接、操作的标准 API。Java 自身并不会去实现对数据库的连接、查询、更新等操作而是通过抽象出数据库操作的 API 接口(JDBC)，不同的数据库提供商必须实现 JDBC 定义的接口从而也就实现了对数据库的一系列操作。
+JDBC ConnectionJava 通过java.sql.Dri
         </a>
       </p>
 
@@ -328,8 +332,8 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-31 12:51" pubdate>
-              2022-03-31
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -337,7 +341,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -345,7 +349,7 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -359,28 +363,23 @@ Container逃逸与容器共享存在漏洞的内核Dirty  Cow（CVE-2016-5195）
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/27/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" target="_self">
-          权限提升
+        <a href="/2023/03/15/JNI%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" target="_self">
+          JNI安全基础
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/27/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" target="_self">
+        <a href="/2023/03/15/JNI%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" target="_self">
           
           
             
           
-          权限提升Windows上常见的权限分类：
+          JNI 安全基础JNI 简介java native interface
+一般情况下，我们完全可以使用 Java 语言编写程序，但某些情况下，Java 可能会不满足应用程序的需求，或者是不能更好的满足需求，比如：
 
-User：普通用户权限；
-Administrator：管理员权限；
-System：系统权限。
-TrustedInstaller ： windows中最高权限。对系统文件，system 权限也无法修改，只有 TrustedInstaller 权限才能修改。
-
-Linux上权限分类：
-
-User：普通用户权限；
-www-data：Web服务的权限，比User
+标准的 Java 类库不支持应用程序平台所需的平台相关功能。
+我们已经用另一种语言编写了一个类库，如何用 Java 代码调用？
+某些运行次数特别多的方法代码，为了加快性能，我们需要用更接
         </a>
       </p>
 
@@ -388,8 +387,8 @@ www-data：Web服务的权限，比User
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-27 13:49" pubdate>
-              2022-03-27
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -397,7 +396,7 @@ www-data：Web服务的权限，比User
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/network/">network</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -405,7 +404,7 @@ www-data：Web服务的权限，比User
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -419,33 +418,19 @@ www-data：Web服务的权限，比User
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" target="_self">
-          Redis未授权访问
+        <a href="/2023/03/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" target="_self">
+          Java动态代理
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/03/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" target="_self">
+        <a href="/2023/03/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" target="_self">
           
           
             
           
-          https://www.cnblogs.com/twosmi1e/p/13308682.html
-写ssh-keygen登录先决条件：目标root账号启动redis服务，开放ssh服务，允许密钥登录
+          Java动态代理就像研究反序列化一样，我们可以自定义writeObject，写入我们想要写入的；动态代理通过Java的反射机制，劫持到所持有的委托类对象的相关方法，成为特定的服务；这样做一是隔绝了直接调用相关业务类的方法或者比静态代理(代码写死)更加灵活，通过代理类来调用一些方法；也可以自定义一些方法在其中（面向切面编程：切入点前执行aaa，切入点后执行bbb），这样可以完成对程序的无侵入式扩展
 
-生成公私钥
-
-
-ssh-keygen -t rsa
-
-
-处理公钥
-
-
-(echo -e “\n\n”;cat id_rsa.pub; echo -e “\n\n”) &gt; 1.txt
-
-
-写入公
         </a>
       </p>
 
@@ -453,8 +438,8 @@ ssh-keygen -t rsa
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-24 23:52" pubdate>
-              2022-03-24
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -462,7 +447,7 @@ ssh-keygen -t rsa
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/cs/">cs</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -470,7 +455,7 @@ ssh-keygen -t rsa
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -484,39 +469,26 @@ ssh-keygen -t rsa
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/19/%E6%9E%84%E5%BB%BA%E9%80%9A%E9%81%93%E6%BC%AB%E6%B8%B8%E5%86%85%E7%BD%91/" target="_self">
-          构建通道漫游内网
+        <a href="/2023/03/15/Java%E5%BA%8F%E5%88%97%E5%8C%96%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
+          Java序列化反序列化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/19/%E6%9E%84%E5%BB%BA%E9%80%9A%E9%81%93%E6%BC%AB%E6%B8%B8%E5%86%85%E7%BD%91/" target="_self">
+        <a href="/2023/03/15/Java%E5%BA%8F%E5%88%97%E5%8C%96%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
           
           
             
           
-          构建通道漫游内网判断内网连通性测试机器能否上网
+          Java序列化/反序列化序列化需要实现接口java.io.Serializable(内部序列化)或java.io.Externalizaable(外部序列化)，其中后者实现了前者的接口
+一个类中，某些属性是不可序列化的，则必须冠以static transient等修饰
+反序列化的条件：
 
-ICMP
+被反序列化的类必须存在
+serialVersionUID值必须存在
 
-ping baidu.com
 
-HTTP
-
-curl baidu.com
-
-DNS
-
-nslookup baidu.com 114.114.114.114 //指定dns解析域名
-dig @8.8.8.8 baidu.com
-仅DNS出网可以直接CS-DNS上线
-
-TCP
-
-nc
-
-nc -lvvp 2333
-nc -zv ip por
+serialVersionUID这个值
         </a>
       </p>
 
@@ -524,8 +496,8 @@ nc -zv ip por
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-19 07:59" pubdate>
-              2022-02-19
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -533,7 +505,7 @@ nc -zv ip por
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/network/">network</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -541,7 +513,7 @@ nc -zv ip por
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -555,32 +527,20 @@ nc -zv ip por
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/01/03/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" target="_self">
-          内网信息收集
+        <a href="/2023/03/15/Java%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/" target="_self">
+          Java读写文件
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/01/03/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" target="_self">
+        <a href="/2023/03/15/Java%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/" target="_self">
           
           
             
           
-          WIN三问：我是谁？这是哪？我在哪？即判断当前机器，当前机器所处的网络环境(拓扑结构分析)，当前机器所处的区域
-我是谁：分析当前机器的角色，web 服务器、开发测试服务器、文件服务器、代理服务器、DNS 服务器等等
-这是哪：整个内网结构的分析
-我在哪：DMZ、办公区、核心区；或者在其他区域
-收集本机信息1. 手动收集
-网络配置
-
-
-ipconfig /all
-
-
-系统信息
-
-
-systeminfo
+          Java读写文件Java流参考
+java.io.FileSystemFileInputStream类读文件
+1234567891011121314151617181920import java.io.*;public class FileIO &#123;    public static void main(String[] args) throws IOException &#123;    
         </a>
       </p>
 
@@ -588,8 +548,8 @@ systeminfo
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-03 21:03" pubdate>
-              2022-01-03
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -597,7 +557,7 @@ systeminfo
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -605,7 +565,7 @@ systeminfo
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -619,19 +579,19 @@ systeminfo
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/01/02/SSTI/" target="_self">
-          ssti
+        <a href="/2023/03/15/JNDI&amp;RMI&amp;LDAP/" target="_self">
+          JNDI&amp;RMI&amp;LDAP
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/01/02/SSTI/" target="_self">
+        <a href="/2023/03/15/JNDI&amp;RMI&amp;LDAP/" target="_self">
           
           
             
           
-          SSTISSTI-服务端模板注入漏洞服务端模板注入是由于服务端接收了用户的输入，将其作为 Web 应用模板内容的一部分，在进行目标编译渲染的过程中，执行了用户插入的恶意内容，因而导致了敏感信息泄露、代码执行、GetShell 等问题。其影响范围主要取决于模版引擎的复杂性。
-Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引擎。它具有完整的 unicode 支
+          JNDI&amp;RMI&amp;LDAPJNDI是Java Naming and Directory Interface即 Java 命名与目录接口，通过 JNDI 的 API 可以调用目录或服务有：JDBC LDAP RMI DNS NIS CORBA，JNDI是Java EE的重要组成部分
+其中的Naming用以命名唯一资源，从而资源方便被调用；Directory就是目录服务，与计算机的文件
         </a>
       </p>
 
@@ -639,8 +599,8 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-02 19:57" pubdate>
-              2022-01-02
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -648,7 +608,7 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/cs/">cs</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -656,7 +616,7 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/ctf-training/">ctf-training</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -670,22 +630,20 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/12/05/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" target="_self">
-          内网基础
+        <a href="/2023/03/15/Gadget%20Java/" target="_self">
+          Gadget Java
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/12/05/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" target="_self">
+        <a href="/2023/03/15/Gadget%20Java/" target="_self">
           
           
             
           
-          内网基础内网也指局域网(Local Area Network,LAN),是指在某一区域内由多台计算机互连而成的计算机组
-工作组(Work Group)在一个大型局域网内，通常会有很多计算机连接组成，他们会列在网络邻居中，为了使网络得到有效的管理，对计算机进行分组，于是就产生了工作组。通常按计算机的不同功能进行分组
-
-
-可以更改工作组的名称加入对应的组，如果组名在网络中不存在，那么相当于新建了一个工
+          Gadget Java基于 Chris Frohoff 工具，ysoserial研究系列的利用链，在GeneratePayload调用每一个链的getObject方法
+URLDNS作为 DNS 查询，URLDNS 不需要依赖第三方包，也不受 jdk 版本限制，常用于检测反序列化(在目标没有回显时探测)；不能命令执行，只能作为 DNS 请求
+12345678910111213141516171819
         </a>
       </p>
 
@@ -693,8 +651,8 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-05 23:22" pubdate>
-              2021-12-05
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
@@ -702,7 +660,7 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+              <a href="/categories/language/">language</a>
             
           </div>
         
@@ -710,7 +668,7 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/knowledge/">knowledge</a>
+              <a href="/tags/Java/">Java</a>
             
           </div>
         
@@ -724,19 +682,19 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/12/04/XXE/" target="_self">
-          XXE
+        <a href="/2023/03/15/Unsafe/" target="_self">
+          
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/12/04/XXE/" target="_self">
+        <a href="/2023/03/15/Unsafe/" target="_self">
           
           
             
           
-          XMLXML 指可扩展标记语言（eXtensible Markup Language）， 被设计用来传输和存储数据。区别于用来显示数据的 html
-作用： 当作小型的数据库使用，如 msg 聊天工作通过 xml 文件在本地保留聊天记录，软件的配置文件 xmk，通讯软件通过 xml 文件保留用户之前看到的媒体信息，在网站当中当作 “接口” 服务，XML 文件作为配置文件（Spring、Struts2
+          sun.misc.Unsafe本文参考：http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/，https://blog.csdn.net/zyzzxycj/article/details/89877863
+Java对内存的管理很严格，https://blog.csdn.net/bandaoyu/article/de
         </a>
       </p>
 
@@ -744,26 +702,12 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-04 12:45" pubdate>
-              2021-12-04
+            <time datetime="2023-03-15 20:56" pubdate>
+              2023-03-15
             </time>
           </div>
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/cs/">cs</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ctf-training/">ctf-training</a>
-            
-          </div>
         
       </div>
     </article>
@@ -773,7 +717,7 @@ Flask(Jinja2)服务端模板注入Jinja2 是用于 Python 的全功能模板引�
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
